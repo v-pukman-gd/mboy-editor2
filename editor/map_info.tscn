@@ -1,0 +1,502 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://editor/map_info.gd" type="Script" id=1]
+
+[node name="MapInfo" type="ConfirmationDialog"]
+
+rect_min_size = Vector2( 450, 540 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 0
+size_flags_vertical = 1
+margin_left = 120.0
+margin_top = 0.0
+margin_right = 570.0
+margin_bottom = 540.0
+popup_exclusive = false
+window_title = "Export Info"
+dialog_hide_on_ok = true
+script = ExtResource( 1 )
+mouse_filter = 0
+
+[node name="VBoxC" type="VBoxContainer" parent="."]
+
+anchor_left = 0.5
+anchor_right = 0.5
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = -200.0
+margin_top = -10.0
+margin_right = 200.0
+margin_bottom = 507.0
+alignment = 1
+mouse_filter = 0
+
+[node name="MapInfoC" type="VBoxContainer" parent="VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 400.0
+margin_bottom = 88.0
+alignment = 0
+mouse_filter = 0
+
+[node name="Control" type="Control" parent="VBoxC/MapInfoC"]
+
+rect_min_size = Vector2( 0, 20 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 400.0
+margin_bottom = 20.0
+mouse_filter = 0
+
+[node name="RichTextLabel" type="Label" parent="VBoxC/MapInfoC"]
+
+rect_min_size = Vector2( 0, 18 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 24.0
+margin_right = 400.0
+margin_bottom = 42.0
+text = "te_map"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 0
+
+[node name="Label00" type="Label" parent="VBoxC/MapInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 46.0
+margin_right = 400.0
+margin_bottom = 60.0
+text = "te_map_author"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Author" type="LineEdit" parent="VBoxC/MapInfoC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 64.0
+margin_right = 400.0
+margin_bottom = 88.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="AudioInfoC" type="VBoxContainer" parent="VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 92.0
+margin_right = 400.0
+margin_bottom = 517.0
+alignment = 0
+mouse_filter = 0
+
+[node name="Control" type="Control" parent="VBoxC/AudioInfoC"]
+
+rect_min_size = Vector2( 0, 6 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 400.0
+margin_bottom = 6.0
+mouse_filter = 0
+
+[node name="RichTextLabel1" type="Label" parent="VBoxC/AudioInfoC"]
+
+rect_min_size = Vector2( 0, 18 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 10.0
+margin_right = 400.0
+margin_bottom = 28.0
+text = "te_audio"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 0
+
+[node name="Label" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 32.0
+margin_right = 400.0
+margin_bottom = 46.0
+text = "te_artist"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Artist" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+rect_min_size = Vector2( 60, 24 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 50.0
+margin_right = 400.0
+margin_bottom = 74.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label1" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 78.0
+margin_right = 400.0
+margin_bottom = 92.0
+text = "te_title"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Title" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 96.0
+margin_right = 400.0
+margin_bottom = 120.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label 2" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 124.0
+margin_right = 400.0
+margin_bottom = 138.0
+text = "te_album"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Album" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 142.0
+margin_right = 400.0
+margin_bottom = 166.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label4" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 170.0
+margin_right = 400.0
+margin_bottom = 184.0
+text = "te_genre"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="GenreSelect" type="OptionButton" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 188.0
+margin_right = 400.0
+margin_bottom = 208.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Item 0"
+flat = false
+align = 0
+selected = 0
+items = [  ]
+mouse_filter = 0
+
+[node name="Label8" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 212.0
+margin_right = 400.0
+margin_bottom = 226.0
+text = "te_subgenre"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Subgenre" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 230.0
+margin_right = 400.0
+margin_bottom = 254.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label3" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 258.0
+margin_right = 400.0
+margin_bottom = 272.0
+text = "te_date"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="ReleaseDate" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 276.0
+margin_right = 400.0
+margin_bottom = 300.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label5" type="Label" parent="VBoxC/AudioInfoC"]
+
+visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 258.0
+margin_right = 400.0
+margin_bottom = 272.0
+text = "te_copyright"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Copyright" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 276.0
+margin_right = 400.0
+margin_bottom = 300.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label6" type="Label" parent="VBoxC/AudioInfoC"]
+
+visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 258.0
+margin_right = 400.0
+margin_bottom = 272.0
+text = "te_license"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="License" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 258.0
+margin_right = 400.0
+margin_bottom = 282.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label9" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 304.0
+margin_right = 400.0
+margin_bottom = 318.0
+text = "te_download_link"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="DownloadLink" type="LineEdit" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 322.0
+margin_right = 400.0
+margin_bottom = 346.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label7" type="Label" parent="VBoxC/AudioInfoC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 350.0
+margin_right = 400.0
+margin_bottom = 364.0
+text = "te_comments"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Comments" type="TextEdit" parent="VBoxC/AudioInfoC"]
+
+rect_min_size = Vector2( 0, 48 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 368.0
+margin_right = 400.0
+margin_bottom = 416.0
+syntax_highlighting = false
+show_line_numbers = false
+highlight_all_occurrences = false
+caret_block_mode = false
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Control 2" type="Control" parent="VBoxC/AudioInfoC"]
+
+rect_min_size = Vector2( 0, 5 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 420.0
+margin_right = 400.0
+margin_bottom = 425.0
+mouse_filter = 0
+
+[connection signal="confirmed" from="." to="." method="_on_map_info_confirmed" binds=[  ]]

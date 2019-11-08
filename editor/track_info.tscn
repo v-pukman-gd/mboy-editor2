@@ -1,0 +1,233 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://editor/track_info.gd" type="Script" id=1]
+
+[node name="TrackInfo" type="ConfirmationDialog"]
+
+rect_min_size = Vector2( 450, 340 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 450.0
+margin_bottom = 340.0
+popup_exclusive = false
+window_title = "Please Confirm..."
+dialog_hide_on_ok = true
+script = ExtResource( 1 )
+mouse_filter = 0
+
+[node name="VBoxC" type="VBoxContainer" parent="."]
+
+editor/display_folded = true
+anchor_left = 0.5
+anchor_right = 0.5
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = -200.0
+margin_top = 0.0
+margin_right = 200.0
+margin_bottom = 282.0
+alignment = 0
+mouse_filter = 0
+
+[node name="Control" type="Control" parent="VBoxC"]
+
+rect_min_size = Vector2( 0, 40 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 400.0
+margin_bottom = 40.0
+mouse_filter = 0
+
+[node name="Label 4" type="Label" parent="VBoxC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 44.0
+margin_right = 400.0
+margin_bottom = 58.0
+text = "te_track"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="Label 2" type="Label" parent="VBoxC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 62.0
+margin_right = 400.0
+margin_bottom = 76.0
+text = "te_instrument"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="InstrumentOption" type="OptionButton" parent="VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 80.0
+margin_right = 400.0
+margin_bottom = 100.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+align = 0
+selected = -1
+items = [  ]
+mouse_filter = 0
+
+[node name="Label" type="Label" parent="VBoxC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 104.0
+margin_right = 400.0
+margin_bottom = 118.0
+text = "te_track_name"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="NameInput" type="LineEdit" parent="VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 122.0
+margin_right = 400.0
+margin_bottom = 146.0
+placeholder_alpha = 0.6
+focus_mode = 2
+caret_blink = false
+caret_blink_speed = 0.65
+mouse_filter = 0
+
+[node name="Label 3" type="Label" parent="VBoxC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 150.0
+margin_right = 400.0
+margin_bottom = 164.0
+text = "te_color"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="ColorBtn" type="ColorPickerButton" parent="VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 168.0
+margin_right = 400.0
+margin_bottom = 188.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+color = Color( 0.25177, 0.348032, 0.976562, 1 )
+edit_alpha = true
+mouse_filter = 0
+
+[node name="Label 5" type="Label" parent="VBoxC"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 192.0
+margin_right = 400.0
+margin_bottom = 206.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[node name="HideBtn" type="CheckButton" parent="VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 210.0
+margin_right = 400.0
+margin_bottom = 232.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "te_hide"
+flat = false
+align = 2
+mouse_filter = 0
+
+[node name="Control 2" type="Control" parent="VBoxC"]
+
+rect_min_size = Vector2( 0, 20 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 236.0
+margin_right = 400.0
+margin_bottom = 256.0
+mouse_filter = 0
+
+[node name="DestroyBtn" type="CheckButton" parent="VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 260.0
+margin_right = 400.0
+margin_bottom = 282.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "te_destroy"
+flat = false
+align = 2
+mouse_filter = 0
+
+[connection signal="confirmed" from="." to="." method="_on_dialog_confirmed" binds=[  ]]

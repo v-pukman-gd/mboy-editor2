@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://editor/note_marker_btn.gd" type="Script" id=1]
+[ext_resource path="res://editor/icons/marker.png" type="Texture" id=2]
+
+[node name="NoteMarkerBtn" type="VBoxContainer"]
+
+rect_min_size = Vector2( 124, 40 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 136.0
+margin_bottom = 40.0
+alignment = 0
+script = ExtResource( 1 )
+type = ""
+label = null
+mouse_filter = 0
+
+[node name="OptionButton" type="OptionButton" parent="."]
+
+rect_min_size = Vector2( 0, 30 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 136.0
+margin_bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "111"
+icon = ExtResource( 2 )
+flat = false
+selected = -1
+items = [  ]
+mouse_filter = 0
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 34.0
+margin_right = 136.0
+margin_bottom = 48.0
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+mouse_filter = 1
+
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_item_selected" binds=[  ]]

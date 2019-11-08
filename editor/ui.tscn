@@ -1,0 +1,922 @@
+[gd_scene load_steps=59 format=2]
+
+[ext_resource path="res://editor/track_info.tscn" type="PackedScene" id=1]
+[ext_resource path="res://editor/track_info.gd" type="Script" id=2]
+[ext_resource path="res://editor/map_info.tscn" type="PackedScene" id=3]
+[ext_resource path="res://editor/map_info.gd" type="Script" id=4]
+[ext_resource path="res://editor/btn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://editor/btn.gd" type="Script" id=6]
+[ext_resource path="res://editor/play_btn.gd" type="Script" id=7]
+[ext_resource path="res://editor/tempo_btn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://editor/tempo_btn.gd" type="Script" id=9]
+[ext_resource path="res://editor/spin_input.tscn" type="PackedScene" id=10]
+[ext_resource path="res://editor/spin_input.gd" type="Script" id=11]
+[ext_resource path="res://editor/cursor.tscn" type="PackedScene" id=12]
+[ext_resource path="res://editor/cursor.gd" type="Script" id=13]
+[ext_resource path="res://editor/editor_waveform.jpg" type="Texture" id=14]
+
+[node name="UI" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1160.0
+margin_bottom = 600.0
+mouse_filter = 0
+
+[node name="MarginC" type="MarginContainer" parent="."]
+
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 3
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 10.0
+margin_bottom = -10.0
+custom_constants/margin_right = 30
+custom_constants/margin_left = 30
+mouse_filter = 0
+
+[node name="VBoxC2" type="VBoxContainer" parent="MarginC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+margin_left = 30.0
+margin_top = 0.0
+margin_right = 1140.0
+margin_bottom = 590.0
+alignment = 0
+mouse_filter = 0
+
+[node name="CenterC" type="CenterContainer" parent="MarginC/VBoxC2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 3
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1110.0
+margin_bottom = 0.0
+use_top_left = false
+mouse_filter = 0
+
+[node name="LoadAudioDialog" type="FileDialog" parent="MarginC/VBoxC2/CenterC"]
+
+visible = false
+rect_min_size = Vector2( 600, 400 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+margin_left = 255.0
+margin_top = -200.0
+margin_right = 855.0
+margin_bottom = 200.0
+popup_exclusive = true
+window_title = "Open a File"
+dialog_hide_on_ok = false
+mode = 0
+access = 2
+filters = PoolStringArray( "*.ogg", "*.mp3", "*.wav" )
+show_hidden_files = false
+mouse_filter = 0
+
+[node name="TrackInfo" type="ConfirmationDialog" parent="MarginC/VBoxC2/CenterC" instance=ExtResource( 1 )]
+
+visible = false
+rect_min_size = Vector2( 600, 400 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 255.0
+margin_top = -200.0
+margin_right = 855.0
+margin_bottom = 200.0
+popup_exclusive = false
+window_title = "Please Confirm..."
+dialog_hide_on_ok = true
+script = ExtResource( 2 )
+mouse_filter = 0
+
+[node name="MapInfo" type="ConfirmationDialog" parent="MarginC/VBoxC2/CenterC" instance=ExtResource( 3 )]
+
+visible = false
+rect_min_size = Vector2( 600, 600 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 255.0
+margin_top = -300.0
+margin_right = 855.0
+margin_bottom = 300.0
+popup_exclusive = false
+window_title = "Export Info"
+dialog_hide_on_ok = true
+script = ExtResource( 4 )
+mouse_filter = 0
+
+[node name="ImportMapDialog" type="FileDialog" parent="MarginC/VBoxC2/CenterC"]
+
+visible = false
+rect_min_size = Vector2( 600, 400 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 255.0
+margin_top = -200.0
+margin_right = 855.0
+margin_bottom = 200.0
+popup_exclusive = false
+window_title = "Open a File"
+dialog_hide_on_ok = false
+mode = 0
+access = 2
+filters = PoolStringArray( "*.mboy" )
+show_hidden_files = false
+mouse_filter = 0
+
+[node name="ExportMapDialog" type="FileDialog" parent="MarginC/VBoxC2/CenterC"]
+
+visible = false
+rect_min_size = Vector2( 600, 400 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 255.0
+margin_top = -200.0
+margin_right = 855.0
+margin_bottom = 200.0
+popup_exclusive = true
+window_title = "Save a File"
+dialog_hide_on_ok = false
+mode = 4
+access = 2
+filters = PoolStringArray( "*.mboy" )
+show_hidden_files = false
+mouse_filter = 0
+
+[node name="NoticeDialog" type="AcceptDialog" parent="MarginC/VBoxC2/CenterC"]
+
+visible = false
+rect_min_size = Vector2( 400, 200 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 355.0
+margin_top = -100.0
+margin_right = 755.0
+margin_bottom = 100.0
+popup_exclusive = true
+window_title = "Notice"
+dialog_hide_on_ok = true
+mouse_filter = 0
+
+[node name="Text" type="RichTextLabel" parent="MarginC/VBoxC2/CenterC/NoticeDialog"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_min_size = Vector2( 390, 90 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = -195.0
+margin_top = -50.0
+margin_right = 195.0
+margin_bottom = 40.0
+bbcode_enabled = true
+bbcode_text = "[center]Super message here[/center]"
+visible_characters = -1
+percent_visible = 1.0
+mouse_filter = 0
+
+[node name="VBoxC" type="VBoxContainer" parent="MarginC"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 30.0
+margin_top = 0.0
+margin_right = 1140.0
+margin_bottom = 590.0
+alignment = 0
+__meta__ = {
+"_edit_lock_": true
+}
+mouse_filter = 0
+
+[node name="HBoxCOffset" type="HBoxContainer" parent="MarginC/VBoxC"]
+
+rect_min_size = Vector2( 0, 10 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1110.0
+margin_bottom = 10.0
+alignment = 0
+mouse_filter = 0
+
+[node name="CenterC" type="CenterContainer" parent="MarginC/VBoxC"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 14.0
+margin_right = 1110.0
+margin_bottom = 62.0
+use_top_left = false
+mouse_filter = 0
+
+[node name="HBoxC" type="HBoxContainer" parent="MarginC/VBoxC/CenterC"]
+
+rect_min_size = Vector2( 0, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 3
+size_flags_vertical = 1
+margin_left = 4.0
+margin_top = 0.0
+margin_right = 1106.0
+margin_bottom = 48.0
+alignment = 0
+__meta__ = {
+"_edit_lock_": true
+}
+mouse_filter = 0
+
+[node name="LoadAudioBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 71.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Load Audio"
+icon_name = "file-audio-o"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 75.0
+margin_top = 0.0
+margin_right = 85.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="ImportBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 89.0
+margin_top = 0.0
+margin_right = 164.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Import Map"
+icon_name = "sign-in"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control7" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 168.0
+margin_top = 0.0
+margin_right = 178.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="AddTrackBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 182.0
+margin_top = 0.0
+margin_right = 244.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Add Track"
+icon_name = "map"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control8" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 248.0
+margin_top = 0.0
+margin_right = 258.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="EditTrackBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 262.0
+margin_top = 0.0
+margin_right = 323.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Edit Track"
+icon_name = "map-o,pencil"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control4" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 50, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 327.0
+margin_top = 0.0
+margin_right = 377.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="PlayBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+editor/display_folded = true
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 381.0
+margin_top = 0.0
+margin_right = 441.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 7 )
+label_text = "Btn"
+icon_name = "flag"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control1" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 50, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 445.0
+margin_top = 0.0
+margin_right = 495.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="ScaleDownBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 499.0
+margin_top = 0.0
+margin_right = 564.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Zoom Out"
+icon_name = "search-minus"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control2" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 568.0
+margin_top = 0.0
+margin_right = 578.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="ScaleUpBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 582.0
+margin_top = 0.0
+margin_right = 642.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Zoom In"
+icon_name = "search-plus"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control3" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 646.0
+margin_top = 0.0
+margin_right = 656.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="Control6" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 20, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 660.0
+margin_top = 0.0
+margin_right = 680.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="TempoBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 8 )]
+
+rect_min_size = Vector2( 138, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 684.0
+margin_top = 0.0
+margin_right = 822.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 9 )
+mouse_filter = 0
+
+[node name="SetStartInput" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 10 )]
+
+editor/display_folded = true
+rect_min_size = Vector2( 110, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 826.0
+margin_top = 0.0
+margin_right = 936.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 11 )
+mouse_filter = 0
+
+[node name="Control5" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 20, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 940.0
+margin_top = 0.0
+margin_right = 960.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="InfoBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 964.0
+margin_top = 0.0
+margin_right = 1024.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Set Info"
+icon_name = "list-alt"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control9" type="Control" parent="MarginC/VBoxC/CenterC/HBoxC"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 1028.0
+margin_top = 0.0
+margin_right = 1038.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="ExportBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 1042.0
+margin_top = 0.0
+margin_right = 1102.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Save Map"
+icon_name = "hdd-o"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="HBoxCOffset1" type="HBoxContainer" parent="MarginC/VBoxC"]
+
+rect_min_size = Vector2( 0, 10 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 66.0
+margin_right = 1110.0
+margin_bottom = 76.0
+alignment = 0
+mouse_filter = 0
+
+[node name="CenterC2" type="CenterContainer" parent="MarginC/VBoxC"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 80.0
+margin_right = 1110.0
+margin_bottom = 128.0
+use_top_left = false
+mouse_filter = 0
+
+[node name="HBoxC2" type="HBoxContainer" parent="MarginC/VBoxC/CenterC2"]
+
+rect_min_size = Vector2( 0, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 3
+size_flags_vertical = 1
+margin_left = 326.0
+margin_top = 0.0
+margin_right = 783.0
+margin_bottom = 48.0
+alignment = 0
+__meta__ = {
+"_edit_lock_": true
+}
+mouse_filter = 0
+
+[node name="MarkAccentBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 79.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Mark Accent"
+icon_name = "legal"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control" type="Control" parent="MarginC/VBoxC/CenterC2/HBoxC2"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 83.0
+margin_top = 0.0
+margin_right = 93.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="MarkEpicBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 97.0
+margin_top = 0.0
+margin_right = 158.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Mark Epic"
+icon_name = "bomb"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control1" type="Control" parent="MarginC/VBoxC/CenterC2/HBoxC2"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 162.0
+margin_top = 0.0
+margin_right = 172.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="MarkExtendedBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 176.0
+margin_top = 0.0
+margin_right = 270.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Mark Extended"
+icon_name = "long-arrow-right"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control2" type="Control" parent="MarginC/VBoxC/CenterC2/HBoxC2"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 274.0
+margin_top = 0.0
+margin_right = 284.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="MarkMixBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 288.0
+margin_top = 0.0
+margin_right = 348.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Mark Mix"
+icon_name = "share-alt"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Control3" type="Control" parent="MarginC/VBoxC/CenterC2/HBoxC2"]
+
+rect_min_size = Vector2( 10, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 352.0
+margin_top = 0.0
+margin_right = 362.0
+margin_bottom = 48.0
+mouse_filter = 0
+
+[node name="MarkAutoplayBtn" type="VBoxContainer" parent="MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
+
+rect_min_size = Vector2( 60, 44 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 366.0
+margin_top = 0.0
+margin_right = 457.0
+margin_bottom = 48.0
+alignment = 0
+script = ExtResource( 6 )
+label_text = "Mark Autoplay"
+icon_name = "car"
+tooltip_text = null
+mouse_filter = 0
+
+[node name="Informer" type="RichTextLabel" parent="MarginC/VBoxC"]
+
+visible = false
+rect_min_size = Vector2( 0, 20 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 135.0
+margin_right = 1110.0
+margin_bottom = 155.0
+bbcode_enabled = true
+bbcode_text = "[center]Welcome![/center]"
+visible_characters = -1
+percent_visible = 1.0
+mouse_filter = 0
+
+[node name="ScrollC" type="ScrollContainer" parent="MarginC/VBoxC"]
+
+editor/display_folded = true
+rect_min_size = Vector2( 0, 256 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+margin_left = 0.0
+margin_top = 132.0
+margin_right = 1110.0
+margin_bottom = 590.0
+scroll_horizontal_enabled = true
+scroll_vertical_enabled = true
+mouse_filter = 0
+
+[node name="VBoxC" type="VBoxContainer" parent="MarginC/VBoxC/ScrollC"]
+
+rect_min_size = Vector2( 0, 256 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 3
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1110.0
+margin_bottom = 294.0
+alignment = 0
+mouse_filter = 0
+
+[node name="CursorC" type="Panel" parent="MarginC/VBoxC/ScrollC/VBoxC"]
+
+rect_min_size = Vector2( 0, 16 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1110.0
+margin_bottom = 16.0
+mouse_filter = 1
+
+[node name="HSlider" type="HSlider" parent="MarginC/VBoxC/ScrollC/VBoxC/CursorC"]
+
+rect_min_size = Vector2( 0, 16 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1102.0
+margin_bottom = 16.0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 1.0
+exp_edit = false
+rounded = false
+tick_count = 0
+ticks_on_borders = false
+focus_mode = 2
+mouse_filter = 0
+
+[node name="CursorStatic" type="Node2D" parent="MarginC/VBoxC/ScrollC/VBoxC/CursorC" instance=ExtResource( 12 )]
+
+script = ExtResource( 13 )
+
+[node name="CursorPlayback" type="Node2D" parent="MarginC/VBoxC/ScrollC/VBoxC/CursorC" instance=ExtResource( 12 )]
+
+script = ExtResource( 13 )
+
+[node name="WaveformC" type="Control" parent="MarginC/VBoxC/ScrollC/VBoxC"]
+
+rect_min_size = Vector2( 1024, 256 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 20.0
+margin_right = 1110.0
+margin_bottom = 276.0
+mouse_filter = 1
+
+[node name="Sprite" type="Sprite" parent="MarginC/VBoxC/ScrollC/VBoxC/WaveformC"]
+
+z_index = -2
+texture = ExtResource( 14 )
+centered = false
+
+[node name="TracksC" type="VBoxContainer" parent="MarginC/VBoxC/ScrollC/VBoxC"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 280.0
+margin_right = 1110.0
+margin_bottom = 280.0
+alignment = 0
+mouse_filter = 0
+
+[node name="VBoxC" type="VBoxContainer" parent="MarginC/VBoxC/ScrollC/VBoxC"]
+
+rect_min_size = Vector2( 0, 10 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 284.0
+margin_right = 1110.0
+margin_bottom = 294.0
+alignment = 0
+mouse_filter = 0
+
+[connection signal="confirmed" from="MarginC/VBoxC2/CenterC/TrackInfo" to="MarginC/VBoxC2/CenterC/TrackInfo" method="_on_dialog_confirmed" binds=[  ]]
+
+[connection signal="confirmed" from="MarginC/VBoxC2/CenterC/MapInfo" to="MarginC/VBoxC2/CenterC/MapInfo" method="_on_map_info_confirmed" binds=[  ]]
