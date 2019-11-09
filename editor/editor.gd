@@ -11,7 +11,7 @@ var active_track
 var window_size = 950
 var is_playing = false
 var is_follow_playing = false
-var sample = "" #Sample.new()
+var sample  #Sample.new()
 var stream = AudioStreamOGGVorbis.new()
 
 var audio_file_name = ""
@@ -49,6 +49,7 @@ var tracks = []
 
 onready var ui_node = get_node("UI")
 onready var window_scroll = get_node("UI/MarginC/VBoxC/ScrollC")
+onready var waveform_c = window_scroll.get_node("VBoxC/WaveformC")
 onready var waveform_node = window_scroll.get_node("VBoxC/WaveformC/Sprite")
 
 #cursor
@@ -58,7 +59,7 @@ onready var cursor_playback = cursor_c.get_node("CursorPlayback")
 onready var cursor_slider = cursor_c.get_node("HSlider")
 
 #players
-onready var sample_player = get_node("Node")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+#onready var sample_player = get_node("Node")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 onready var stream_player = get_node("AudioStreamPlayer")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 #dialogs
@@ -116,6 +117,10 @@ func _ready():
 	for d in dialog_c.get_children():
 		d.connect("about_to_show", self, "disable_inputs")
 		d.connect("popup_hide", self, "enable_inputs")
+		
+	
+	#TODO: remove this
+	load_audio("")
 
 func disable_inputs(): set_process_input(false)
 func enable_inputs(): set_process_input(true)
@@ -125,10 +130,13 @@ func update_last_file_path(file_path):
 
 func setup_editor_dir():
 	
-	editor_dir = OS.get_user_data_dir() + "/" + "editor"
+	#editor_dir = OS.get_user_data_dir() + "/" + "editor"
+	editor_dir = "user://editor"
 	var dir = Directory.new()
 	if not dir.open(editor_dir) == OK:
 		dir.make_dir(editor_dir)
+		
+	print("editor_dir:", editor_dir)
 
 func _process(delta):
 
@@ -165,7 +173,7 @@ func _process(delta):
 			window_scroll.set_h_scroll(cursor_playback.get_position().x-window_scroll.get_size().x/2.0)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 func set_params():
-	sample_duration_in_sec = sample.get_length()/float(sample.get_mix_rate())
+	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
 	print("sample_duration_in_sec", sample_duration_in_sec)
 	quarter_time_in_sec = 60.0/track_tempo
 	bar_size = float(EDITOR_BAR_C.CELL_WIDTH * EDITOR_BAR_C.QUARTERS_COUNT * EDITOR_BAR_C.CELLS_IN_QUARTER_COUNT)
@@ -188,6 +196,9 @@ func set_params():
 
 	waveform_node.set_scale(Vector2(waveform_scale, 1))
 	waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
+		
+	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
+	print("wz:", waveform_c.get_size())
 
 
 	cursor_slider.set_max(waveform_length)
@@ -202,10 +213,11 @@ func set_params():
 	prev_scale_ratio = 1
 
 func draw_waveform():
-	var img = geditor.waveform_image(sample, EDITOR_C.WAVEFORM_W, EDITOR_C.WAVEFORM_H)
-	var txt = ImageTexture.new()
-	txt.create_from_image(img)
-	waveform_node.set_texture(txt)
+	print("draw_waveform")
+	#var img = geditor.waveform_image(sample, EDITOR_C.WAVEFORM_W, EDITOR_C.WAVEFORM_H)
+	#var txt = ImageTexture.new()
+	#txt.create_from_image(img)
+	#waveform_node.set_texture(txt)
 
 
 func update_cursor_length():
@@ -253,9 +265,7 @@ func scale_to(dir):
 		scale_ratio = 0.1
 		ui_scale -= value
 		return
-	#if curr_scale < 1:
-	#	curr_scale = 1.0
-	#	ui_scale -= value
+
 	var scale_d = scale_ratio/prev_scale_ratio
 
 	waveform_node.set_scale(Vector2(curr_scale, 1))
@@ -270,9 +280,6 @@ func scale_to(dir):
 	var scroll_val = window_scroll.get_h_scroll()
 	d = scroll_val - cursor_val
 
-	#if waveform_length*scale_ratio > waveform_length*prev_scale_ratio:
-	#	d -= waveform_length*scale_ratio - waveform_length*prev_scale_ratio
-
 
 	cursor_slider.set_max(waveform_length*scale_ratio)
 	cursor_slider.set_custom_minimum_size(Vector2(waveform_length*scale_ratio, 16))
@@ -282,11 +289,6 @@ func scale_to(dir):
 
 	print("cursor_slider max:", cursor_slider.get_max())
 
-
-	#print("d:", d)
-	#d = scroll_val - cursor_val
-	#pending_wscroll_update = true
-	#window_scroll.set_h_scroll(cursor_slider.get_value())
 	window_scroll.set_h_scroll(scroll_val*scale_d)
 
 	#map
@@ -478,7 +480,7 @@ func update_load_audio(text):
 func copy_audio(input_file_path):
 	print("copy started")
 	var file_name = input_file_path.get_file()
-	var file_format = str(file_name.extension()).to_lower()
+	var file_format = str(file_name.get_extension()).to_lower()
 	var dir = Directory.new()
 	#store original name
 	audio_file_name = file_name.substr(0, file_name.find_last('.'))
@@ -493,10 +495,10 @@ func copy_audio(input_file_path):
 	if file_format == "ogg":
 		#ogg_file_path = input_file_path
 		dir.copy(input_file_path, ogg_file_path)
-		res = geditor.ogg_to_wav(ogg_file_path, wav_file_path)
-		if res == 0:
-			show_notice("te_ogg_to_wav_failed")
-			return false
+		#res = geditor.ogg_to_wav(ogg_file_path, wav_file_path)
+		#if res == 0:
+		#	show_notice("te_ogg_to_wav_failed")
+		#	return false
 	elif file_format == "mp3":
 		dir.copy(input_file_path, mp3_file_path)
 		res = geditor.mp3_to_wav(mp3_file_path, wav_file_path)
@@ -517,14 +519,15 @@ func copy_audio(input_file_path):
 	else:
 		show_notice(str(file_format) +  tr("te_format_is_not_supported"))
 		return false
-
+	
+	print("copy finished")
 	return true
 
 func check_audio():
 	var checker = File.new()
-	if not checker.file_exists(wav_file_path):
-		show_notice(wav_file_path + tr("te_is_not_found"))
-		return false
+	#if not checker.file_exists(wav_file_path):
+	#	show_notice(wav_file_path + tr("te_is_not_found"))
+	#	return false
 	if not checker.file_exists(ogg_file_path):
 		show_notice(ogg_file_path + tr("te_is_not_found"))
 		return false
@@ -545,27 +548,33 @@ func load_audio(input_file_path):
 
 	update_load_audio(tr("te_loading_1_3"))
 
-	var is_copied = copy_audio(input_file_path)
-	if not is_copied:
-		audio_load_thread.wait_to_finish()
-		enable_load_audio(true)
-		return
-
-	if not check_audio():
-		audio_load_thread.wait_to_finish()
-		enable_load_audio(true)
-		return
+#   TODO: back this later
+#	var is_copied = copy_audio(input_file_path)
+#	if not is_copied:
+#		audio_load_thread.wait_to_finish()
+#		enable_load_audio(true)
+#		return
+#
+#	if not check_audio():
+#		audio_load_thread.wait_to_finish()
+#		enable_load_audio(true)
+#		return
 
 	update_load_audio(tr("te_loading_2_3"))
 
-	stream = ResourceLoader.load(ogg_file_path)
+	#stream = ResourceLoader.load(ogg_file_path)
+	print("FILE:", ogg_file_path)
+	stream = load("res://audio.ogg")
+	
+	sample = ResourceLoader.load("res://audio.ogg", "AudioStreamSample")
+	print(stream, sample)
 	if not is_audio_loaded(stream): return
 	stream_player.set_stream(stream)
 
 	# NOTE: only wav format is valid for waveform txt creation
 	#       wav formats are samples played by sample_player
-	sample = ResourceLoader.load(wav_file_path, "Sample")
-	if not is_audio_loaded(sample): return
+	#sample = ResourceLoader.load(wav_file_path, "Sample")
+	#if not is_audio_loaded(sample): return
 
 	update_load_audio(tr("te_loading_3_3"))
 
@@ -794,3 +803,5 @@ func _on_action_confirmed():
 class Geditor:
 	func waveform_image():
 		pass
+	func ogg_comments(file):
+		return ""
