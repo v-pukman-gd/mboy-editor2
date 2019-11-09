@@ -50,6 +50,7 @@ var tracks = []
 onready var ui_node = get_node("UI")
 onready var window_scroll = get_node("UI/MarginC/VBoxC/ScrollC")
 onready var waveform_c = window_scroll.get_node("VBoxC/WaveformC")
+onready var waveform_n = window_scroll.get_node("VBoxC/WaveformC/AudioWaveform")
 onready var waveform_node = window_scroll.get_node("VBoxC/WaveformC/Sprite")
 
 #cursor
@@ -167,6 +168,8 @@ func _process(delta):
 		for t in tracks: t.move_label(window_scroll.get_h_scroll())
 
 	window_scroll_last_val = window_scroll.get_h_scroll()
+	
+	waveform_n.set_scroll(window_scroll_last_val)
 
 	if is_playing and is_follow_playing:
 		if cursor_playback.get_position().x >= window_scroll.get_size().x/2.0:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
@@ -198,8 +201,12 @@ func set_params():
 	waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
 		
 	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
-	print("wz:", waveform_c.get_size())
-
+	print("waveform_c size:", waveform_c.get_size())
+	
+	waveform_n.full_size = waveform_c.get_size()
+	waveform_n.viewport_rect = Rect2(Vector2(),Vector2(1255, 256))
+	waveform_n.set_custom_minimum_size(waveform_c.get_size())
+	
 
 	cursor_slider.set_max(waveform_length)
 	#cursor_slider.set_ticks(bars_count)
@@ -303,7 +310,7 @@ func _on_scale_down_btn_pressed():
 	scale_to(-1)
 
 func _on_hslider_value_changed( value ):
-	#print("slider val changed:", value)
+	print("slider val changed:", value)
 
 	cursor_static.set_position(Vector2(value, cursor_static.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	cursor_playback.set_position(Vector2(value, cursor_playback.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
@@ -805,3 +812,7 @@ class Geditor:
 		pass
 	func ogg_comments(file):
 		return ""
+
+
+func _on_ScrollC_scroll_started():
+	pass

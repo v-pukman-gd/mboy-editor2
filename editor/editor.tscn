@@ -483,7 +483,7 @@ mouse_filter = 1
 size_flags_horizontal = 3
 
 [node name="AudioWaveform" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC" instance=ExtResource( 11 )]
-margin_right = 1255.0
+margin_right = 1555.0
 margin_bottom = 256.0
 color = Color( 0.258824, 0.254902, 0.254902, 1 )
 
@@ -533,4 +533,5 @@ size_flags_horizontal = 3
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ExitBtn" to="." method="_on_exit_btn_pressed"]
 [connection signal="minimum_size_changed" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_minimum_size_changed"]
+[connection signal="scroll_started" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_scroll_started"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_stream_player_finished"]

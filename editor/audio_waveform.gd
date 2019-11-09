@@ -5,43 +5,64 @@ var preview
 var loaded = false
 #onready var _preview = $ColorRect
 
+var full_size = Vector2()
+var viewport_rect = Rect2()
+var last_scroll_val = 0
+
 func _ready():
 	var g = AudioStreamPreviewGenerator.new()
 	g.connect("preview_updated", self, "_on_preview_updated")
 	preview = g.generate_preview(stream)
 	#print(preview.get_max(1,1.1))
 	#self.connect("draw", self, "_draw_preview")
+	
 	set_process(true)
 	update()
+
+func set_scroll(val):
+	#print("scroll:", val)
+	if last_scroll_val != val:
+		last_scroll_val = val
+		viewport_rect.position = Vector2(val, 0)
+		#set_position(Vector2(val, 0))
+		
+		update()
 	
 	
 func _draw_preview():
-	print("_draw_preview")
+	print("_draw_preview", get_size())
 	
+	#set_size(viewport_rect.size)
 	#if not preview:
 	#	return
 		
 	#var rect = get_rect()
-	var size = get_size()
-	print("audiow size:", size)
+	#var size = viewport_rect.size #get_size()
+	var viewport_size = viewport_rect.size
+	var viewport_position = viewport_rect.position
+	print("audiow draw:",full_size, viewport_rect)
 	var preview_len = float(preview.get_length())
 	
 	#var lines = Vector2()
 	#draw_multiline()
 	var lines = PoolVector2Array()
-	lines.resize(size.x * 2)
+	lines.resize(viewport_size.x * 2)
 	
-	for i in range(0, size.x):
-		var ofs = i * preview_len / size.x
-		var ofs_n = (i+1) * preview_len / size.x
+	var idx = 0
+	for i in range(0, full_size.x):
+		
+		var ofs = i * preview_len / full_size.x
+		var ofs_n = (i+1) * preview_len / full_size.x
 		var maxi = preview.get_max(ofs, ofs_n) * 0.5 + 0.5
 		var mini = preview.get_min(ofs, ofs_n) * 0.5 + 0.5
 		
-		var idx = i
-		#lines.insert(idx*2+0, Vector2(i+1, rect.position.y + mini * rect.size.y));
-		#lines.insert(idx*2+1, Vector2(i+1, rect.position.y + maxi * rect.size.y));
-		lines.insert(idx*2+0, Vector2(i+1, mini * size.y));
-		lines.insert(idx*2+1, Vector2(i+1, maxi * size.y));
+		if i >= viewport_position.x and i < viewport_position.x + viewport_size.x:
+			#var idx = i
+			#lines.insert(idx*2+0, Vector2(i+1, rect.position.y + mini * rect.size.y));
+			#lines.insert(idx*2+1, Vector2(i+1, rect.position.y + maxi * rect.size.y));
+			lines.insert(idx*2+0, Vector2(i+1, mini * viewport_size.y));
+			lines.insert(idx*2+1, Vector2(i+1, maxi * viewport_size.y));
+			idx += 1
 		
 	#print(lines)
 	#var colors = PoolColorArray()
@@ -55,7 +76,7 @@ func _on_preview_updated(e):
 	if not loaded:
 		loaded = true
 		_draw()
-	update()
+		update()
 	#print("on preview updated", e)
 
 
