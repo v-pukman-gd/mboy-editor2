@@ -8,6 +8,7 @@ var loaded = false
 var full_size = Vector2()
 var viewport_rect = Rect2()
 var last_scroll_val = 0
+var last_scale_val = 1
 
 func _ready():
 	var g = AudioStreamPreviewGenerator.new()
@@ -17,20 +18,27 @@ func _ready():
 	#self.connect("draw", self, "_draw_preview")
 	
 	set_process(true)
-	update()
+	
 
 func set_scroll(val):
-	#print("scroll:", val)
+	#print("set_scroll:", val)
 	if last_scroll_val != val:
+		print("**set_scroll:", val)
 		last_scroll_val = val
 		viewport_rect.position = Vector2(val, 0)
-		#set_position(Vector2(val, 0))
-		
+		#set_position(Vector2(val, 0))		
+		update()
+
+func set_scale_ratio(val):
+	if last_scale_val != val:
+		print("**set_scale_ratio:", val)
+		var scale_d = val/last_scale_val
+		last_scale_val = val
+		viewport_rect = Rect2(Vector2(round(viewport_rect.position.x*scale_d),viewport_rect.position.y), Vector2(viewport_rect.size.x,viewport_rect.size.y))
 		update()
 	
-	
 func _draw_preview():
-	print("_draw_preview", get_size())
+	#print("_draw_preview", get_size())
 	
 	#set_size(viewport_rect.size)
 	#if not preview:
@@ -75,7 +83,7 @@ func _draw_preview():
 func _on_preview_updated(e):
 	if not loaded:
 		loaded = true
-		_draw()
+		#_draw()
 		update()
 	#print("on preview updated", e)
 

@@ -51,7 +51,7 @@ onready var ui_node = get_node("UI")
 onready var window_scroll = get_node("UI/MarginC/VBoxC/ScrollC")
 onready var waveform_c = window_scroll.get_node("VBoxC/WaveformC")
 onready var waveform_n = window_scroll.get_node("VBoxC/WaveformC/AudioWaveform")
-onready var waveform_node = window_scroll.get_node("VBoxC/WaveformC/Sprite")
+#onready var waveform_node = window_scroll.get_node("VBoxC/WaveformC/Sprite")
 
 #cursor
 onready var cursor_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/CursorC/")
@@ -197,8 +197,8 @@ func set_params():
 
 	cursor_playback.speed = track_speed
 
-	waveform_node.set_scale(Vector2(waveform_scale, 1))
-	waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
+	#waveform_node.set_scale(Vector2(waveform_scale, 1))
+	#waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
 		
 	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
 	print("waveform_c size:", waveform_c.get_size())
@@ -218,6 +218,7 @@ func set_params():
 	ui_scale = 0
 	scale_ratio = 1
 	prev_scale_ratio = 1
+	scale_to(0)
 
 func draw_waveform():
 	print("draw_waveform")
@@ -273,12 +274,37 @@ func scale_to(dir):
 		ui_scale -= value
 		return
 
+#	if scale_ratio == 0.1:
+#		if dir > 0:
+#			scale_ratio = 0.5
+#	else:
+#		scale_ratio += dir*0.5
+#
+#	if scale_ratio <= 0:
+#		scale_ratio = 0.1
+		
+#	scale_ratio += dir*0.1
+#	if scale_ratio <= 0.1:
+#		scale_ratio = 0.1
+#		return
+
 	var scale_d = scale_ratio/prev_scale_ratio
 
-	waveform_node.set_scale(Vector2(curr_scale, 1))
-	waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H))
-
-	cursor_playback.speed_scale = scale_ratio
+	#waveform_node.set_scale(Vector2(curr_scale, 1))
+	#waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H))
+	var scaled_size = Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H)
+	
+	waveform_c.set_custom_minimum_size(scaled_size)
+	waveform_c.set_size(scaled_size)
+	
+	waveform_n.set_custom_minimum_size(scaled_size)
+	waveform_n.set_size(scaled_size)
+	
+	#waveform_n.viewport_rect = Rect2(scale_ratio*waveform_n.viewport_rect.position, scale_ratio*waveform_n.viewport_rect.size) # Rect2(Vector2(),Vector2(1255, 256))
+	waveform_n.full_size = scaled_size
+	waveform_n.set_scale_ratio(scale_ratio)
+	
+	cursor_playback.speed_scale = scale_ratio	
 
 	print("scale_ratio",  scale_ratio)
 	print("scale_d:", scale_d)
@@ -296,12 +322,15 @@ func scale_to(dir):
 
 	print("cursor_slider max:", cursor_slider.get_max())
 
-	window_scroll.set_h_scroll(scroll_val*scale_d)
+	#window_scroll.set_h_scroll(scroll_val*scale_d)
+	#window_scroll.set_h_scroll(cursor_playback.get_position().x)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	window_scroll.set_h_scroll(cursor_playback.get_position().x+d)
 
 	#map
 	for t in tracks: t.update_scale(scale_ratio)
 
 	prev_scale_ratio = scale_ratio
+	
 
 func _on_scale_up_btn_pressed():
 	scale_to(1)
