@@ -457,6 +457,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CursorC" type="Panel" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
+editor/display_folded = true
 margin_right = 1255.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
@@ -475,6 +476,8 @@ ticks_on_borders = true
 [node name="CursorPlayback" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/CursorC" instance=ExtResource( 10 )]
 
 [node name="WaveformC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
+editor/display_folded = true
+show_behind_parent = true
 margin_top = 20.0
 margin_right = 1255.0
 margin_bottom = 276.0
