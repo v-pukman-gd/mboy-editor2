@@ -49,12 +49,13 @@ var tracks = []
 
 onready var ui_node = get_node("UI")
 onready var window_scroll = get_node("UI/MarginC/VBoxC/ScrollC")
-onready var waveform_c = window_scroll.get_node("VBoxC/WaveformC")
-onready var waveform_n = window_scroll.get_node("VBoxC/WaveformC/AudioWaveform")
+
+onready var waveform_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC")
+onready var waveform_n = waveform_c.get_node("AudioWaveform")
 #onready var waveform_node = window_scroll.get_node("VBoxC/WaveformC/Sprite")
 
 #cursor
-onready var cursor_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/CursorC/")
+onready var cursor_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC")
 onready var cursor_static = cursor_c.get_node("CursorStatic")
 onready var cursor_playback = cursor_c.get_node("CursorPlayback")
 onready var cursor_slider = cursor_c.get_node("HSlider")
@@ -287,8 +288,18 @@ func scale_to(dir):
 #	if scale_ratio <= 0.1:
 #		scale_ratio = 0.1
 #		return
-
 	var scale_d = scale_ratio/prev_scale_ratio
+	
+	# because cursor inside of waveform now
+	# need to update cursor before waveform
+	var cursor_val = cursor_slider.get_value()
+	var scroll_val = window_scroll.get_h_scroll()
+	d = scroll_val - cursor_val
+	
+	cursor_slider.set_max(waveform_length*scale_ratio)
+	cursor_slider.set_custom_minimum_size(Vector2(waveform_length*scale_ratio, 256))
+	cursor_slider.set_value(cursor_val*scale_d)
+	print("cursor_slider max:", cursor_slider.get_max())
 
 	#waveform_node.set_scale(Vector2(curr_scale, 1))
 	#waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H))
@@ -308,19 +319,7 @@ func scale_to(dir):
 
 	print("scale_ratio",  scale_ratio)
 	print("scale_d:", scale_d)
-
-	var cursor_val = cursor_slider.get_value()
-	var scroll_val = window_scroll.get_h_scroll()
-	d = scroll_val - cursor_val
-
-
-	cursor_slider.set_max(waveform_length*scale_ratio)
-	cursor_slider.set_custom_minimum_size(Vector2(waveform_length*scale_ratio, 16))
-
-
-	cursor_slider.set_value(cursor_val*scale_d)
-
-	print("cursor_slider max:", cursor_slider.get_max())
+	
 
 	#window_scroll.set_h_scroll(scroll_val*scale_d)
 	#window_scroll.set_h_scroll(cursor_playback.get_position().x)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review

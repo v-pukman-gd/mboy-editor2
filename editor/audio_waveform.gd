@@ -68,8 +68,8 @@ func _draw_preview():
 			#var idx = i
 			#lines.insert(idx*2+0, Vector2(i+1, rect.position.y + mini * rect.size.y));
 			#lines.insert(idx*2+1, Vector2(i+1, rect.position.y + maxi * rect.size.y));
-			lines.insert(idx*2+0, Vector2(i+1, mini * viewport_size.y));
-			lines.insert(idx*2+1, Vector2(i+1, maxi * viewport_size.y));
+			lines.insert(idx*2+0, Vector2(i+1, viewport_size.y*0.05 + mini * viewport_size.y*0.9));
+			lines.insert(idx*2+1, Vector2(i+1, viewport_size.y*0.05 + maxi * viewport_size.y*0.9));
 			idx += 1
 		
 	#print(lines)
@@ -77,7 +77,7 @@ func _draw_preview():
 	#colors.push_back(Color(0.75, 0.75, 0.75, 1))
 	var color = Color(0.68, 1, 0.18, 1)
 	
-	draw_multiline(lines, color)
+	draw_multiline(lines, color, 100)
 	#draw_line(Vector2(2,2), Vector2(30,30), color)
 	
 func _on_preview_updated(e):
