@@ -45,7 +45,7 @@ func set_inputs(track):
 		index += 1
 
 	instrument_option.select(index)
-	name_input.set_text(track.name)
+	name_input.set_text(track.track_name)
 	color_btn.color = track.color
 	hide_btn.set_pressed(track.minimized)
 	destroy_btn.set_pressed(false)
