@@ -3,7 +3,7 @@ extends Node
 # fix load map error
 const VERSION = "1.4.1"
 
-const WAVEFORM_H = 256
+const WAVEFORM_H = 128
 const WAVEFORM_W = 1255 #4096
 
 const BG_COLOR = Color("4c4c4c")

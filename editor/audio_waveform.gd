@@ -9,13 +9,13 @@ var full_size = Vector2()
 var viewport_rect = Rect2()
 var last_scroll_val = 0
 var last_scale_val = 1
+var updated = true
 
 func _ready():
 	var g = AudioStreamPreviewGenerator.new()
 	g.connect("preview_updated", self, "_on_preview_updated")
 	preview = g.generate_preview(stream)
 	#print(preview.get_max(1,1.1))
-	#self.connect("draw", self, "_draw_preview")
 	
 	set_process(true)
 	
@@ -27,7 +27,7 @@ func set_scroll(val):
 		last_scroll_val = val
 		viewport_rect.position = Vector2(val, 0)
 		#set_position(Vector2(val, 0))		
-		update()
+		queue_update()
 
 func set_scale_ratio(val):
 	if last_scale_val != val:
@@ -35,11 +35,23 @@ func set_scale_ratio(val):
 		var scale_d = val/last_scale_val
 		last_scale_val = val
 		viewport_rect = Rect2(Vector2(round(viewport_rect.position.x*scale_d),viewport_rect.position.y), Vector2(viewport_rect.size.x,viewport_rect.size.y))
-		update()
+		queue_update()
+		
+func set_viewport_rect(rect):
+	if viewport_rect.position.x != rect.position.x or viewport_rect.position.y != rect.position.y or viewport_rect.size.x != rect.size.x or viewport_rect.size.y != rect.size.y:
+		viewport_rect = rect
+		queue_update()
+		
+func set_full_size(new_full_size):
+	if full_size.x != new_full_size.x or full_size.y != new_full_size.y:
+		full_size = new_full_size
+		queue_update()
+		
+func queue_update():
+	#print("queue_update!")
+	updated = false
 	
-func _draw_preview():
-	#print("_draw_preview", get_size())
-	
+func _draw_wavefrom():
 	#set_size(viewport_rect.size)
 	#if not preview:
 	#	return
@@ -48,7 +60,7 @@ func _draw_preview():
 	#var size = viewport_rect.size #get_size()
 	var viewport_size = viewport_rect.size
 	var viewport_position = viewport_rect.position
-	print("audiow draw:",full_size, viewport_rect)
+	print("setup audiow:", full_size, viewport_rect)
 	var preview_len = float(preview.get_length())
 	
 	#var lines = Vector2()
@@ -80,14 +92,17 @@ func _draw_preview():
 	draw_multiline(lines, color, 100)
 	#draw_line(Vector2(2,2), Vector2(30,30), color)
 	
+	
 func _on_preview_updated(e):
 	if not loaded:
 		loaded = true
-		#_draw()
-		update()
-	#print("on preview updated", e)
-
+		queue_update()
 
 func _draw():
-	if loaded:
-		_draw_preview()
+	_draw_wavefrom()
+
+func update():
+	if not updated:
+		print("*update waveform*")
+		updated = true
+		.update()

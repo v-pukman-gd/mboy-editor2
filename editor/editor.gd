@@ -170,8 +170,10 @@ func _process(delta):
 
 	window_scroll_last_val = window_scroll.get_h_scroll()
 	
-	# Update waveform
+	# Update waveform scroll
 	waveform_n.set_scroll(window_scroll_last_val)
+	# Redraw if needed
+	waveform_n.update()
 
 	if is_playing and is_follow_playing:
 		if cursor_playback.get_position().x >= window_scroll.get_size().x/2.0:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
@@ -205,10 +207,12 @@ func set_params():
 	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
 	print("waveform_c size:", waveform_c.get_size())
 	
-	waveform_n.full_size = waveform_c.get_size()
+	#waveform_n.full_size = waveform_c.get_size()
+	waveform_n.set_full_size(waveform_c.get_size())
 	
 	#waveform_n.viewport_rect = Rect2(Vector2(),Vector2(1255, 256))
-	waveform_n.viewport_rect = Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H))
+	#waveform_n.viewport_rect = Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H))
+	waveform_n.set_viewport_rect(Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
 	waveform_n.set_custom_minimum_size(waveform_c.get_size())
 	
 
@@ -217,6 +221,7 @@ func set_params():
 	cursor_slider.set_custom_minimum_size(Vector2(waveform_length, 16))
 
 	window_scroll.set_h_scroll(0)
+	
 
 	#scale reset
 	ui_scale = 0
@@ -315,7 +320,7 @@ func scale_to(dir):
 	waveform_n.set_size(scaled_size)
 	
 	#waveform_n.viewport_rect = Rect2(scale_ratio*waveform_n.viewport_rect.position, scale_ratio*waveform_n.viewport_rect.size) # Rect2(Vector2(),Vector2(1255, 256))
-	waveform_n.full_size = scaled_size
+	waveform_n.set_full_size(scaled_size)
 	waveform_n.set_scale_ratio(scale_ratio)
 	
 	cursor_playback.speed_scale = scale_ratio	
@@ -678,8 +683,8 @@ func _on_ScrollC_minimum_size_changed():
 func _on_ScrollC_resized():
 	#print("_on_ScrollC_resized:", window_scroll.get_size())
 	# Update waveform viewport size and position
-	waveform_n.viewport_rect = Rect2(Vector2(window_scroll_last_val, 0),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H))
-	waveform_n.update()
+	waveform_n.set_viewport_rect(Rect2(Vector2(window_scroll_last_val, 0),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
+	
 
 
 # ACTIVE NOTE
