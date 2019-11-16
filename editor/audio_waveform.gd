@@ -1,6 +1,6 @@
 extends ColorRect
 
-var stream = preload("res://audio.ogg")
+#var stream = preload("res://audio.ogg")
 var preview
 var loaded = false
 #onready var _preview = $ColorRect
@@ -12,14 +12,20 @@ var last_scale_val = 1
 var updated = true
 
 func _ready():
-	var g = AudioStreamPreviewGenerator.new()
-	g.connect("preview_updated", self, "_on_preview_updated")
-	preview = g.generate_preview(stream)
+	pass
+#	var g = AudioStreamPreviewGenerator.new()
+#	g.connect("preview_updated", self, "_on_preview_updated")
+#	preview = g.generate_preview(stream)
 	#print(preview.get_max(1,1.1))
 	
-	set_process(true)
+	#set_process(true)
 	
-
+func set_stream(stream):
+	loaded = false
+	var g = AudioStreamPreviewGenerator.new()
+	g.connect("preview_updated", self, "_on_preview_updated")
+	preview = g.generate_preview(stream) 
+	
 func set_scroll(val):
 	#print("set_scroll:", val)
 	if last_scroll_val != val:
@@ -44,7 +50,7 @@ func set_viewport_rect(rect):
 		
 func set_full_size(new_full_size):
 	if full_size.x != new_full_size.x or full_size.y != new_full_size.y:
-		full_size = new_full_size
+		full_size = Vector2(round(new_full_size.x), round(new_full_size.y))
 		queue_update()
 		
 func queue_update():
@@ -97,6 +103,7 @@ func _on_preview_updated(e):
 	if not loaded:
 		loaded = true
 		queue_update()
+		set_process(true)
 
 func _draw():
 	_draw_wavefrom()

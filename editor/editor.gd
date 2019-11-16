@@ -122,7 +122,9 @@ func _ready():
 		
 	
 	#TODO: remove this
-	load_audio("")
+	#Uncomment to Quick start file preload
+	#load_audio("user://editor/audio_mock.ogg")
+	
 
 func disable_inputs(): set_process_input(false)
 func enable_inputs(): set_process_input(true)
@@ -130,9 +132,8 @@ func enable_inputs(): set_process_input(true)
 func update_last_file_path(file_path):
 	EDITOR_C.last_file_path = file_path
 
-func setup_editor_dir():
-	
-	#editor_dir = OS.get_user_data_dir() + "/" + "editor"
+func setup_editor_dir():	
+	#editor_dir_in_finder = OS.get_user_data_dir() + "/" + "editor"
 	editor_dir = "user://editor"
 	var dir = Directory.new()
 	if not dir.open(editor_dir) == OK:
@@ -229,12 +230,13 @@ func set_params():
 	prev_scale_ratio = 1
 	scale_to(0)
 
-func draw_waveform():
-	print("draw_waveform")
+func load_waveform(stream):
+	#print("load_waveform")
 	#var img = geditor.waveform_image(sample, EDITOR_C.WAVEFORM_W, EDITOR_C.WAVEFORM_H)
 	#var txt = ImageTexture.new()
 	#txt.create_from_image(img)
 	#waveform_node.set_texture(txt)
+	waveform_n.set_stream(stream)
 
 
 func update_cursor_length():
@@ -531,7 +533,7 @@ func copy_audio(input_file_path):
 	wav_file_path = editor_dir + "/" + "audio" + ".wav"
 	ogg_file_path = editor_dir + "/" + "audio" + ".ogg"
 	mp3_file_path = editor_dir + "/" + "audio" + ".mp3"
-	var res
+	#var res
 
 	# we need ogg and wav
 	# we support ogg, mp3, wav on input
@@ -542,23 +544,23 @@ func copy_audio(input_file_path):
 		#if res == 0:
 		#	show_notice("te_ogg_to_wav_failed")
 		#	return false
-	elif file_format == "mp3":
-		dir.copy(input_file_path, mp3_file_path)
-		res = geditor.mp3_to_wav(mp3_file_path, wav_file_path)
-		if res < 0:
-			show_notice("te_mp3_to_wav_failed")
-			return false
-		res = geditor.wav_to_ogg(wav_file_path, ogg_file_path)
-		if res == 0:
-			show_notice("te_wav_to_ogg_failed")
-			return false
-	elif file_format == "wav":
-		dir.copy(input_file_path, wav_file_path)
-		#wav_file_path = input_file_path
-		res = geditor.wav_to_ogg(wav_file_path, ogg_file_path)
-		if res == 0:
-			show_notice("te_wav_to_ogg_failed")
-			return false
+#	elif file_format == "mp3":
+#		dir.copy(input_file_path, mp3_file_path)
+#		res = geditor.mp3_to_wav(mp3_file_path, wav_file_path)
+#		if res < 0:
+#			show_notice("te_mp3_to_wav_failed")
+#			return false
+#		res = geditor.wav_to_ogg(wav_file_path, ogg_file_path)
+#		if res == 0:
+#			show_notice("te_wav_to_ogg_failed")
+#			return false
+#	elif file_format == "wav":
+#		dir.copy(input_file_path, wav_file_path)
+#		#wav_file_path = input_file_path
+#		res = geditor.wav_to_ogg(wav_file_path, ogg_file_path)
+#		if res == 0:
+#			show_notice("te_wav_to_ogg_failed")
+#			return false
 	else:
 		show_notice(str(file_format) +  tr("te_format_is_not_supported"))
 		return false
@@ -584,45 +586,43 @@ func is_audio_loaded(audio_data):
 		return false
 	else:
 		return true
+		
+func load_ogg(path):
+	var ogg_file = File.new()
+	ogg_file.open(path, File.READ)
+	var bytes = ogg_file.get_buffer(ogg_file.get_len())
+	var stream = AudioStreamOGGVorbis.new()
+	stream.data = bytes
+	ogg_file.close()
+	return stream
 
 func load_audio(input_file_path):
-	print("loading started")
+	print("loading started " , input_file_path)
 	enable_load_audio(false)
 
 	update_load_audio(tr("te_loading_1_3"))
 
-#   TODO: back this later
-#	var is_copied = copy_audio(input_file_path)
-#	if not is_copied:
-#		audio_load_thread.wait_to_finish()
-#		enable_load_audio(true)
-#		return
-#
-#	if not check_audio():
-#		audio_load_thread.wait_to_finish()
-#		enable_load_audio(true)
-#		return
+	var is_copied = copy_audio(input_file_path)
+	if not is_copied:
+		audio_load_thread.wait_to_finish()
+		enable_load_audio(true)
+		return
+
+	if not check_audio():
+		audio_load_thread.wait_to_finish()
+		enable_load_audio(true)
+		return
 
 	update_load_audio(tr("te_loading_2_3"))
 
-	#stream = ResourceLoader.load(ogg_file_path)
-	print("FILE:", ogg_file_path)
-	stream = load("res://audio.ogg")
-	
-	sample = ResourceLoader.load("res://audio.ogg", "AudioStreamSample")
-	print(stream, sample)
+	stream = load_ogg(ogg_file_path)
+	print("FILE:", ogg_file_path, stream)	
 	if not is_audio_loaded(stream): return
 	stream_player.set_stream(stream)
-
-	# NOTE: only wav format is valid for waveform txt creation
-	#       wav formats are samples played by sample_player
-	#sample = ResourceLoader.load(wav_file_path, "Sample")
-	#if not is_audio_loaded(sample): return
-
 	update_load_audio(tr("te_loading_3_3"))
-
+	
+	load_waveform(stream)
 	set_params()
-	draw_waveform()
 
 	map_info.setup(audio_file_name, geditor.ogg_comments(ogg_file_path))
 
