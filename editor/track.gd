@@ -83,7 +83,7 @@ func respawn_bars():
 
 func set_info(track_info):
 	instrument = track_info.instrument
-	track_name = track_info.name
+	track_name = track_info.track_name
 	color = track_info.color
 	if not minimized and track_info.minimized:
 		real_size = get_custom_minimum_size()
@@ -103,7 +103,7 @@ func get_height():
 	return EDITOR_TRACK_C.TRACKS_DISTANCE + get_max_bar_height()
 
 func get_full_name():
-	if name != "": return name
+	if track_name != "": return track_name
 	else: return instrument
 
 func get_label_color():

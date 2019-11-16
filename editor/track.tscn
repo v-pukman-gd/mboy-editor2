@@ -1,69 +1,41 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://editor/track.gd" type="Script" id=1]
 [ext_resource path="res://editor/bg_color.tscn" type="PackedScene" id=2]
 
 [node name="Track" type="Control"]
-
-rect_min_size = Vector2( 0, 60 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
-margin_left = 0.0
-margin_top = 0.0
 margin_right = 1024.0
 margin_bottom = 60.0
-script = ExtResource( 1 )
+rect_min_size = Vector2( 0, 60 )
 mouse_filter = 1
+script = ExtResource( 1 )
 
 [node name="NameC" type="Control" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags_horizontal = 0
-size_flags_vertical = 0
-margin_left = 0.0
-margin_top = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="BgColor" parent="NameC" instance=ExtResource( 2 )]
-
 position = Vector2( 20, 0 )
 z_index = -1
 width = 100
 height = 20
 
 [node name="NameLabel" type="Label" parent="NameC/BgColor"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 0
-size_flags_vertical = 0
-margin_left = 0.0
-margin_top = 0.0
 margin_right = 100.0
 margin_bottom = 20.0
+mouse_filter = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Track n"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-mouse_filter = 0
 
 [node name="BarsC" type="Control" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
-margin_left = 0.0
 margin_top = 20.0
 margin_right = 40.0
 margin_bottom = 60.0
 mouse_filter = 1
-
-[connection signal="gui_input" from="NameC/BgColor/NameLabel" to="." method="_on_name_control_input_event" binds=[  ]]
+[connection signal="gui_input" from="NameC/BgColor/NameLabel" to="." method="_on_name_control_gui_input"]

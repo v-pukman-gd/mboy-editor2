@@ -123,7 +123,7 @@ func _ready():
 	
 	#TODO: remove this
 	#Uncomment to Quick start file preload
-	#load_audio("user://editor/audio_mock.ogg")
+	load_audio("user://editor/audio_mock.ogg")
 	
 
 func disable_inputs(): set_process_input(false)
@@ -779,6 +779,9 @@ func unset_active_track():
 
 
 func grab_cursor_slider_focus(e):
+	#TODO: fix later
+	print("FIXME: grab_cursor_slider_focus", e)
+	return
 	if e.global_pos.y <= cursor_c.get_global_position().y+cursor_c.get_size().y+10.0:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			cursor_slider_pressed = e.pressed

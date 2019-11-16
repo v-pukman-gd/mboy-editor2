@@ -34,7 +34,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterC" type="Control" parent="UI"]
-editor/display_folded = true
 anchor_right = 1.0
 margin_left = 2.0
 margin_right = 4.0

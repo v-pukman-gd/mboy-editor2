@@ -76,7 +76,9 @@ func init_map_inputs():
 
 	if file.open(session_file_path, File.READ) != 0:
 		return
-
+	
+	print("FIX ME: init_map_inputs()")
+	return
 	session_data.parse_json(file.get_as_text())
 	author = str(session_data.author)
 	author_input.set_text(author)

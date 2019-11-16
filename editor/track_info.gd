@@ -21,7 +21,6 @@ func _ready():
 		instrument_option.add_item(i, index)
 		index += 1
 
-	#color_btn.set_color(EDITOR_TRACK_C.DEFAULT_COLOR)
 
 func setup(track):
 	self.track = track
@@ -34,7 +33,7 @@ func setup(track):
 func apply_inputs():
 	instrument = EDITOR_TRACK_INSTRUMENT_C.LIST[instrument_option.get_selected()]
 	track_name = str(name_input.get_text())
-	color = color_btn.get_color()
+	color = color_btn.color
 	minimized = hide_btn.is_pressed()
 	pending_destroy = destroy_btn.is_pressed()
 
@@ -47,7 +46,7 @@ func set_inputs(track):
 
 	instrument_option.select(index)
 	name_input.set_text(track.name)
-	color_btn.set_color(track.color)
+	color_btn.color = track.color
 	hide_btn.set_pressed(track.minimized)
 	destroy_btn.set_pressed(false)
 
@@ -57,7 +56,7 @@ func set_inputs(track):
 func set_default_inputs():
 	instrument_option.select(0)
 	name_input.set_text("")
-	color_btn.set_color(EDITOR_TRACK_C.DEFAULT_COLOR)
+	color_btn.color = EDITOR_TRACK_C.DEFAULT_COLOR
 	hide_btn.set_pressed(false)
 	destroy_btn.set_pressed(false)
 
