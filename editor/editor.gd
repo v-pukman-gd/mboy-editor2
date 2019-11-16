@@ -170,6 +170,7 @@ func _process(delta):
 
 	window_scroll_last_val = window_scroll.get_h_scroll()
 	
+	# Update waveform
 	waveform_n.set_scroll(window_scroll_last_val)
 
 	if is_playing and is_follow_playing:
@@ -205,7 +206,9 @@ func set_params():
 	print("waveform_c size:", waveform_c.get_size())
 	
 	waveform_n.full_size = waveform_c.get_size()
-	waveform_n.viewport_rect = Rect2(Vector2(),Vector2(1255, 256))
+	
+	#waveform_n.viewport_rect = Rect2(Vector2(),Vector2(1255, 256))
+	waveform_n.viewport_rect = Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H))
 	waveform_n.set_custom_minimum_size(waveform_c.get_size())
 	
 
@@ -671,7 +674,12 @@ func _on_ScrollC_minimum_size_changed():
 	if dd > window_size and not pending_wscroll_update:
 		window_scroll_size = window_scroll.get_h_scroll() + dd + d
 		pending_wscroll_update = true
-
+		
+func _on_ScrollC_resized():
+	#print("_on_ScrollC_resized:", window_scroll.get_size())
+	# Update waveform viewport size and position
+	waveform_n.viewport_rect = Rect2(Vector2(window_scroll_last_val, 0),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H))
+	waveform_n.update()
 
 
 # ACTIVE NOTE
@@ -844,3 +852,6 @@ class Geditor:
 
 func _on_ScrollC_scroll_started():
 	pass
+
+
+

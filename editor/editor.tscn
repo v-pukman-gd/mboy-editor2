@@ -362,6 +362,7 @@ rect_min_size = Vector2( 0, 5 )
 mouse_filter = 0
 
 [node name="CenterC2" type="Control" parent="UI/MarginC/VBoxC"]
+editor/display_folded = true
 margin_top = 75.0
 margin_right = 1255.0
 margin_bottom = 115.0
@@ -534,5 +535,6 @@ size_flags_horizontal = 3
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ExitBtn" to="." method="_on_exit_btn_pressed"]
 [connection signal="minimum_size_changed" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_minimum_size_changed"]
+[connection signal="resized" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_resized"]
 [connection signal="scroll_started" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_scroll_started"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_stream_player_finished"]
