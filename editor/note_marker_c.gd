@@ -58,24 +58,8 @@ var marker_values = []
 #var custom_marker_values = []
 
 func load_markers(file_path):
-	var file = File.new()
-	if file.open(file_path, File.READ) != 0:
-		print("Error opening file for load markers")
-		print(file_path)
-		return []
-
-	if not file.get_as_text():
-		print("File is empty")
-		return []
-
-	var json = JSON.parse(file.get_as_text())
-	if json.error != OK:
-		print("JSON parse error")
-		return []
-
-	var data = json.result
-
-	if data.has("markers"):
+	var data = Utils.read_json_file(file_path)
+	if data and data.has("markers"):
 		return data["markers"]
 	else:
 		return []

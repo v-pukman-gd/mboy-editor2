@@ -437,15 +437,8 @@ func export_data(file_path):
 		start_pos = map_start_pos * EDITOR_BAR_C.CELL_EXPORT_SCALE,
 		tracks = tracks_data
 	}
-
-	var file = File.new()
-	if file.open(file_path, File.WRITE) != 0:
-		print("Error opening file for export")
-		return
-
-	file.store_line(JSON.print(data))
-	file.close()
-
+	
+	Utils.write_json_file(file_path, data)
 	update_last_file_path(file_path)
 	print("data exported")
 
@@ -460,26 +453,9 @@ func _on_import_btn_pressed():
 func _on_import_map_file_selected(file_path):
 	import_data(file_path)
 
-func import_data(file_path):
-	var file = File.new()
-	if not file.file_exists(file_path):
-		print("No file saved!")
-		return
-
-	if file.open(file_path, File.READ) != 0:
-		print("Error opening file for import")
-		return
-
-	if not file.get_as_text():
-		print("File is empty!")
-		return
-
-	var json = JSON.parse(file.get_as_text())
-	if json.error != OK:
-		print("JSON parse error")
-		return
-
-	var data = json.result
+func import_data(file_path):	
+	var data = Utils.read_json_file(file_path)
+	if not data: return
 
 	#update editor
 	track_tempo = int(data.tempo)

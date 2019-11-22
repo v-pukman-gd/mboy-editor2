@@ -70,17 +70,12 @@ func init_audio_inputs(audio_comments):
 		title_input.set_text(audio_file_name)
 
 func init_map_inputs():
-	var file = File.new()
-	if not file.file_exists(session_file_path):
+	session_data = Utils.read_json_file(session_file_path)
+	if not session_data: 
+		session_data = {}
 		return
-
-	if file.open(session_file_path, File.READ) != 0:
-		return
-	
-	if file.get_as_text():
-		session_data = JSON.parse(file.get_as_text()).result
-		author = str(session_data.author)
-		author_input.set_text(author)
+	author = str(session_data.author)
+	author_input.set_text(author)	
 
 func set_audio_inputs_from(data):
 	artist_input.set_text(data["artist"])
@@ -130,15 +125,8 @@ func apply_audio_inputs():
 
 func apply_map_inputs():
 	author = author_input.get_text()
-
-	var file = File.new()
-	if file.open(session_file_path, File.WRITE) != 0:
-		return
-
 	session_data["author"] = author
-	file.store_line(JSON.print(session_data))
-	file.close()
-
+	Utils.write_json_file(session_file_path, session_data)
 
 func _on_map_info_confirmed():
 	if author_input.get_text() == "" or title_input.get_text() == "" or download_link.get_text() == "":
