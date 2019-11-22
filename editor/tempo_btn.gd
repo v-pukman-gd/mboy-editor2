@@ -24,7 +24,7 @@ func _on_meter_btn_pressed():
 		tempo_meter_started = true
 		tempo_meter_time = 0
 		tempo_meter_vals = []
-	else:
+	elif tempo_meter_time > 0:
 		var val = round(60.0/tempo_meter_time)
 		tempo_meter_vals.append(val)
 		if tempo_meter_vals.size() > 4: tempo_meter_vals.pop_front()

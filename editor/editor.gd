@@ -657,7 +657,7 @@ func _on_tempo_changed():
 		print("tempo updated!")
 		track_tempo = tempo_btn.get_tempo()
 		set_params()
-		scale_to(0)
+		#scale_to(0)
 		redraw_map()
 
 func _on_ScrollC_minimum_size_changed():
