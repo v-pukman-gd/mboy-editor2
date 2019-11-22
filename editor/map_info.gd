@@ -77,11 +77,10 @@ func init_map_inputs():
 	if file.open(session_file_path, File.READ) != 0:
 		return
 	
-	print("FIX ME: init_map_inputs()")
-	return
-	session_data.parse_json(file.get_as_text())
-	author = str(session_data.author)
-	author_input.set_text(author)
+	if file.get_as_text():
+		session_data = JSON.parse(file.get_as_text()).result
+		author = str(session_data.author)
+		author_input.set_text(author)
 
 func set_audio_inputs_from(data):
 	artist_input.set_text(data["artist"])
@@ -137,7 +136,7 @@ func apply_map_inputs():
 		return
 
 	session_data["author"] = author
-	file.store_line(session_data.to_json())
+	file.store_line(JSON.print(session_data))
 	file.close()
 
 

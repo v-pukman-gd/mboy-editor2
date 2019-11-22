@@ -119,12 +119,12 @@ func _ready():
 	for d in dialog_c.get_children():
 		d.connect("about_to_show", self, "disable_inputs")
 		d.connect("popup_hide", self, "enable_inputs")
-		
-	
+
+
 	#TODO: remove this
 	#Uncomment to Quick start file preload
 	load_audio("user://editor/audio_mock.ogg")
-	
+
 
 func disable_inputs(): set_process_input(false)
 func enable_inputs(): set_process_input(true)
@@ -132,13 +132,15 @@ func enable_inputs(): set_process_input(true)
 func update_last_file_path(file_path):
 	EDITOR_C.last_file_path = file_path
 
-func setup_editor_dir():	
-	#editor_dir_in_finder = OS.get_user_data_dir() + "/" + "editor"
+func setup_editor_dir():
+	# hint editor folder
+	print("user data dir:", OS.get_user_data_dir())
+
 	editor_dir = "user://editor"
 	var dir = Directory.new()
 	if not dir.open(editor_dir) == OK:
 		dir.make_dir(editor_dir)
-		
+
 	print("editor_dir:", editor_dir)
 
 func _process(delta):
@@ -170,7 +172,7 @@ func _process(delta):
 		for t in tracks: t.move_label(window_scroll.get_h_scroll())
 
 	window_scroll_last_val = window_scroll.get_h_scroll()
-	
+
 	# Update waveform scroll
 	waveform_n.set_scroll(window_scroll_last_val)
 	# Redraw if needed
@@ -204,25 +206,25 @@ func set_params():
 
 	#waveform_node.set_scale(Vector2(waveform_scale, 1))
 	#waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
-		
+
 	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
 	print("waveform_c size:", waveform_c.get_size())
-	
+
 	#waveform_n.full_size = waveform_c.get_size()
 	waveform_n.set_full_size(waveform_c.get_size())
-	
+
 	#waveform_n.viewport_rect = Rect2(Vector2(),Vector2(1255, 256))
 	#waveform_n.viewport_rect = Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H))
 	waveform_n.set_viewport_rect(Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
 	waveform_n.set_custom_minimum_size(waveform_c.get_size())
-	
+
 
 	cursor_slider.set_max(waveform_length)
 	#cursor_slider.set_ticks(bars_count)
 	cursor_slider.set_custom_minimum_size(Vector2(waveform_length, 16))
 
 	window_scroll.set_h_scroll(0)
-	
+
 
 	#scale reset
 	ui_scale = 0
@@ -293,19 +295,19 @@ func scale_to(dir):
 #
 #	if scale_ratio <= 0:
 #		scale_ratio = 0.1
-		
+
 #	scale_ratio += dir*0.1
 #	if scale_ratio <= 0.1:
 #		scale_ratio = 0.1
 #		return
 	var scale_d = scale_ratio/prev_scale_ratio
-	
+
 	# because cursor inside of waveform now
 	# need to update cursor before waveform
 	var cursor_val = cursor_slider.get_value()
 	var scroll_val = window_scroll.get_h_scroll()
 	d = scroll_val - cursor_val
-	
+
 	cursor_slider.set_max(waveform_length*scale_ratio)
 	cursor_slider.set_custom_minimum_size(Vector2(waveform_length*scale_ratio, 256))
 	cursor_slider.set_value(cursor_val*scale_d)
@@ -314,22 +316,22 @@ func scale_to(dir):
 	#waveform_node.set_scale(Vector2(curr_scale, 1))
 	#waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H))
 	var scaled_size = Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H)
-	
+
 	waveform_c.set_custom_minimum_size(scaled_size)
 	waveform_c.set_size(scaled_size)
-	
+
 	waveform_n.set_custom_minimum_size(scaled_size)
 	waveform_n.set_size(scaled_size)
-	
+
 	#waveform_n.viewport_rect = Rect2(scale_ratio*waveform_n.viewport_rect.position, scale_ratio*waveform_n.viewport_rect.size) # Rect2(Vector2(),Vector2(1255, 256))
 	waveform_n.set_full_size(scaled_size)
 	waveform_n.set_scale_ratio(scale_ratio)
-	
-	cursor_playback.speed_scale = scale_ratio	
+
+	cursor_playback.speed_scale = scale_ratio
 
 	print("scale_ratio",  scale_ratio)
 	print("scale_d:", scale_d)
-	
+
 
 	#window_scroll.set_h_scroll(scroll_val*scale_d)
 	#window_scroll.set_h_scroll(cursor_playback.get_position().x)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
@@ -339,7 +341,7 @@ func scale_to(dir):
 	for t in tracks: t.update_scale(scale_ratio)
 
 	prev_scale_ratio = scale_ratio
-	
+
 
 func _on_scale_up_btn_pressed():
 	scale_to(1)
@@ -441,7 +443,7 @@ func export_data(file_path):
 		print("Error opening file for export")
 		return
 
-	file.store_line(data.to_json())
+	file.store_line(JSON.print(data))
 	file.close()
 
 	update_last_file_path(file_path)
@@ -468,8 +470,16 @@ func import_data(file_path):
 		print("Error opening file for import")
 		return
 
-	var data = {}
-	data.parse_json(file.get_as_text())
+	if not file.get_as_text():
+		print("File is empty!")
+		return
+
+	var json = JSON.parse(file.get_as_text())
+	if json.error != OK:
+		print("JSON parse error")
+		return
+
+	var data = json.result
 
 	#update editor
 	track_tempo = int(data.tempo)
@@ -564,7 +574,7 @@ func copy_audio(input_file_path):
 	else:
 		show_notice(str(file_format) +  tr("te_format_is_not_supported"))
 		return false
-	
+
 	print("copy finished")
 	return true
 
@@ -586,7 +596,7 @@ func is_audio_loaded(audio_data):
 		return false
 	else:
 		return true
-		
+
 func load_ogg(path):
 	var ogg_file = File.new()
 	ogg_file.open(path, File.READ)
@@ -616,11 +626,11 @@ func load_audio(input_file_path):
 	update_load_audio(tr("te_loading_2_3"))
 
 	stream = load_ogg(ogg_file_path)
-	print("FILE:", ogg_file_path, stream)	
+	print("FILE:", ogg_file_path, stream)
 	if not is_audio_loaded(stream): return
 	stream_player.set_stream(stream)
 	update_load_audio(tr("te_loading_3_3"))
-	
+
 	load_waveform(stream)
 	set_params()
 
@@ -679,12 +689,12 @@ func _on_ScrollC_minimum_size_changed():
 	if dd > window_size and not pending_wscroll_update:
 		window_scroll_size = window_scroll.get_h_scroll() + dd + d
 		pending_wscroll_update = true
-		
+
 func _on_ScrollC_resized():
 	#print("_on_ScrollC_resized:", window_scroll.get_size())
 	# Update waveform viewport size and position
 	waveform_n.set_viewport_rect(Rect2(Vector2(window_scroll_last_val, 0),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
-	
+
 
 
 # ACTIVE NOTE

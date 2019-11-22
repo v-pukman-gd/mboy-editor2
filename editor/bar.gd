@@ -86,7 +86,7 @@ func clear_notes():
 func set_notes_data(notes_data):
 	clear_notes()
 	for data in notes_data:
-		var x = int(int(data.position)/EDITOR_BAR_C.CELL_EXPORT_SCALE)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		var x = int(int(data.pos)/EDITOR_BAR_C.CELL_EXPORT_SCALE)
 		var n = add_note(x)
 		n.set_width(int(data.len)/EDITOR_BAR_C.CELL_EXPORT_SCALE)
 		n.set_markers_data(data.markers)

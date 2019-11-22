@@ -64,8 +64,17 @@ func load_markers(file_path):
 		print(file_path)
 		return []
 
-	var data = {}
-	data.parse_json(file.get_as_text())
+	if not file.get_as_text():
+		print("File is empty")
+		return []
+
+	var json = JSON.parse(file.get_as_text())
+	if json.error != OK:
+		print("JSON parse error")
+		return []
+
+	var data = json.result
+
 	if data.has("markers"):
 		return data["markers"]
 	else:
