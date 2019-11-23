@@ -13,7 +13,7 @@ const TRACK_TEMPO_MAX = 900
 
 const TRACK_DISTANCE = 50
 
-const CURSOR_FOCUS_OFFSET = 150
+const CURSOR_FOCUS_OFFSET = 20
 
 #var last_load_audio_path = "//"
 #var last_import_map_path = "//"

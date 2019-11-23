@@ -489,7 +489,7 @@ custom_icons/grabber_highlight = ExtResource( 11 )
 custom_icons/grabber = ExtResource( 11 )
 custom_styles/slider = SubResource( 2 )
 value = 1.0
-ticks_on_borders = true
+scrollable = false
 
 [node name="CursorStatic" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 12 )]
 

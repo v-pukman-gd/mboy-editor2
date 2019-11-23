@@ -18,6 +18,8 @@ func _process(delta):
 		# 40 is min tempo, 1.5 in sec
 		if tempo_meter_time > 1.5: # 6.0:
 			tempo_meter_started = false
+			
+	
 
 func _on_meter_btn_pressed():
 	if not tempo_meter_started:
@@ -42,7 +44,7 @@ func _on_spin_box_changed(val):
 	emit_signal("tempo_changed")
 
 func set_disabled(val):
-	tempo_val_input.set_editable(!val)
+	#tempo_val_input.set_editable(!val)
 	btn.set_disabled(val)
 
 func get_tempo():
