@@ -194,6 +194,8 @@ func _process(delta):
 		cursor_slider.set_value(cursor_slider.get_value()*scale)		
 		window_scroll.set_h_scroll(cursor_slider.get_value()+dd)
 		cursor_static.set_position(Vector2(cursor_slider.get_value(), cursor_static.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		if not is_playing:
+			cursor_playback.set_position(cursor_static.get_position())
 		
 		tempo_update_in_process = false
 		
