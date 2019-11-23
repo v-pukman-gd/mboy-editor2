@@ -27,7 +27,7 @@ var track_speed
 
 var waveform_length
 var waveform_scale
-var waveform_update_timeout = 0
+var tempo_update_timeout = 0
 var tempo_update_in_process = false
 
 var ui_scale
@@ -174,13 +174,13 @@ func _process(delta):
 		for t in tracks: t.move_label(window_scroll.get_h_scroll())
 
 	
-	# Redraw if needed
-	if waveform_update_timeout > 0:
-		waveform_update_timeout -= delta
-	elif waveform_update_timeout < 0:
-		waveform_update_timeout = 0
+	# Waveorm update
+	if tempo_update_timeout > 0:
+		tempo_update_timeout -= delta
+	elif tempo_update_timeout < 0:
+		tempo_update_timeout = 0
 		tempo_update_in_process = true
-		print("c1:",cursor_slider.get_value())
+		
 		var old_waveform_length = waveform_length
 		
 		var cursor_val = cursor_slider.get_value()
@@ -191,43 +191,32 @@ func _process(delta):
 		redraw_map()
 		
 		var scale = waveform_length/old_waveform_length
-		cursor_slider.set_value(cursor_slider.get_value()*scale)
-		
+		cursor_slider.set_value(cursor_slider.get_value()*scale)		
 		window_scroll.set_h_scroll(cursor_slider.get_value()+dd)
-		
-		print("c2:", cursor_slider.get_value(), dd)
-		
 		cursor_static.set_position(Vector2(cursor_slider.get_value(), cursor_static.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-		#cursor_playback.set_position(Vector2(value, cursor_playback.get_position().y))  #-- NOTE:
 		
-		#window_scroll.set_h_scroll(0)
 		tempo_update_in_process = false
 		
 	window_scroll_last_val = window_scroll.get_h_scroll()
-	# Update waveform scroll
 	waveform_n.set_scroll(window_scroll_last_val)
-
 	waveform_n.update()
-
-	if is_playing and is_follow_playing:
-		if cursor_playback.get_position().x >= window_scroll.get_size().x/2.0:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-			window_scroll.set_h_scroll(cursor_playback.get_position().x-window_scroll.get_size().x/2.0)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	
+	# TODO: bring back follow
+	#if is_playing and is_follow_playing:
+	#	if cursor_playback.get_position().x >= window_scroll.get_size().x/2.0:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	#		window_scroll.set_h_scroll(cursor_playback.get_position().x-window_scroll.get_size().x/2.0)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
-	print("sample_duration_in_sec", sample_duration_in_sec)
 	quarter_time_in_sec = 60.0/track_tempo
 	bar_size = float(EDITOR_BAR_C.CELL_WIDTH * EDITOR_BAR_C.QUARTERS_COUNT * EDITOR_BAR_C.CELLS_IN_QUARTER_COUNT)
 
 	track_speed = bar_size/(quarter_time_in_sec*EDITOR_BAR_C.QUARTERS_COUNT)
 	track_length = round(track_speed * sample_duration_in_sec)
-
 	bars_count = round(track_length / bar_size)
-
 
 	waveform_scale = track_length/float(EDITOR_C.WAVEFORM_W)
 	waveform_length = track_length
-
 
 	print("w scale:", waveform_scale)
 	print("t len:", track_length)
@@ -235,27 +224,14 @@ func set_params():
 
 	cursor_playback.speed = track_speed
 
-	#waveform_node.set_scale(Vector2(waveform_scale, 1))
-	#waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
-
 	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
-	print("waveform_c size:", waveform_c.get_size())
-
-	#waveform_n.full_size = waveform_c.get_size()
+	
 	waveform_n.set_full_size(waveform_c.get_size())
-
-	#waveform_n.viewport_rect = Rect2(Vector2(),Vector2(1255, 256))
-	#waveform_n.viewport_rect = Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H))
 	waveform_n.set_viewport_rect(Rect2(Vector2(),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
 	waveform_n.set_custom_minimum_size(waveform_c.get_size())
 
-
 	cursor_slider.set_max(waveform_length)
-	#cursor_slider.set_ticks(bars_count)
 	cursor_slider.set_custom_minimum_size(Vector2(waveform_length, 16))
-
-	#window_scroll.set_h_scroll(0)
-
 
 	#scale reset
 	ui_scale = 0
@@ -315,7 +291,7 @@ func cursor_focus():
 	window_scroll.set_h_scroll(cursor_static.get_position().x-EDITOR_C.CURSOR_FOCUS_OFFSET)
 
 func scale_to(dir):
-	print("****** scale ****")
+	print("****** scale_to ******")
 	var value = dir * (waveform_scale/10.0) #0.5
 	ui_scale += value
 	var curr_scale = waveform_scale + ui_scale
@@ -340,7 +316,8 @@ func scale_to(dir):
 #		return
 	
 	var scale_d = scale_ratio/prev_scale_ratio
-	
+		
+	print("scale to:", dir)
 	print("scale_ratio:", scale_ratio)
 	print("scale_d:", scale_d)
 
@@ -353,10 +330,7 @@ func scale_to(dir):
 	cursor_slider.set_max(waveform_length*scale_ratio)
 	cursor_slider.set_custom_minimum_size(Vector2(waveform_length*scale_ratio, 256))
 	cursor_slider.set_value(cursor_val*scale_d)
-	print("cursor_slider max:", cursor_slider.get_max())
 
-	#waveform_node.set_scale(Vector2(curr_scale, 1))
-	#waveform_node.get_parent().set_custom_minimum_size(Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H))
 	var scaled_size = Vector2(waveform_length*scale_ratio, EDITOR_C.WAVEFORM_H)
 
 	waveform_c.set_custom_minimum_size(scaled_size)
@@ -365,20 +339,11 @@ func scale_to(dir):
 	waveform_n.set_custom_minimum_size(scaled_size)
 	waveform_n.set_size(scaled_size)
 
-	#waveform_n.viewport_rect = Rect2(scale_ratio*waveform_n.viewport_rect.position, scale_ratio*waveform_n.viewport_rect.size) # Rect2(Vector2(),Vector2(1255, 256))
 	waveform_n.set_full_size(scaled_size)
 	waveform_n.set_scale_ratio(scale_ratio)
 
 	cursor_playback.speed_scale = scale_ratio
 
-	print("scale_ratio",  scale_ratio)
-	print("scale_d:", scale_d)
-
-
-	#window_scroll.set_h_scroll(scroll_val*scale_d)
-	#window_scroll.set_h_scroll(cursor_playback.get_position().x)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-	
-	#window_scroll.set_h_scroll(cursor_playback.get_position().x+d)
 	window_scroll.set_h_scroll(cursor_slider.get_value()+d)
 
 	#map
@@ -700,16 +665,13 @@ func update_controls():
 		window_scroll.hide()
 
 func _on_tempo_changed():
-	print("tempo changed!")
-	#window_scroll.set_h_scroll(0)
+	print("_on_tempo_changed:")
+	
 	if track_tempo != tempo_btn.get_tempo():
-		print("tempo updated!")
-		
 		track_tempo = tempo_btn.get_tempo()
-#		set_params()
-#		#scale_to(0)
-#		redraw_map()
-		waveform_update_timeout = 1.0 # (track_tempo/60.0)*2.0
+		tempo_update_timeout = 1.0
+		
+		print("tempo updated to", track_tempo)
 
 func _on_ScrollC_minimum_size_changed():
 	var dd =  cursor_slider.get_value() - window_scroll.get_h_scroll()
