@@ -96,3 +96,7 @@ translations=[ "res://editor/translation/translation_editor.txt.en.translation",
 [physics_2d]
 
 motion_fix_enabled=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
