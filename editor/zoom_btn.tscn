@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://editor/zoom_btn.gd" type="Script" id=2]
+[ext_resource path="res://addons/FontAwesome/fontawesome-webfont.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="ZoomBtn" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_right = 4.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="HBoxC" type="HBoxContainer" parent="."]
+margin_left = 612.0
+margin_right = 672.0
+margin_bottom = 30.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 0
+
+[node name="UpBtn" type="Button" parent="HBoxC"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+
+[node name="Label" type="Label" parent="HBoxC/UpBtn"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 8.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 2 )
+text = ""
+script = ExtResource( 4 )
+icon = "search-plus"
+
+[node name="DownBtn" type="Button" parent="HBoxC"]
+margin_left = 30.0
+margin_right = 60.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+
+[node name="Label" type="Label" parent="HBoxC/DownBtn"]
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 23.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 1 )
+text = ""
+align = 1
+script = ExtResource( 4 )
+icon = "search-minus"
+
+[node name="Label" type="Label" parent="."]
+margin_top = 34.0
+margin_right = 1284.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 60, 14 )
+text = "Zoom In / Out"
+align = 1
+[connection signal="pressed" from="HBoxC/UpBtn" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="HBoxC/DownBtn" to="." method="_on_down_pressed"]

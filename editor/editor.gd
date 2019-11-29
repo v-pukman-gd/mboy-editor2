@@ -82,8 +82,8 @@ onready var play_btn = btn_c.get_node("PlayBtn")
 onready var add_track_btn = btn_c.get_node("AddTrackBtn")
 onready var edit_track_btn = btn_c.get_node("EditTrackBtn")
 onready var load_audio_btn = btn_c.get_node("LoadAudioBtn")
-onready var scale_up_btn = btn_c.get_node("ScaleUpBtn")
-onready var scale_down_btn = btn_c.get_node("ScaleDownBtn")
+onready var scale_up_btn = btn_c.get_node("ZoomBtn/HBoxC/UpBtn")
+onready var scale_down_btn = btn_c.get_node("ZoomBtn/HBoxC/DownBtn")
 onready var export_btn = btn_c.get_node("ExportBtn")
 onready var import_btn = btn_c.get_node("ImportBtn")
 onready var tempo_btn = btn_c.get_node("TempoBtn")
@@ -394,10 +394,10 @@ func _input(e):
 	elif e.is_action_pressed("editor_cursor_focus"):
 		cursor_focus()
 	elif e.is_action_pressed("editor_scale_up"):
-		scale_up_btn.btn.grab_focus()
+		scale_up_btn.grab_focus()
 		scale_to(1)
 	elif e.is_action_pressed("editor_scale_down"):
-		scale_down_btn.btn.grab_focus()
+		scale_down_btn.grab_focus()
 		scale_to(-1)
 	elif e.is_action_pressed("editor_sinfo"):
 		print("window_scroll.get_h_scroll():", window_scroll.get_h_scroll())

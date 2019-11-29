@@ -27,6 +27,7 @@ rect_min_size = Vector2( 138, 44 )
 mouse_filter = 0
 
 [node name="HBoxC" type="HBoxContainer" parent="VBoxC"]
+editor/display_folded = true
 margin_right = 394.0
 margin_bottom = 30.0
 mouse_filter = 0
@@ -34,8 +35,8 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="SpinBox" type="SpinBox" parent="VBoxC/HBoxC"]
-margin_left = 128.0
-margin_right = 202.0
+margin_left = 127.0
+margin_right = 203.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 74, 30 )
 min_value = 40.0
@@ -43,8 +44,8 @@ max_value = 999.0
 value = 130.0
 
 [node name="Button" type="Button" parent="VBoxC/HBoxC"]
-margin_left = 206.0
-margin_right = 266.0
+margin_left = 207.0
+margin_right = 267.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
 
