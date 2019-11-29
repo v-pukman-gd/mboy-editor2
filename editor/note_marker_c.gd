@@ -48,11 +48,11 @@ var WIDTH = EDITOR_BAR_C.CELL_WIDTH
 
 const NoteMarker = preload("res://editor/note_marker.gd")
 
-var markers_path = "res://editor/note_marker/markers"
+var markers_path = "res://editor/note_marker/markers.json"
 var markers = []
 #TODO: add a tool for custom markers creation
 # "user://editor/note_marker/markers"
-var custom_markers_path = "res://editor/custom_note_marker/markers"
+var custom_markers_path = "res://editor/custom_note_marker/markers.json"
 var custom_markers = []
 var marker_values = []
 #var custom_marker_values = []

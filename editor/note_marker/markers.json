@@ -1,0 +1,19 @@
+{
+  "markers": [
+    {
+      "label": "te_accent",
+      "icon_path": "res://editor/note_marker/icons/accent.png",
+      "value": "accent"
+    },
+    {
+      "label": "te_extended",
+      "icon_path": "res://editor/note_marker/icons/extended.png",
+      "value": "extended"
+    },
+    {
+      "label": "te_mix",
+      "icon_path": "res://editor/note_marker/icons/mix.png",
+      "value": "mix"
+    },
+  ]
+}
