@@ -170,10 +170,7 @@ __meta__ = {
 }
 
 [node name="LoadAudioBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 0.0
 margin_right = 95.0
 margin_bottom = 56.0
 label_text = "te_load_audio"
@@ -186,11 +183,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="ImportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 113.0
-margin_top = 0.0
 margin_right = 217.0
 margin_bottom = 56.0
 label_text = "te_import_map"
@@ -203,16 +197,12 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="AddTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 235.0
-margin_top = 0.0
 margin_right = 322.0
 margin_bottom = 56.0
 label_text = "te_add_track"
 icon_name = "map"
-tooltip_text = ""
 
 [node name="Control8" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
 margin_left = 326.0
@@ -221,11 +211,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="EditTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 340.0
-margin_top = 0.0
 margin_right = 429.0
 margin_bottom = 56.0
 label_text = "te_edit_track"
@@ -238,16 +225,12 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 50, 0 )
 
 [node name="PlayBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 487.0
-margin_top = 0.0
 margin_right = 547.0
 margin_bottom = 56.0
 script = ExtResource( 6 )
 label_text = "Btn"
-tooltip_text = ""
 
 [node name="Control1" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
 margin_left = 551.0
@@ -256,11 +239,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 50, 0 )
 
 [node name="ScaleDownBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 605.0
-margin_top = 0.0
 margin_right = 695.0
 margin_bottom = 56.0
 label_text = "te_zoom_out"
@@ -273,11 +253,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="ScaleUpBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 713.0
-margin_top = 0.0
 margin_right = 794.0
 margin_bottom = 56.0
 label_text = "te_zoom_in"
@@ -321,11 +298,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="InfoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 1148.0
-margin_top = 0.0
 margin_right = 1225.0
 margin_bottom = 56.0
 label_text = "te_set_info"
@@ -338,11 +312,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="ExportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 1243.0
-margin_top = 0.0
 margin_right = 1333.0
 margin_bottom = 56.0
 label_text = "te_save_map"
@@ -403,11 +374,8 @@ rect_min_size = Vector2( 50, 0 )
 size_flags_horizontal = 3
 
 [node name="ResetBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 1047.0
-margin_top = 0.0
 margin_right = 1107.0
 margin_bottom = 56.0
 label_text = "te_reset"
@@ -420,11 +388,8 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="ExitBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
-anchor_top = 0.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 1125.0
-margin_top = 0.0
 margin_right = 1185.0
 margin_bottom = 56.0
 label_text = "te_exit"
