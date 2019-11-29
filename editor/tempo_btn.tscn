@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://editor/tempo_btn.gd" type="Script" id=1]
-[ext_resource path="res://addons/FontAwesome/fontawesome-webfont.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=3]
+[ext_resource path="res://editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://editor/tempo_btn.gd" type="Script" id=2]
+[ext_resource path="res://addons/FontAwesome/fontawesome-webfont.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="TempoBtn" type="VBoxContainer"]
 anchor_top = 1.0
@@ -16,24 +17,25 @@ margin_right = -886.0
 margin_bottom = -556.0
 rect_min_size = Vector2( 138, 44 )
 mouse_filter = 0
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="VBoxC" type="VBoxContainer" parent="."]
-margin_right = 276.0
-margin_bottom = 48.0
+margin_right = 394.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 138, 44 )
 mouse_filter = 0
 
 [node name="HBoxC" type="HBoxContainer" parent="VBoxC"]
-margin_right = 276.0
+margin_right = 394.0
 margin_bottom = 30.0
 mouse_filter = 0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="SpinBox" type="SpinBox" parent="VBoxC/HBoxC"]
-margin_left = 69.0
-margin_right = 143.0
+margin_left = 128.0
+margin_right = 202.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 74, 30 )
 min_value = 40.0
@@ -41,12 +43,13 @@ max_value = 999.0
 value = 130.0
 
 [node name="Button" type="Button" parent="VBoxC/HBoxC"]
-margin_left = 147.0
-margin_right = 207.0
+margin_left = 206.0
+margin_right = 266.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
 
 [node name="FontAwesome" type="Label" parent="VBoxC/HBoxC/Button"]
+margin_top = 2.0
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 60, 30 )
@@ -55,20 +58,17 @@ size_flags_vertical = 0
 custom_fonts/font = SubResource( 1 )
 text = ""
 align = 1
-valign = 1
-script = ExtResource( 3 )
-size = 16
+script = ExtResource( 4 )
 icon = "hand-pointer-o"
 
 [node name="Label" type="Label" parent="VBoxC"]
 margin_top = 34.0
-margin_right = 276.0
-margin_bottom = 48.0
+margin_right = 394.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 60, 14 )
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_set_tempo"
 align = 1
-valign = 1
 [connection signal="value_changed" from="VBoxC/HBoxC/SpinBox" to="." method="_on_spin_box_changed"]
 [connection signal="pressed" from="VBoxC/HBoxC/Button" to="." method="_on_meter_btn_pressed"]
