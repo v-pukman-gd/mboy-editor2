@@ -93,7 +93,6 @@ onready var set_start_input = btn_c.get_node("SetStartInput")
 #btn2
 onready var btn_c2 = get_node("UI/MarginC/VBoxC/CenterC2/HBoxC2")
 onready var marker_btn = btn_c2.get_node("MarkerBtn")
-onready var custom_marker_btn = btn_c2.get_node("CustomMarkerBtn")
 onready var reset_btn = btn_c2.get_node("ResetBtn")
 onready var exit_btn = btn_c2.get_node("ExitBtn")
 
@@ -125,7 +124,7 @@ func _ready():
 
 	#TODO: remove this
 	#Uncomment to Quick start file preload
-	load_audio("user://editor/audio_mock.ogg")
+	#load_audio("user://editor/audio_mock.ogg")
 
 
 func disable_inputs(): set_process_input(false)
@@ -154,11 +153,9 @@ func _process(delta):
 	#update note buttons
 	if active_note:
 		marker_btn.set_disabled(false)
-		custom_marker_btn.set_disabled(false)
 
 	elif active_note == null:
 		marker_btn.set_disabled(true)
-		custom_marker_btn.set_disabled(true)
 
 	if active_track and edit_track_btn.btn.is_disabled():
 		edit_track_btn.set_disabled(false)
@@ -167,13 +164,10 @@ func _process(delta):
 
 	tracks_c.set_custom_minimum_size(Vector2(OS.get_window_size().x-200, 100))
 
-
-
 	cursor_c.set_position(Vector2(cursor_c.get_position().x, window_scroll.get_v_scroll()))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	if window_scroll_last_val != window_scroll.get_h_scroll():
 		for t in tracks: t.move_label(window_scroll.get_h_scroll())
 
-	
 	# Waveorm update
 	if tempo_update_timeout > 0:
 		tempo_update_timeout -= delta
@@ -486,6 +480,11 @@ func import_data(file_path):
 	clear_tracks()
 	set_params()
 	scale_to(0)
+	
+	var markers_data = []
+	if data.has("markers"): markers_data = data.markers
+	EDITOR_NOTE_MARKER_C.load_markers(markers_data)
+	marker_btn.setup()
 
 	var y = EDITOR_BAR_C.CELL_HEIGHT + EDITOR_C.TRACK_DISTANCE
 	for track_data in data.tracks:
@@ -501,7 +500,8 @@ func import_data(file_path):
 
 	update_last_file_path(file_path)
 	print("data imported")
-
+	
+	
 # LOAD AUDIO
 func _on_load_audio_btn_pressed():
 	load_audio_dialog.set_current_path(EDITOR_C.last_file_path)

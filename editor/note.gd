@@ -47,7 +47,7 @@ func _process(delta):
 
 func is_extended():
 	for m in markers:
-		if m.value == EDITOR_NOTE_MARKER_C.EXTENDED:
+		if m.marker_name == EDITOR_NOTE_MARKER_C.EXTENDED:
 			return true
 	return false
 

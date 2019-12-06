@@ -2,93 +2,49 @@ extends Node
 
 const default_icon = preload("res://editor/note_marker/icons/default_marker.png")
 
-#var markers = []
-#var marker_values = []
-#
-#const ACCENT = "accent"
-#const EPIC = "epic"
 const EXTENDED = "extended"
-#const MIX = "mix"
-#const AUTOPLAY = "autoplay"
-#
-#var MARKERS_LIST = [
-#	ACCENT,
-#	EPIC,
-#	EXTENDED,
-#	MIX,
-#	AUTOPLAY
-#]
-#
-#var ICONS = {
-#	ACCENT: "legal",
-#	EPIC: "bomb",
-#	EXTENDED: "long-arrow-right",
-#	MIX: "share-alt",
-#	AUTOPLAY: "car"
-#}
-#
-#var HEIGHT = EDITOR_BAR_C.CELL_WIDTH
-#var WIDTH = EDITOR_BAR_C.CELL_WIDTH
-#
-#func add_marker(marker):
-#	if not marker_values.has(marker.value):
-#		markers.append(marker)
-#		marker_values.append(marker.value)
-#
-#func get_icon(value):
-#	for m in markers:
-#		if m.value == value:
-#			if File.new().file_exists(m.icon_path):
-#				return load(m.icon_path)
-#			return null
-#	return null
+const ACCENT = "accent"
 
 var HEIGHT = EDITOR_BAR_C.CELL_WIDTH
 var WIDTH = EDITOR_BAR_C.CELL_WIDTH
 
 const NoteMarker = preload("res://editor/note_marker.gd")
 
-var markers_path = "res://editor/note_marker/markers.json"
 var markers = []
-#TODO: add a tool for custom markers creation
-# "user://editor/note_marker/markers"
-var custom_markers_path = "res://editor/custom_note_marker/markers.json"
-var custom_markers = []
-var marker_values = []
-#var custom_marker_values = []
+var marker_names = []
 
-func load_markers(file_path):
-	var data = Utils.read_json_file(file_path)
-	if data and data.has("markers"):
-		return data["markers"]
-	else:
-		return []
+#func load_markers(data):
+#	marker_names = []
+#	markers = []
+#	for t in data.tracks:
+#		for b in t.bars:
+#			for n in b.notes:
+#				for m in n.markers:
+#					if not marker_names.has(m):
+#						marker_names.append(m)
+#						load_marker(m)
 
-func _ready():
-	var list
+func load_markers(markers_data):
+	#append default markers
+	load_marker({ 'name': ACCENT, 'code': '*', 'color': '' })
+	load_marker({ 'name': EXTENDED, 'code': '->', 'color': '' })
+	
+	#append custom markers
+	if markers_data:
+		for m in markers_data:
+			load_marker(m)
+		
+						
+func load_marker(marker_data):
+	if not marker_names.has(marker_data.name):
+		marker_names.append(marker_data.name)
 
-	list = load_markers(markers_path)
-	for m in list:
-		if not marker_values.has(m.value):
-			marker_values.append(m.value)
-			var marker = NoteMarker.new()
-			marker.setup(m.label, m.icon_path, m.value)
-			markers.append(marker)
+		var marker = NoteMarker.new()
+		marker.setup(marker_data.name, marker_data.code, marker_data.color)
+		markers.append(marker)
 
-	list = load_markers(custom_markers_path)
-	for m in list:
-		if not marker_values.has(m.value):
-			marker_values.append(m.value)
-			var marker = NoteMarker.new()
-			marker.setup(m.label, m.icon_path, m.value)
-			custom_markers.append(marker)
-
-func get_marker(value):
+func get_marker(name):
 	for m in markers:
-		if m.value == value:
-			return m
-	for m in custom_markers:
-		if m.value == value:
+		if m.marker_name == name:
 			return m
 	return null
-

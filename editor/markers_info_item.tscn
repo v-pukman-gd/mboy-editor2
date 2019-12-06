@@ -1,0 +1,170 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://addons/FontAwesome/fontawesome-webfont.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="MarkersInfoItem" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -94.0
+margin_bottom = -616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 453.0
+margin_right = 733.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 24, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_right = 465.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 114.0
+margin_bottom = 22.0
+text = "te_marker_name"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 118.0
+margin_right = 227.0
+margin_bottom = 22.0
+text = "te_marker_code"
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 231.0
+margin_right = 341.0
+margin_bottom = 22.0
+text = "te_marker_color"
+
+[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 345.0
+margin_right = 465.0
+margin_bottom = 22.0
+text = "te_marker_visible"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 280.0
+margin_bottom = 22.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 150.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
+margin_right = 150.0
+margin_bottom = 22.0
+text = "te_marker_name"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 150.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 150, 0 )
+caret_blink = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 154.0
+margin_right = 214.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+visible = false
+margin_right = 109.0
+margin_bottom = 22.0
+text = "te_marker_code"
+
+[node name="LineEdit2" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 60.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 30, 0 )
+max_length = 5
+caret_blink = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 218.0
+margin_right = 246.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+visible = false
+margin_right = 59.0
+margin_bottom = 22.0
+text = "te_color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_right = 28.0
+margin_bottom = 22.0
+text = "CC"
+color = Color( 0.992157, 1, 0.0431373, 1 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+editor/display_folded = true
+visible = false
+margin_left = 330.0
+margin_right = 385.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer4"]
+visible = false
+margin_right = 55.0
+margin_bottom = 22.0
+text = "te_hide"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/VBoxContainer4"]
+margin_top = 26.0
+margin_right = 55.0
+margin_bottom = 50.0
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+editor/display_folded = true
+visible = false
+margin_left = 330.0
+margin_right = 392.0
+margin_bottom = 48.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer6"]
+visible = false
+margin_right = 62.0
+margin_bottom = 22.0
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer6"]
+margin_top = 26.0
+margin_right = 62.0
+margin_bottom = 48.0
+text = "te_keep"
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 250.0
+margin_right = 280.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer5"]
+visible = false
+margin_right = 30.0
+margin_bottom = 22.0
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer5"]
+margin_right = 30.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 30, 0 )
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer5/Button"]
+margin_top = -2.0
+margin_right = 30.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 30, 0 )
+custom_fonts/font = SubResource( 1 )
+text = ""
+align = 1
+script = ExtResource( 3 )
+icon = "remove"
