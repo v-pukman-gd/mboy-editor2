@@ -160,7 +160,7 @@ func set_markers_data(marker_values):
 func get_markers_data():
 	var marker_values = []
 	for m in markers:
-		marker_values.append(m.value)
+		marker_values.append(m.marker_name)
 	return marker_values
 
 func add_markers(markers_list):
@@ -170,7 +170,15 @@ func add_markers(markers_list):
 	print(markers)
 	update_markers()
 	bar.track.update_height()
-
+	
+func delete_markers(markers_list):
+	var changed = false
+	for marker in markers_list:
+		if markers.has(marker):
+			markers.erase(marker)
+			changed = true
+	if changed:
+		update_markers()
 
 func update_markers():
 	for m in markers_c.get_children():
@@ -180,7 +188,7 @@ func update_markers():
 	for m in markers:
 		var marker_icon = marker_icon_scn.instance()
 		marker_icon.marker = m
-		marker_icon.color = bar.track.color
+		#marker_icon.color = bar.track.color
 		marker_icon.set_position(Vector2(0, i*EDITOR_NOTE_MARKER_C.HEIGHT))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		markers_c.add_child(marker_icon)
 		i += 1

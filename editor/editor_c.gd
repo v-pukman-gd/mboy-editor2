@@ -1,7 +1,9 @@
 extends Node
 
 # fix load map error
-const VERSION = "1.4.1"
+#const VERSION = "1.4.1"
+
+const VERSION = "2.0"
 
 const WAVEFORM_H = 128
 const WAVEFORM_W = 1280 #4096
@@ -23,7 +25,7 @@ var last_file_path = "//"
 const GENRES = [
 	"Other",
 	"African",
-  "Arabic",
+	"Arabic",
 	"Asian",
 	"Avantgarde",
 	"Blues",

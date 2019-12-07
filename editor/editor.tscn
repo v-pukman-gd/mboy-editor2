@@ -1,18 +1,19 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://editor/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
 [ext_resource path="res://editor/track_info.tscn" type="PackedScene" id=3]
 [ext_resource path="res://editor/map_info.tscn" type="PackedScene" id=4]
-[ext_resource path="res://editor/btn.tscn" type="PackedScene" id=5]
-[ext_resource path="res://editor/play_btn.gd" type="Script" id=6]
-[ext_resource path="res://editor/zoom_btn.tscn" type="PackedScene" id=7]
-[ext_resource path="res://editor/tempo_btn.tscn" type="PackedScene" id=8]
-[ext_resource path="res://editor/spin_input.tscn" type="PackedScene" id=9]
-[ext_resource path="res://editor/note_marker_btn.tscn" type="PackedScene" id=10]
-[ext_resource path="res://editor/audio_waveform.tscn" type="PackedScene" id=11]
-[ext_resource path="res://editor/icons/grabber_transparent.png" type="Texture" id=12]
-[ext_resource path="res://editor/cursor.tscn" type="PackedScene" id=13]
+[ext_resource path="res://editor/note_marker_manager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://editor/btn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://editor/play_btn.gd" type="Script" id=7]
+[ext_resource path="res://editor/zoom_btn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://editor/tempo_btn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://editor/spin_input.tscn" type="PackedScene" id=10]
+[ext_resource path="res://editor/note_marker_btn.tscn" type="PackedScene" id=11]
+[ext_resource path="res://editor/audio_waveform.tscn" type="PackedScene" id=12]
+[ext_resource path="res://editor/icons/grabber_transparent.png" type="Texture" id=13]
+[ext_resource path="res://editor/cursor.tscn" type="PackedScene" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -33,9 +34,6 @@ size_flags_vertical = 3
 
 [node name="CenterC" type="Control" parent="UI"]
 anchor_right = 1.0
-margin_left = 2.0
-margin_right = 4.0
-margin_bottom = 400.0
 rect_min_size = Vector2( 1160, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -65,6 +63,7 @@ margin_left = 355.0
 margin_right = 805.0
 
 [node name="MapInfo" parent="UI/CenterC" instance=ExtResource( 4 )]
+visible = false
 margin_left = 355.0
 margin_right = 805.0
 
@@ -133,6 +132,15 @@ bbcode_enabled = true
 bbcode_text = "[center]hey[/center]"
 text = "hey"
 
+[node name="MarkerManagerDialog" parent="UI/CenterC" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -225.0
+margin_right = 225.0
+margin_bottom = 401.0
+size_flags_horizontal = 5
+popup_exclusive = true
+
 [node name="MarginC" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -167,7 +175,7 @@ rect_min_size = Vector2( 0, 44 )
 mouse_filter = 0
 size_flags_horizontal = 3
 
-[node name="LoadAudioBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+[node name="LoadAudioBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_right = 95.0
 label_text = "te_load_audio"
@@ -179,7 +187,7 @@ margin_right = 109.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="ImportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+[node name="ImportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 113.0
 margin_right = 217.0
@@ -192,7 +200,7 @@ margin_right = 231.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="AddTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+[node name="AddTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 235.0
 margin_right = 322.0
@@ -205,7 +213,7 @@ margin_right = 336.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="EditTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+[node name="EditTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 340.0
 margin_right = 429.0
@@ -218,11 +226,11 @@ margin_right = 483.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="PlayBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+[node name="PlayBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 487.0
 margin_right = 547.0
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 label_text = "Btn"
 
 [node name="Control1" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
@@ -243,7 +251,7 @@ margin_right = 719.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="ZoomBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
+[node name="ZoomBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 723.0
@@ -257,7 +265,7 @@ margin_right = 846.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 20, 0 )
 
-[node name="TempoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 8 )]
+[node name="TempoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 9 )]
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -266,7 +274,7 @@ margin_top = 0.0
 margin_right = 990.0
 margin_bottom = 56.0
 
-[node name="SetStartInput" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 9 )]
+[node name="SetStartInput" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 10 )]
 editor/display_folded = true
 anchor_top = 0.0
 anchor_right = 0.0
@@ -282,7 +290,7 @@ margin_right = 1158.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 20, 0 )
 
-[node name="InfoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+[node name="InfoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 1162.0
 margin_right = 1239.0
@@ -295,7 +303,7 @@ margin_right = 1253.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="ExportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 5 )]
+[node name="ExportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 1257.0
 margin_right = 1347.0
@@ -334,21 +342,36 @@ margin_right = 300.0
 margin_bottom = 57.0
 rect_min_size = Vector2( 300, 0 )
 
-[node name="MarkerBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 10 )]
-anchor_left = 0.0
+[node name="MarkerManagerBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 304.0
-margin_right = 364.0
+margin_right = 436.0
 margin_bottom = 57.0
+label_text = "tr_manage_markers"
+icon_name = "flag-o,pencil"
+
+[node name="Control10" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
+margin_left = 440.0
+margin_right = 450.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="MarkerBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 11 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 454.0
+margin_right = 514.0
+margin_bottom = 57.0
+label = "te_toggle_marker"
 
 [node name="Control4" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
-margin_left = 368.0
+margin_left = 518.0
 margin_right = 1102.0
 margin_bottom = 57.0
 rect_min_size = Vector2( 50, 0 )
 size_flags_horizontal = 3
 
-[node name="ResetBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
+[node name="ResetBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 1106.0
 margin_right = 1166.0
@@ -362,7 +385,7 @@ margin_right = 1180.0
 margin_bottom = 57.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="ExitBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 5 )]
+[node name="ExitBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 1184.0
 margin_right = 1244.0
@@ -399,7 +422,7 @@ margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 1
 
-[node name="AudioWaveform" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC" instance=ExtResource( 11 )]
+[node name="AudioWaveform" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC" instance=ExtResource( 12 )]
 margin_right = 1255.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 1, 256 )
@@ -419,16 +442,17 @@ margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 1
 size_flags_vertical = 1
-custom_icons/grabber_disabled = ExtResource( 12 )
-custom_icons/grabber_highlight = ExtResource( 12 )
-custom_icons/grabber = ExtResource( 12 )
+custom_icons/grabber_disabled = ExtResource( 13 )
+custom_icons/grabber_highlight = ExtResource( 13 )
+custom_icons/grabber = ExtResource( 13 )
 custom_styles/slider = SubResource( 1 )
 value = 1.0
 scrollable = false
+ticks_on_borders = true
 
-[node name="CursorPlayback" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 13 )]
+[node name="CursorPlayback" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 14 )]
 
-[node name="CursorStatic" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 13 )]
+[node name="CursorStatic" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 14 )]
 is_static = true
 
 [node name="TracksC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
@@ -454,6 +478,7 @@ size_flags_horizontal = 3
 [connection signal="file_selected" from="UI/CenterC/ImportMapDialog" to="." method="_on_import_map_file_selected"]
 [connection signal="file_selected" from="UI/CenterC/ExportMapDialog" to="." method="_on_export_map_file_selected"]
 [connection signal="confirmed" from="UI/CenterC/ConfirmDialog" to="." method="_on_action_confirmed"]
+[connection signal="markers_updated" from="UI/CenterC/MarkerManagerDialog" to="." method="_on_markers_updated"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/LoadAudioBtn" to="." method="_on_load_audio_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/ImportBtn" to="." method="_on_import_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/AddTrackBtn" to="." method="_on_add_track_btn_pressed"]
@@ -465,6 +490,7 @@ size_flags_horizontal = 3
 [connection signal="value_changed" from="UI/MarginC/VBoxC/CenterC/HBoxC/SetStartInput" to="." method="_on_start_pos_input_changed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/InfoBtn" to="." method="_on_info_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/ExportBtn" to="." method="_on_export_btn_pressed"]
+[connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/MarkerManagerBtn" to="." method="_on_marker_manager_btn_pressed"]
 [connection signal="note_marker_btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/MarkerBtn" to="." method="_on_note_marker_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ExitBtn" to="." method="_on_exit_btn_pressed"]

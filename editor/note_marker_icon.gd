@@ -11,7 +11,7 @@ onready var editor = get_node("/root/Editor")
 func _ready():
 	#icon_node.set_texture(marker.icon)
 	label_node.text = marker.code
-	bg.color = color
+	bg.color = marker.color
 	bg.width = EDITOR_NOTE_MARKER_C.WIDTH
 	bg.height = EDITOR_NOTE_MARKER_C.HEIGHT
 	bg.update()

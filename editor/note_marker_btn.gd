@@ -15,10 +15,14 @@ func _ready():
 	label_node.set_text(tr(label))
 	
 func setup():
+	clear_options()
+	
 	self.markers = EDITOR_NOTE_MARKER_C.markers
 	set_options()
 	menu_btn.get_popup().connect("id_pressed", self, "_on_option_selected")
 
+func clear_options():
+	menu_btn.get_popup().clear()
 
 func set_options():
 	#option_btn.clear()

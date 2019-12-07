@@ -75,6 +75,9 @@ onready var map_info = dialog_c.get_node("MapInfo")
 onready var track_info = dialog_c.get_node("TrackInfo")
 onready var notice_dialog = dialog_c.get_node("NoticeDialog")
 onready var confirm_dialog = dialog_c.get_node("ConfirmDialog")
+onready var marker_manager_dialog = dialog_c.get_node("MarkerManagerDialog")
+
+var opened_dialog 
 
 #btn
 onready var btn_c = get_node("UI/MarginC/VBoxC/CenterC/HBoxC")
@@ -92,7 +95,9 @@ onready var set_start_input = btn_c.get_node("SetStartInput")
 
 #btn2
 onready var btn_c2 = get_node("UI/MarginC/VBoxC/CenterC2/HBoxC2")
+onready var marker_manger_btn = btn_c2.get_node("MarkerManagerBtn")
 onready var marker_btn = btn_c2.get_node("MarkerBtn")
+
 onready var reset_btn = btn_c2.get_node("ResetBtn")
 onready var exit_btn = btn_c2.get_node("ExitBtn")
 
@@ -120,8 +125,9 @@ func _ready():
 	for d in dialog_c.get_children():
 		d.connect("about_to_show", self, "disable_inputs")
 		d.connect("popup_hide", self, "enable_inputs")
-
-
+	
+	setup_markers()
+	
 	#TODO: remove this
 	#Uncomment to Quick start file preload
 	#load_audio("user://editor/audio_mock.ogg")
@@ -143,6 +149,11 @@ func setup_editor_dir():
 		dir.make_dir(editor_dir)
 
 	print("editor_dir:", editor_dir)
+	
+func setup_markers(markers_data=null):
+	EDITOR_NOTE_MARKER_C.load_markers(markers_data)
+	marker_btn.setup()
+	marker_manager_dialog.setup()
 
 func _process(delta):
 
@@ -437,6 +448,9 @@ func get_curr_date():
 func export_data(file_path):
 	var tracks_data = []
 	for t in tracks: tracks_data.append(t.get_data())
+	
+	var markers_data = EDITOR_NOTE_MARKER_C.get_markers_data()
+	
 	var data = {
 		editor = "music_boy_editor_v"+str(EDITOR_C.VERSION),
 		audio = map_info.audio_info,
@@ -444,7 +458,8 @@ func export_data(file_path):
 		date = get_curr_date(),
 		tempo = track_tempo,
 		start_pos = map_start_pos * EDITOR_BAR_C.CELL_EXPORT_SCALE,
-		tracks = tracks_data
+		tracks = tracks_data,
+		markers = markers_data
 	}
 
 	Utils.write_json_file(file_path, data)
@@ -480,12 +495,14 @@ func import_data(file_path):
 	clear_tracks()
 	set_params()
 	scale_to(0)
+		
+	# markers
+	var markers_data = null
+	if data.has("markers"): 
+		markers_data = data.markers
+	setup_markers(markers_data)
 	
-	var markers_data = []
-	if data.has("markers"): markers_data = data.markers
-	EDITOR_NOTE_MARKER_C.load_markers(markers_data)
-	marker_btn.setup()
-
+	# tracks
 	var y = EDITOR_BAR_C.CELL_HEIGHT + EDITOR_C.TRACK_DISTANCE
 	for track_data in data.tracks:
 		var t = track_scn.instance()
@@ -685,7 +702,7 @@ func _on_ScrollC_resized():
 	#print("_on_ScrollC_resized:", window_scroll.get_size())
 	# Update waveform viewport size and position
 	waveform_n.set_viewport_rect(Rect2(Vector2(window_scroll_last_val, 0),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
-
+	
 
 
 # ACTIVE NOTE
@@ -803,11 +820,8 @@ func show_notice(text):
 func popup_dialog(dialog):
 	dialog.popup()
 	var x = int(ui_node.get_size().x/2.0 - dialog.get_size().x/2.0)
-	dialog.set_position(Vector2(x,0))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-  #dialog.set_anchor(MARGIN_LEFT, 3)
-  #dialog.set_anchor(MARGIN_RIGHT, 3)
-
-
+	dialog.set_position(Vector2(x,0)) 
+  
 func _on_editor_minimum_size_changed():
 	pass
 	#var size = get_viewport().get_rect().size
@@ -863,4 +877,8 @@ func _on_ScrollC_scroll_started():
 	pass
 
 
+func _on_marker_manager_btn_pressed():
+	popup_dialog(marker_manager_dialog)
 
+func _on_markers_updated():
+	marker_btn.setup()
