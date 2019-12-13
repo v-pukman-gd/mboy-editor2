@@ -47,7 +47,7 @@ func _process(delta):
 
 func is_extended():
 	for m in markers:
-		if m.marker_name == EDITOR_NOTE_MARKER_C.EXTENDED:
+		if m.id == EDITOR_NOTE_MARKER_C.EXTENDED:
 			return true
 	return false
 
@@ -160,7 +160,7 @@ func set_markers_data(marker_values):
 func get_markers_data():
 	var marker_values = []
 	for m in markers:
-		marker_values.append(m.marker_name)
+		marker_values.append(m.id)
 	return marker_values
 
 func add_markers(markers_list):
@@ -170,7 +170,7 @@ func add_markers(markers_list):
 	print(markers)
 	update_markers()
 	bar.track.update_height()
-	
+
 func delete_markers(markers_list):
 	var changed = false
 	for marker in markers_list:

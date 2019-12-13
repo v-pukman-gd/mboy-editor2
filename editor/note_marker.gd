@@ -7,12 +7,12 @@ extends Node
 
 #var icon
 
-var marker_name
+var id
 var code
-var color 
+var color
 
-func setup(marker_name, code, color):
-	self.marker_name = marker_name
+func setup(id, code, color):
+	self.id = id
 	self.code = code
 	self.color = color
 

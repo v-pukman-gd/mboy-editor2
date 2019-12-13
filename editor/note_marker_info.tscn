@@ -34,7 +34,7 @@ margin_bottom = 22.0
 [node name="Label" type="Label" parent="VBoxC/HBoxC2"]
 margin_right = 114.0
 margin_bottom = 22.0
-text = "te_marker_name"
+text = "te_marker_id"
 
 [node name="Label2" type="Label" parent="VBoxC/HBoxC2"]
 margin_left = 118.0
@@ -66,9 +66,9 @@ margin_bottom = 22.0
 visible = false
 margin_right = 150.0
 margin_bottom = 22.0
-text = "te_marker_name"
+text = "te_marker_id"
 
-[node name="NameEdit" type="LineEdit" parent="VBoxC/HBoxC/VBoxC"]
+[node name="IdEdit" type="LineEdit" parent="VBoxC/HBoxC/VBoxC"]
 margin_right = 150.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
