@@ -4,7 +4,7 @@
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
 [ext_resource path="res://editor/track_info.tscn" type="PackedScene" id=3]
 [ext_resource path="res://editor/map_info.tscn" type="PackedScene" id=4]
-[ext_resource path="res://editor/note_marker_manager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://editor/note_markers_info_dialog.tscn" type="PackedScene" id=5]
 [ext_resource path="res://editor/btn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://editor/play_btn.gd" type="Script" id=7]
 [ext_resource path="res://editor/zoom_btn.tscn" type="PackedScene" id=8]
@@ -132,7 +132,7 @@ bbcode_enabled = true
 bbcode_text = "[center]hey[/center]"
 text = "hey"
 
-[node name="MarkerManagerDialog" parent="UI/CenterC" instance=ExtResource( 5 )]
+[node name="NoteMarkersInfoDialog" parent="UI/CenterC" instance=ExtResource( 5 )]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -225.0
@@ -478,7 +478,7 @@ size_flags_horizontal = 3
 [connection signal="file_selected" from="UI/CenterC/ImportMapDialog" to="." method="_on_import_map_file_selected"]
 [connection signal="file_selected" from="UI/CenterC/ExportMapDialog" to="." method="_on_export_map_file_selected"]
 [connection signal="confirmed" from="UI/CenterC/ConfirmDialog" to="." method="_on_action_confirmed"]
-[connection signal="markers_updated" from="UI/CenterC/MarkerManagerDialog" to="." method="_on_markers_updated"]
+[connection signal="markers_updated" from="UI/CenterC/NoteMarkersInfoDialog" to="." method="_on_markers_updated"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/LoadAudioBtn" to="." method="_on_load_audio_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/ImportBtn" to="." method="_on_import_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/AddTrackBtn" to="." method="_on_add_track_btn_pressed"]

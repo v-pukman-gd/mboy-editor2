@@ -1,6 +1,7 @@
 extends ConfirmationDialog
 
-onready var marker_info_c = get_node("VBoxC/ScrollContainer/ItemsList")
+onready var marker_info_c = get_node("VBoxC/ScrollC/ItemsList")
+onready var header_node = get_node("VBoxC/ItemsListHeader")
 var marker_info_scn = preload("res://editor/note_marker_info.tscn")
 
 var deleted_markers = []
@@ -15,10 +16,12 @@ func setup():
 	deleted_markers = []
 
 	for c in marker_info_c.get_children():
+		c.hide()
 		c.queue_free()
 
 	for m in EDITOR_NOTE_MARKER_C.markers:
 		add_marker_info(m)
+	toggle_header()
 
 func add_marker_info(marker):
 	var info = marker_info_scn.instance()
@@ -29,18 +32,31 @@ func add_marker_info(marker):
 func _on_add_btn_pressed():
 	var marker = EDITOR_NOTE_MARKER_C.new_marker()
 	add_marker_info(marker)
+	toggle_header()
 
 func _on_delete_btn_pressed(info):
-	if info.marker.id == EDITOR_NOTE_MARKER_C.ACCENT or \
-		info.marker.id == EDITOR_NOTE_MARKER_C.EXTENDED:
-			return
+	#if info.marker.id == EDITOR_NOTE_MARKER_C.ACCENT or \
+	#	info.marker.id == EDITOR_NOTE_MARKER_C.EXTENDED:
+	#		return
 
 	deleted_markers.append(info.marker)
 	for c in marker_info_c.get_children():
 		if c == info:
 			c.hide()
 			break
+			
+	toggle_header()
 
+func toggle_header():
+	var size = 0
+	for c in marker_info_c.get_children():
+		if c.visible:
+			size += 1
+	print("size:", size)
+	if size == 0:
+		header_node.hide()
+	else:
+		header_node.show()
 
 func _on_dialog_confirmed():
 	for m in deleted_markers:

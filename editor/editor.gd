@@ -75,7 +75,7 @@ onready var map_info = dialog_c.get_node("MapInfo")
 onready var track_info = dialog_c.get_node("TrackInfo")
 onready var notice_dialog = dialog_c.get_node("NoticeDialog")
 onready var confirm_dialog = dialog_c.get_node("ConfirmDialog")
-onready var marker_manager_dialog = dialog_c.get_node("MarkerManagerDialog")
+onready var note_markers_info_dialog = dialog_c.get_node("NoteMarkersInfoDialog")
 
 var opened_dialog 
 
@@ -153,7 +153,7 @@ func setup_editor_dir():
 func setup_markers(markers_data=null):
 	EDITOR_NOTE_MARKER_C.load_markers(markers_data)
 	marker_btn.setup()
-	marker_manager_dialog.setup()
+	note_markers_info_dialog.setup()
 
 func _process(delta):
 
@@ -163,7 +163,7 @@ func _process(delta):
 
 	#update note buttons
 	if active_note:
-		marker_btn.set_disabled(false)
+		marker_btn.set_disabled(EDITOR_NOTE_MARKER_C.markers.size() == 0)
 
 	elif active_note == null:
 		marker_btn.set_disabled(true)
@@ -878,7 +878,7 @@ func _on_ScrollC_scroll_started():
 
 
 func _on_marker_manager_btn_pressed():
-	popup_dialog(marker_manager_dialog)
+	popup_dialog(note_markers_info_dialog)
 
 func _on_markers_updated():
 	marker_btn.setup()
