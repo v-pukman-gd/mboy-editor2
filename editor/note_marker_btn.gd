@@ -31,7 +31,10 @@ func set_options():
 	var id = 1
 	for m in markers:
 		#option_btn.add_item(str(m.code) + " " + str(m.marker_name), id)
-		label = str(m.code) + " " + str(m.marker_name)
+		if m.code:
+			label = "%s ( %s )" % [m.marker_name, m.code]
+		else:
+			label = m.marker_name
 		menu_btn.get_popup().add_item(label, id)
 		id += 1
 
