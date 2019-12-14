@@ -8,7 +8,7 @@ const ACCENT = "accent"
 var HEIGHT = EDITOR_BAR_C.CELL_WIDTH
 var WIDTH = EDITOR_BAR_C.CELL_WIDTH
 
-const NoteMarker = preload("res://editor/note_marker.gd")
+const NoteMarker = preload("res://editor/note_marker/note_marker.gd")
 
 var markers = []
 var ids = []
@@ -41,18 +41,18 @@ func load_default_markers():
 
 func load_markers(markers_data):
 	clear()
-	
+
 	if markers_data:
 		for m in markers_data:
 			load_marker(m)
-			
+
 	if markers.size() == 0:
 		load_default_markers()
 
 func load_marker(marker_data):
 	if not marker_data.has('id'):
-		return 
-		
+		return
+
 	if str(marker_data.id) == "":
 		return
 
@@ -122,6 +122,6 @@ func redraw_markers():
 		updated_markers = []
 
 func check_marker_usage(id):
-	if str(id) == "": 
+	if str(id) == "":
 		return false
 	return get_tree().get_nodes_in_group("note_marker_%s" % id).size() > 0

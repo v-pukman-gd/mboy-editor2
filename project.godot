@@ -25,7 +25,7 @@ boot_bg_color=Color( 0, 0, 0, 1 )
 
 EDITOR_BAR_C="*res://editor/bar_c.gd"
 EDITOR_C="*res://editor/editor_c.gd"
-EDITOR_NOTE_MARKER_C="*res://editor/note_marker_c.gd"
+EDITOR_NOTE_MARKER_C="*res://editor/note_marker/note_marker_c.gd"
 EDITOR_TRACK_C="*res://editor/track_c.gd"
 EDITOR_TRACK_INSTRUMENT_C="*res://editor/track_instrument_c.gd"
 Utils="*res://editor/utils.gd"

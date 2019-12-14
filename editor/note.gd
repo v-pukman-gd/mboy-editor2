@@ -23,7 +23,7 @@ onready var markers_c = get_node("MarkersC")
 onready var bar = get_node("../")
 onready var editor = get_node("/root/Editor")
 
-var marker_icon_scn = preload("res://editor/note_marker_icon.tscn")
+var marker_icon_scn = preload("res://editor/note_marker/note_marker_icon.tscn")
 
 func _ready():
 	set_process(true)

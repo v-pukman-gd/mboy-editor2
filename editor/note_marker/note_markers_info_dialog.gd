@@ -5,7 +5,7 @@ onready var header_node = get_node("VBoxC/ItemsListHeader")
 onready var alert_label = get_node("VBoxC/AlertLabel")
 onready var notice_label = get_node("VBoxC/NoticeLabel")
 
-var marker_info_scn = preload("res://editor/note_marker_info.tscn")
+var marker_info_scn = preload("res://editor/note_marker/note_marker_info.tscn")
 
 var deleted_markers = []
 var marker_ids_in_use = []
@@ -53,15 +53,15 @@ func _on_delete_btn_pressed(info):
 			c.hide()
 			check_usage(info.marker.id)
 			break
-			
+
 	toggle_header()
-	
+
 func check_usage(id):
 	print("EDITOR_NOTE_MARKER_C.check_marker_usage(id)", id, EDITOR_NOTE_MARKER_C.check_marker_usage(id))
 	if EDITOR_NOTE_MARKER_C.check_marker_usage(id):
 		if not marker_ids_in_use.has(id):
 			marker_ids_in_use.append(id)
-			
+
 	if marker_ids_in_use.size() > 0:
 		alert_label.show()
 		if marker_ids_in_use.size() == 1:
@@ -74,18 +74,18 @@ func check_usage(id):
 func clear_alert():
 	alert_label.hide()
 	alert_label.set_text("")
-	
+
 func check_existence(id):
 	if EDITOR_NOTE_MARKER_C.get_marker(id):
 		notice_label.show()
 		notice_label.set_text("Notice: marker %s already exists." % id)
 	else:
 		clear_notice()
-		
+
 func clear_notice():
 	notice_label.hide()
 	notice_label.set_text("")
-		
+
 func toggle_header():
 	var size = 0
 	for c in marker_info_c.get_children():
@@ -111,7 +111,7 @@ func _on_dialog_confirmed():
 
 func _on_dialog_about_to_show():
 	setup()
-	
+
 func _on_id_text_changed(value, info):
 	if str(value) != "":
 		check_existence(value)
