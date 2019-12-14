@@ -14,6 +14,7 @@ var width_scale = 1
 var max_width = EDITOR_BAR_C.CELL_WIDTH
 var last_dragging_y = 0
 var start_dragging_y = 0
+var updated_scale = 1
 
 #var marker_values = []
 var markers = []
@@ -193,8 +194,9 @@ func update_markers():
 		markers_c.add_child(marker_icon)
 		i += 1
 	markers_c.set_custom_minimum_size(Vector2(EDITOR_NOTE_MARKER_C.WIDTH, markers.size()*EDITOR_NOTE_MARKER_C.HEIGHT))
-
-#don't scale markers only
+	update_scale(updated_scale)
+	
+# don't scale markers
 func update_scale(val):
+	updated_scale = val
 	for m in markers_c.get_children(): m.set_scale(Vector2(1.0/val,1))
-
