@@ -78,7 +78,7 @@ func clear_alert():
 func check_existence(id):
 	if EDITOR_NOTE_MARKER_C.get_marker(id):
 		notice_label.show()
-		notice_label.set_text("Notice: marker %s already exist." % id)
+		notice_label.set_text("Notice: marker %s already exists." % id)
 	else:
 		clear_notice()
 		
