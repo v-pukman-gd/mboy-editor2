@@ -3,7 +3,6 @@
 [ext_resource path="res://editor/note_marker/note_marker_icon.gd" type="Script" id=1]
 [ext_resource path="res://editor/bg_color.tscn" type="PackedScene" id=2]
 
-
 [node name="NoteMarkerIcon" type="Control"]
 margin_right = 20.0
 margin_bottom = 10.0

@@ -30,6 +30,5 @@ func set_inputs():
 func _on_delete_btn_pressed():
 	emit_signal("delete")
 
-
 func _on_id_text_changed(new_text):
 	emit_signal("id_text_changed", new_text)

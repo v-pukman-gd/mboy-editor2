@@ -14,7 +14,6 @@ signal markers_updated
 
 func _ready():
 	pass
-	#show()
 
 func setup():
 	deleted_markers = []
@@ -43,10 +42,6 @@ func _on_add_btn_pressed():
 	toggle_header()
 
 func _on_delete_btn_pressed(info):
-	#if info.marker.id == EDITOR_NOTE_MARKER_C.ACCENT or \
-	#	info.marker.id == EDITOR_NOTE_MARKER_C.EXTENDED:
-	#		return
-
 	deleted_markers.append(info.marker)
 	for c in marker_info_c.get_children():
 		if c == info:
@@ -57,7 +52,6 @@ func _on_delete_btn_pressed(info):
 	toggle_header()
 
 func check_usage(id):
-	print("EDITOR_NOTE_MARKER_C.check_marker_usage(id)", id, EDITOR_NOTE_MARKER_C.check_marker_usage(id))
 	if EDITOR_NOTE_MARKER_C.check_marker_usage(id):
 		if not marker_ids_in_use.has(id):
 			marker_ids_in_use.append(id)
@@ -91,7 +85,7 @@ func toggle_header():
 	for c in marker_info_c.get_children():
 		if c.visible:
 			size += 1
-	print("size:", size)
+			
 	if size == 0:
 		header_node.hide()
 	else:

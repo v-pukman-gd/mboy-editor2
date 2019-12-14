@@ -1,6 +1,5 @@
 extends Node
 
-#const default_icon = preload("res://editor/note_marker/icons/default_marker.png")
 const COLOR = "ffffff00"
 const EXTENDED = "extended"
 const ACCENT = "accent"
@@ -16,16 +15,6 @@ var ids = []
 var deleted_markers = []
 var updated_markers = []
 
-#func load_markers(data):
-#	ids = []
-#	markers = []
-#	for t in data.tracks:
-#		for b in t.bars:
-#			for n in b.notes:
-#				for m in n.markers:
-#					if not ids.has(m):
-#						ids.append(m)
-#						load_marker(m)
 func _ready():
 	pass
 
