@@ -133,7 +133,6 @@ bbcode_text = "[center]hey[/center]"
 text = "hey"
 
 [node name="NoteMarkersInfoDialog" parent="UI/CenterC" instance=ExtResource( 5 )]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -225.0
@@ -143,7 +142,6 @@ size_flags_horizontal = 5
 popup_exclusive = true
 
 [node name="MarginC" type="MarginContainer" parent="UI"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3

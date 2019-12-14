@@ -164,13 +164,12 @@ func _process(delta):
 	#update note buttons
 	if active_note:
 		marker_btn.set_disabled(EDITOR_NOTE_MARKER_C.markers.size() == 0)
-
 	elif active_note == null:
 		marker_btn.set_disabled(true)
 
-	if active_track and edit_track_btn.btn.is_disabled():
+	if active_track and edit_track_btn.is_disabled():
 		edit_track_btn.set_disabled(false)
-	elif active_track == null and not edit_track_btn.btn.is_disabled():
+	elif active_track == null and not edit_track_btn.is_disabled():
 		edit_track_btn.set_disabled(true)
 
 	tracks_c.set_custom_minimum_size(Vector2(OS.get_window_size().x-200, 100))

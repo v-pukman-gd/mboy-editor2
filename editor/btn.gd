@@ -13,7 +13,8 @@ onready var icon_label = get_node("VBoxC/Button/FontAwesome")
 onready var label = get_node("VBoxC/Label")
 
 func _ready():
-	btn.set_tooltip(str(tooltip_text))
+	if tooltip_text:
+		btn.set_tooltip(str(tooltip_text))
 	icon_label.icon = icon_name
 	label.set_text(str(label_text))
 	#set_custom_minimum_size(container.get_size())
@@ -25,3 +26,5 @@ func _on_button_pressed():
 func set_disabled(val):
 	btn.set_disabled(val)
 
+func is_disabled():
+	btn.is_disabled()
