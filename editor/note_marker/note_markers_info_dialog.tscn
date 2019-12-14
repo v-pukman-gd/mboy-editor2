@@ -4,7 +4,6 @@
 [ext_resource path="res://editor/note_marker/note_markers_info_dialog.gd" type="Script" id=2]
 
 [node name="NoteMarkersInfoDialog" type="ConfirmationDialog"]
-visible = true
 margin_left = 1.0
 margin_right = 451.0
 margin_bottom = 562.0
