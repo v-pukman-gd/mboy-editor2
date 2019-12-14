@@ -5,7 +5,6 @@
 [ext_resource path="res://addons/FontAwesome/fontawesome-webfont.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=4]
 
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
