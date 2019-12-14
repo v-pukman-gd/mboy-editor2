@@ -120,3 +120,8 @@ func redraw_markers():
 				n.update_markers()
 		deleted_markers = []
 		updated_markers = []
+
+func check_marker_usage(id):
+	if str(id) == "": 
+		return false
+	return get_tree().get_nodes_in_group("note_marker_%s" % id).size() > 0

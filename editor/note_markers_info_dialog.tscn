@@ -4,6 +4,7 @@
 [ext_resource path="res://editor/note_markers_info_dialog.gd" type="Script" id=2]
 
 [node name="NoteMarkersInfoDialog" type="ConfirmationDialog"]
+visible = true
 margin_left = 1.0
 margin_right = 451.0
 margin_bottom = 562.0
@@ -16,18 +17,18 @@ anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -217.0
 margin_top = 8.0
-margin_right = 217.0
+margin_right = 213.0
 margin_bottom = 524.0
 mouse_filter = 0
 
 [node name="Control" type="Control" parent="VBoxC"]
-margin_right = 434.0
+margin_right = 430.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="Label" type="Label" parent="VBoxC"]
 margin_top = 24.0
-margin_right = 434.0
+margin_right = 430.0
 margin_bottom = 46.0
 mouse_filter = 1
 size_flags_vertical = 0
@@ -36,13 +37,14 @@ align = 1
 
 [node name="Control 3" type="Control" parent="VBoxC"]
 margin_top = 50.0
-margin_right = 434.0
+margin_right = 430.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="ItemsListHeader" type="HBoxContainer" parent="VBoxC"]
+editor/display_folded = true
 margin_top = 74.0
-margin_right = 434.0
+margin_right = 430.0
 margin_bottom = 96.0
 
 [node name="Control" type="Control" parent="VBoxC/ItemsListHeader"]
@@ -75,27 +77,48 @@ text = "te_color"
 clip_text = true
 
 [node name="ScrollC" type="ScrollContainer" parent="VBoxC"]
+editor/display_folded = true
 margin_top = 100.0
-margin_right = 434.0
-margin_bottom = 461.0
+margin_right = 430.0
+margin_bottom = 375.0
 rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 
 [node name="ItemsList" type="VBoxContainer" parent="VBoxC/ScrollC"]
-margin_right = 434.0
+margin_right = 430.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 
+[node name="AlertLabel" type="Label" parent="VBoxC"]
+margin_top = 379.0
+margin_right = 430.0
+margin_bottom = 418.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 1, 0.262745, 0, 1 )
+text = "Notice: [b]markers[/b] %s in use. After press OK, it will be deleted from the map."
+autowrap = true
+
+[node name="NoticeLabel" type="Label" parent="VBoxC"]
+margin_top = 422.0
+margin_right = 430.0
+margin_bottom = 461.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "Notice: markers %s in use. After press OK, it will be deleted from the map."
+autowrap = true
+
 [node name="Control 5" type="Control" parent="VBoxC"]
 margin_top = 465.0
-margin_right = 434.0
+margin_right = 430.0
 margin_bottom = 490.0
 rect_min_size = Vector2( 25, 25 )
 
 [node name="AddMarkerBtn" type="Button" parent="VBoxC"]
-margin_left = 164.0
+margin_left = 162.0
 margin_top = 494.0
-margin_right = 269.0
+margin_right = 267.0
 margin_bottom = 516.0
 size_flags_horizontal = 4
 size_flags_vertical = 4

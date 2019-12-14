@@ -168,4 +168,5 @@ text = ""
 align = 1
 script = ExtResource( 4 )
 icon = "trash"
+[connection signal="text_changed" from="VBoxC/HBoxC/VBoxC/IdEdit" to="." method="_on_id_text_changed"]
 [connection signal="pressed" from="VBoxC/HBoxC/VBoxC5/DeleteBtn" to="." method="_on_delete_btn_pressed"]

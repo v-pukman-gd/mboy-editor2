@@ -2,9 +2,13 @@ extends ConfirmationDialog
 
 onready var marker_info_c = get_node("VBoxC/ScrollC/ItemsList")
 onready var header_node = get_node("VBoxC/ItemsListHeader")
+onready var alert_label = get_node("VBoxC/AlertLabel")
+onready var notice_label = get_node("VBoxC/NoticeLabel")
+
 var marker_info_scn = preload("res://editor/note_marker_info.tscn")
 
 var deleted_markers = []
+var marker_ids_in_use = []
 
 signal markers_updated
 
@@ -14,6 +18,7 @@ func _ready():
 
 func setup():
 	deleted_markers = []
+	marker_ids_in_use = []
 
 	for c in marker_info_c.get_children():
 		c.hide()
@@ -22,11 +27,14 @@ func setup():
 	for m in EDITOR_NOTE_MARKER_C.markers:
 		add_marker_info(m)
 	toggle_header()
+	clear_alert()
+	clear_notice()
 
 func add_marker_info(marker):
 	var info = marker_info_scn.instance()
 	info.setup(marker)
 	info.connect("delete", self, "_on_delete_btn_pressed", [info])
+	info.connect("id_text_changed", self, "_on_id_text_changed", [info])
 	marker_info_c.add_child(info)
 
 func _on_add_btn_pressed():
@@ -43,10 +51,41 @@ func _on_delete_btn_pressed(info):
 	for c in marker_info_c.get_children():
 		if c == info:
 			c.hide()
+			check_usage(info.marker.id)
 			break
 			
 	toggle_header()
+	
+func check_usage(id):
+	print("EDITOR_NOTE_MARKER_C.check_marker_usage(id)", id, EDITOR_NOTE_MARKER_C.check_marker_usage(id))
+	if EDITOR_NOTE_MARKER_C.check_marker_usage(id):
+		if not marker_ids_in_use.has(id):
+			marker_ids_in_use.append(id)
+			
+	if marker_ids_in_use.size() > 0:
+		alert_label.show()
+		if marker_ids_in_use.size() == 1:
+			alert_label.set_text("Alert: marker %s is in use. After press OK, it will be deleted from the map." % marker_ids_in_use[0])
+		else:
+			alert_label.set_text("Alert: markers %s are in use. After press OK, they will be deleted from the map." % PoolStringArray(marker_ids_in_use).join(", "))
+	else:
+		clear_alert()
 
+func clear_alert():
+	alert_label.hide()
+	alert_label.set_text("")
+	
+func check_existence(id):
+	if EDITOR_NOTE_MARKER_C.get_marker(id):
+		notice_label.show()
+		notice_label.set_text("Notice: marker %s already exist." % id)
+	else:
+		clear_notice()
+		
+func clear_notice():
+	notice_label.hide()
+	notice_label.set_text("")
+		
 func toggle_header():
 	var size = 0
 	for c in marker_info_c.get_children():
@@ -72,3 +111,7 @@ func _on_dialog_confirmed():
 
 func _on_dialog_about_to_show():
 	setup()
+	
+func _on_id_text_changed(value, info):
+	if str(value) != "":
+		check_existence(value)
