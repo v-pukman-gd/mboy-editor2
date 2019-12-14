@@ -4,6 +4,7 @@
 [ext_resource path="res://editor/note_marker/note_markers_info_dialog.gd" type="Script" id=2]
 
 [node name="NoteMarkersInfoDialog" type="ConfirmationDialog"]
+visible = true
 margin_left = 1.0
 margin_right = 451.0
 margin_bottom = 562.0
@@ -55,7 +56,7 @@ margin_left = 39.0
 margin_right = 229.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 190, 0 )
-text = "te_name"
+text = "te_marker_name"
 clip_text = true
 
 [node name="Label2" type="Label" parent="VBoxC/ItemsListHeader"]
@@ -63,7 +64,7 @@ margin_left = 233.0
 margin_right = 308.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 75, 0 )
-text = "te_code"
+text = "te_marker_code"
 clip_text = true
 
 [node name="Label3" type="Label" parent="VBoxC/ItemsListHeader"]
@@ -77,7 +78,7 @@ clip_text = true
 [node name="ScrollC" type="ScrollContainer" parent="VBoxC"]
 margin_top = 100.0
 margin_right = 434.0
-margin_bottom = 375.0
+margin_bottom = 409.0
 rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 
@@ -87,16 +88,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 
 [node name="AlertLabel" type="Label" parent="VBoxC"]
-margin_top = 379.0
+margin_top = 413.0
 margin_right = 434.0
-margin_bottom = 418.0
+margin_bottom = 435.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 5
 custom_colors/font_color = Color( 1, 0.262745, 0, 1 )
 autowrap = true
 
 [node name="NoticeLabel" type="Label" parent="VBoxC"]
-margin_top = 422.0
+margin_top = 439.0
 margin_right = 434.0
 margin_bottom = 461.0
 rect_min_size = Vector2( 400, 0 )

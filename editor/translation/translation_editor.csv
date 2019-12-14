@@ -1,0 +1,74 @@
+,en,ru
+te_music_boy,Music Boy,Музыкальный Пацан
+te_load_audio,Load Audio,Загруз. Аудио
+te_import_map,Import Map,Импорт Карты
+te_add_track,Add Track,Доб. Дорожку
+te_edit_track,Edit Track,Изм. Дорожку
+te_play,Play,Пуск
+te_zoom_out,Zoom Out,Уменьшить
+te_zoom_in,Zoom In,Увеличить
+te_set_tempo,Set Tempo,Темп
+te_set_start_position,Set Start Position,Уст. Начало
+te_set_info,Set Info,Инфо
+te_save_map,Save Map,Сохр. Карту
+te_mark_accent,Mark Accent,Акцент
+te_mark_epic,Mark Epic,Эпик
+te_mark_extended,Mark Extended,Легато
+te_mark_mix,Mark Mix,Микс
+te_mark_autoplay,Mark Autoplay,Авто
+te_reset,Reset,Сброс
+te_exit,Exit,Выход
+te_stop,Stop,Стоп
+te_loading,Loading . . .,Загрузка . . .
+te_ogg_to_wav_failed,Ogg to Wav Failed!,из Ogg в Wav не получилось
+te_mp3_to_wav_failed,Mp3 to Wav Failed!,из Mp3 в Wav не получилось
+te_wav_to_ogg_failed,Wav to Ogg Failed!,из Wav в Ogg не получилось
+te_format_is_not_supported,format is not supported,формат не поддерживается
+te_is_not_found,is not found,не найден
+te_loading_1_3,Loading (1/3),Загрузка (1/3)
+te_loading_2_3,Loading (2/3),Загрузка (2/3)
+te_loading_3_3,Loading (3/3),Загрузка (3/3)
+te_exit_confirm,Exit from the editor?,Выйти из редактора?
+te_reset_confirm,All changes will be erased. Reset the editor?,Все измененния будут стерты. Сбросить все?
+te_track,Track,Дорожка
+te_instrument,Instrument,Инструмент
+te_track_name,Name,Название
+te_color,Color,Цвет
+te_hide,Hide,Скрыть
+te_destroy,Destroy,Удалить
+te_map_author,Author (*required),Автор (*обязательно)
+te_map,Map,Карта
+te_audio,Audio,Аудио
+te_artist,Artist (*required),Исполнитель  (*обязательно)
+te_title,Title (*required),Название  (*обязательно)
+te_album,Album,Альбом
+te_genre,Genre  (*required),Жанр  (*обязательно)
+te_subgenre,Subgenre,Поджанр
+te_date,Release date,Дата релиза
+te_copyright,Copyright,Копирайт
+te_license,License,Лицензия
+te_comments,Comments,Комментарий
+te_audio_is_not_loaded,For some reasons the audio file can't be loaded,По каким-то причинам загрузка аудио файла не удалась
+te_download_link,Download audio link (iTunes/GooglePlay/Other) (*required),Ссылка на скачивание музыки (iTunes/GooglePlay/Другое) (*обязательно)
+te_set_marker,Set Marker,Муз. Маркер
+te_set_custom_marker,Set Game Marker,Маркер Игры
+te_camera_back,Camera Back,Вид Сзади
+te_camera_front,Camera Front,Вид Спереди
+te_camera_top,Camera Top,Вид Сверху
+te_camera_right,Camera Right,Вид Сбоку
+te_accent,Accent,Акцент
+te_epic,Epic,Эпик
+te_extended,Extended,Легато
+te_mix,Mix,Микс
+te_autoplay,Autoplay,Авто
+te_manage_markers,Edit Markers,Изм. Маркеры
+te_marker_name,Id (must be unique),Id (уникальный)
+te_marker_code,Code,Код
+te_toggle_marker,Toggle Marker,Назначить Маркер
+te_add_marker,Add Marker,Новый Маркер
+te_marker_in_use1,Alert: marker,Маркер
+te_marker_in_use2,"is in use. After press OK, it will be deleted from the map","используется. После нажатия ОК, он будет удален из карты"
+te_markers_in_use1,Alert: markers,Маркеры
+te_markers_in_use2,"are in use. After press OK, they will be deleted from the map","используются. После нажатия ОК, они будут удалены из карты"
+te_marker_exists1,Notice: marker,Маркер
+te_marker_exists2,already exists,уже существует

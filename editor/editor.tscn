@@ -345,27 +345,27 @@ rect_min_size = Vector2( 300, 0 )
 [node name="MarkerManagerBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_left = 304.0
-margin_right = 436.0
+margin_right = 439.0
 margin_bottom = 57.0
-label_text = "tr_manage_markers"
+label_text = "te_manage_markers"
 icon_name = "flag-o,pencil"
 
 [node name="Control10" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
-margin_left = 440.0
-margin_right = 450.0
+margin_left = 443.0
+margin_right = 453.0
 margin_bottom = 57.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="MarkerBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 11 )]
 anchor_left = 0.0
 anchor_right = 0.0
-margin_left = 454.0
-margin_right = 514.0
+margin_left = 457.0
+margin_right = 517.0
 margin_bottom = 57.0
 label = "te_toggle_marker"
 
 [node name="Control4" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
-margin_left = 518.0
+margin_left = 521.0
 margin_right = 1102.0
 margin_bottom = 57.0
 rect_min_size = Vector2( 50, 0 )

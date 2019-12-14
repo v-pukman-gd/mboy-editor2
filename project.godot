@@ -92,7 +92,7 @@ editor_sinfo={
 translation_remaps={
 
 }
-translations=[ "res://editor/translation/translation_editor.txt.en.translation", "res://editor/translation/translation_editor.txt.ru.translation" ]
+translations=PoolStringArray( "res://editor/translation/translation_editor.en.translation", "res://editor/translation/translation_editor.ru.translation" )
 
 [physics_2d]
 

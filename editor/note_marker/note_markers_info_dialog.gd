@@ -59,9 +59,9 @@ func check_usage(id):
 	if marker_ids_in_use.size() > 0:
 		alert_label.show()
 		if marker_ids_in_use.size() == 1:
-			alert_label.set_text("Alert: marker %s is in use. After press OK, it will be deleted from the map." % marker_ids_in_use[0])
+			alert_label.set_text("%s %s %s" % [tr("te_marker_in_use1"), marker_ids_in_use[0], tr("te_marker_in_use2")])
 		else:
-			alert_label.set_text("Alert: markers %s are in use. After press OK, they will be deleted from the map." % PoolStringArray(marker_ids_in_use).join(", "))
+			alert_label.set_text("%s %s %s" % [tr("te_markers_in_use1"), PoolStringArray(marker_ids_in_use).join(", "), tr("te_markers_in_use2")])
 	else:
 		clear_alert()
 
@@ -72,7 +72,7 @@ func clear_alert():
 func check_existence(id):
 	if EDITOR_NOTE_MARKER_C.get_marker(id):
 		notice_label.show()
-		notice_label.set_text("Notice: marker %s already exists." % id)
+		notice_label.set_text("%s %s %s" % [tr("te_marker_exists1"),id,tr("te_marker_exists2")])
 	else:
 		clear_notice()
 
