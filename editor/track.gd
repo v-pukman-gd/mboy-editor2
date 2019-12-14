@@ -191,6 +191,8 @@ func _on_name_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 
 	if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT and e.pressed) or (e is InputEventScreenTouch):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		if is_active: editor.unset_active_track()
 		else: editor.set_active_track(self)
+		
+		print("HANDLED!")
 
 func set_active(val):
 	is_active = val

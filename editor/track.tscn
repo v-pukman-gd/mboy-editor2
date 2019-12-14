@@ -21,7 +21,6 @@ size_flags_vertical = 0
 position = Vector2( 20, 0 )
 z_index = -1
 width = 100
-height = 20
 
 [node name="NameLabel" type="Label" parent="NameC/BgColor"]
 margin_right = 100.0

@@ -76,6 +76,7 @@ onready var track_info = dialog_c.get_node("TrackInfo")
 onready var notice_dialog = dialog_c.get_node("NoticeDialog")
 onready var confirm_dialog = dialog_c.get_node("ConfirmDialog")
 onready var note_markers_info_dialog = dialog_c.get_node("NoteMarkersInfoDialog")
+onready var editor_info_dialog = dialog_c.get_node("EditorInfoDialog")
 
 var opened_dialog 
 
@@ -111,6 +112,9 @@ var editor_dir
 
 func _ready():
 	VisualServer.set_default_clear_color(EDITOR_C.BG_COLOR)
+	get_tree().set_auto_accept_quit(false)
+	
+	editor_info_dialog.get_node("Text").bbcode_text = "[center]MBOY Editor v. %s[/center]" % EDITOR_C.VERSION
 
 	set_process(true)
 	set_process_input(true)
@@ -132,6 +136,10 @@ func _ready():
 	#Uncomment to Quick start file preload
 	#load_audio("user://editor/audio_mock.ogg")
 
+func _notification(what):
+	# Confirm before exit
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		_on_exit_btn_pressed()
 
 func disable_inputs(): set_process_input(false)
 func enable_inputs(): set_process_input(true)
@@ -167,9 +175,9 @@ func _process(delta):
 	elif active_note == null:
 		marker_btn.set_disabled(true)
 
-	if active_track and edit_track_btn.is_disabled():
+	if active_track and active_track.is_active:
 		edit_track_btn.set_disabled(false)
-	elif active_track == null and not edit_track_btn.is_disabled():
+	elif active_track == null or not active_track.is_active:
 		edit_track_btn.set_disabled(true)
 
 	tracks_c.set_custom_minimum_size(Vector2(OS.get_window_size().x-200, 100))
@@ -666,6 +674,7 @@ func update_controls():
 		set_start_input.input.set_editable(true)
 		info_btn.set_disabled(false)
 		reset_btn.set_disabled(false)
+		marker_manger_btn.set_disabled(false)
 
 		window_scroll.show()
 	elif not audio_loaded:
@@ -679,6 +688,8 @@ func update_controls():
 		set_start_input.input.set_editable(false)
 		info_btn.set_disabled(true)
 		reset_btn.set_disabled(true)
+		marker_manger_btn.set_disabled(true)
+		
 
 		window_scroll.hide()
 
@@ -785,6 +796,7 @@ func update_track(track):
 		track.set_info(track_info)
 
 func set_active_track(track):
+	print("SET ACTIVE:", track)
 	if active_track != null: active_track.set_active(false)
 	active_track = track
 	active_track.set_active(true)
@@ -871,13 +883,14 @@ class Geditor:
 	func ogg_comments(file):
 		return ""
 
-
 func _on_ScrollC_scroll_started():
 	pass
-
 
 func _on_marker_manager_btn_pressed():
 	popup_dialog(note_markers_info_dialog)
 
 func _on_markers_updated():
 	marker_btn.setup()
+
+func _on_editor_info_btn_pressed():
+	popup_dialog(editor_info_dialog)

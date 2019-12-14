@@ -6,6 +6,7 @@ var markers = []
 export (String) var label
 
 onready var menu_btn = get_node("MenuButton")
+onready var button_node = get_node("MenuButton/Button")
 onready var label_node = get_node("Label")
 
 func _ready():
@@ -39,6 +40,7 @@ func _on_option_selected(option_id):
 
 func set_disabled(val):
 	menu_btn.set_disabled(val)
+	button_node.set_disabled(val)
 	
 func is_disabled():
 	menu_btn.is_disabled()

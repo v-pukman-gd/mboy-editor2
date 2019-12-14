@@ -16,7 +16,7 @@ te_mark_epic,Mark Epic,Эпик
 te_mark_extended,Mark Extended,Легато
 te_mark_mix,Mark Mix,Микс
 te_mark_autoplay,Mark Autoplay,Авто
-te_reset,Reset,Сброс
+te_reset,Reset Editor,Сброс
 te_exit,Exit,Выход
 te_stop,Stop,Стоп
 te_loading,Loading . . .,Загрузка . . .
@@ -72,3 +72,4 @@ te_markers_in_use1,Alert: markers,Маркеры
 te_markers_in_use2,"are in use. After press OK, they will be deleted from the map","используются. После нажатия ОК, они будут удалены из карты"
 te_marker_exists1,Notice: marker,Маркер
 te_marker_exists2,already exists,уже существует
+te_editor_info,Get Info,Инфо
