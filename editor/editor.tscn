@@ -133,7 +133,6 @@ bbcode_text = "[center]hey[/center]"
 text = "hey"
 
 [node name="EditorInfoDialog" type="AcceptDialog" parent="UI/CenterC"]
-visible = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -200.0
