@@ -306,8 +306,6 @@ func cursor_focus():
 
 func scale_to(dir):
 	print("****** scale_to ******")
-	if is_playing:
-		play()
 		
 	var value = dir * (waveform_scale/10.0) #0.5
 	ui_scale += value
