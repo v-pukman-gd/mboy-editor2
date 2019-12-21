@@ -23,7 +23,10 @@ func stop():
 	curr_speed = 0
 
 func _process(delta):
-	move_local_x(curr_speed*speed_scale*delta)
+	pass
+	#move_local_x(curr_speed*speed_scale*delta)
+	#if curr_speed > 0:
+	#	print(get_position())
 
 func set_length_offset(val):
 	length_offset = val

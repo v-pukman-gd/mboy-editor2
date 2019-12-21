@@ -40,7 +40,6 @@ var sample_duration_in_sec
 var quarter_time_in_sec
 
 var window_scroll_size = 0
-var d = 0
 var pending_wscroll_update = false
 var cursor_slider_pressed = false
 var window_scroll_last_val = 0
@@ -118,7 +117,7 @@ func _ready():
 
 	set_process(true)
 	set_process_input(true)
-	cursor_slider.connect("value_changed", self, "_on_hslider_value_changed")
+	#cursor_slider.connect("value_changed", self, "_on_hslider_value_changed")
 	window_scroll_size = window_scroll.get_minimum_size().x
 	update_controls()
 	setup_editor_dir()
@@ -164,7 +163,9 @@ func setup_markers(markers_data=null):
 	note_markers_info_dialog.setup()
 
 func _process(delta):
-
+	
+	# call set_h_scroll to update scroll here
+	# calling set_h_scroll in other places just doesn't work
 	if pending_wscroll_update:
 		window_scroll.set_h_scroll(window_scroll_size)
 		pending_wscroll_update = false
@@ -186,7 +187,7 @@ func _process(delta):
 	if window_scroll_last_val != window_scroll.get_h_scroll():
 		for t in tracks: t.move_label(window_scroll.get_h_scroll())
 
-	# Waveorm update
+	# Waveform update
 	if tempo_update_timeout > 0:
 		tempo_update_timeout -= delta
 	elif tempo_update_timeout < 0:
@@ -206,14 +207,21 @@ func _process(delta):
 		cursor_slider.set_value(cursor_slider.get_value()*scale)		
 		window_scroll.set_h_scroll(cursor_slider.get_value()+dd)
 		cursor_static.set_position(Vector2(cursor_slider.get_value(), cursor_static.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-		if not is_playing:
-			cursor_playback.set_position(cursor_static.get_position())
+		#if not is_playing:
+		#	cursor_playback.set_position(cursor_static.get_position())
 		
 		tempo_update_in_process = false
 		
 	window_scroll_last_val = window_scroll.get_h_scroll()
 	waveform_n.set_scroll(window_scroll_last_val)
 	waveform_n.update()
+	
+	if is_playing:
+		cursor_playback.set_position(Vector2(track_speed*stream_player.get_playback_position()*scale_ratio,0))
+		#cursor_playback.show()
+	else:
+		cursor_playback.set_position(cursor_static.get_position())
+		#cursor_playback.hide()
 	
 	# TODO: bring back follow
 	#if is_playing and is_follow_playing:
@@ -276,8 +284,8 @@ func play():
 	if is_playing:
 		is_playing = false
 		stream_player.stop()
-		cursor_playback.stop()
-		cursor_playback.set_position(cursor_static.get_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		#cursor_playback.stop()
+		#cursor_playback.set_position(cursor_static.get_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	else:
 		is_playing = true
 		unset_active_note()
@@ -285,8 +293,8 @@ func play():
 		var t = cursor_slider.get_value() / track_speed
 		t = t / scale_ratio
 		stream_player.play(t)
-		cursor_playback.set_position(cursor_static.get_position())
-		cursor_playback.start()
+		#cursor_playback.set_position(cursor_static.get_position())
+		#cursor_playback.start()
 
 	play_btn.set_playing(is_playing)
 
@@ -304,9 +312,9 @@ func cursor_focus():
 	#window_scroll.set_h_scroll(cursor_slider.get_value()-EDITOR_C.CURSOR_FOCUS_OFFSET)
 	window_scroll.set_h_scroll(cursor_static.get_position().x-EDITOR_C.CURSOR_FOCUS_OFFSET)
 
-func scale_to(dir):
+func scale_to(dir):		
 	print("****** scale_to ******")
-		
+	
 	var value = dir * (waveform_scale/10.0) #0.5
 	ui_scale += value
 	var curr_scale = waveform_scale + ui_scale
@@ -342,7 +350,7 @@ func scale_to(dir):
 	# need to update cursor before waveform
 	var cursor_val = cursor_slider.get_value()
 	var scroll_val = window_scroll.get_h_scroll()
-	d = scroll_val - cursor_val
+	var d = cursor_val - scroll_val 
 
 	cursor_slider.set_max(waveform_length*scale_ratio)
 	cursor_slider.set_custom_minimum_size(Vector2(waveform_length*scale_ratio, 256))
@@ -360,8 +368,10 @@ func scale_to(dir):
 	waveform_n.set_scale_ratio(scale_ratio)
 
 	cursor_playback.speed_scale = scale_ratio
-
-	window_scroll.set_h_scroll(cursor_slider.get_value()+d)
+	
+	# on scale keep cursor in the same position
+	window_scroll_size = cursor_slider.get_value() - d
+	pending_wscroll_update = true
 
 	#map
 	for t in tracks: t.update_scale(scale_ratio)
@@ -379,11 +389,12 @@ func _on_scale_down_btn_pressed():
 
 func _on_hslider_value_changed( value ):
 	print("slider val changed:", value)
+	
 	if tempo_update_in_process:
 		return
 
 	cursor_static.set_position(Vector2(value, cursor_static.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-	cursor_playback.set_position(Vector2(value, cursor_playback.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	#cursor_playback.set_position(Vector2(value, cursor_playback.get_position().y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 	
 	if is_playing:
@@ -706,9 +717,9 @@ func _on_tempo_changed():
 		print("tempo updated to", track_tempo)
 
 func _on_ScrollC_minimum_size_changed():
-	var dd =  cursor_slider.get_value() - window_scroll.get_h_scroll()
-	if dd > window_size and not pending_wscroll_update:
-		window_scroll_size = window_scroll.get_h_scroll() + dd + d
+	var d = cursor_slider.get_value() - window_scroll.get_h_scroll()
+	if d > window_size and not pending_wscroll_update:
+		window_scroll_size = window_scroll.get_h_scroll() + d
 		pending_wscroll_update = true
 
 func _on_ScrollC_resized():
