@@ -78,6 +78,6 @@ func _draw():
 
 func update():
 	if not updated:
-		print("*update waveform*")
+		#print("*update waveform*")
 		updated = true
 		.update()

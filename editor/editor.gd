@@ -306,13 +306,18 @@ func cursor_focus():
 
 func scale_to(dir):
 	print("****** scale_to ******")
+	if is_playing:
+		play()
+		
 	var value = dir * (waveform_scale/10.0) #0.5
 	ui_scale += value
 	var curr_scale = waveform_scale + ui_scale
 	scale_ratio = curr_scale/waveform_scale
-	if scale_ratio <= 0:
+	# check  zero value as string because comparing to number doesnt work
+	if scale_ratio <= 0 or str(scale_ratio) == "0":
 		scale_ratio = 0.1
 		ui_scale -= value
+		print("scale_ratio:", scale_ratio)
 		return
 
 #	if scale_ratio == 0.1:
@@ -883,8 +888,6 @@ class Geditor:
 	func ogg_comments(file):
 		return ""
 
-func _on_ScrollC_scroll_started():
-	pass
 
 func _on_marker_manager_btn_pressed():
 	popup_dialog(note_markers_info_dialog)
@@ -894,3 +897,6 @@ func _on_markers_updated():
 
 func _on_editor_info_btn_pressed():
 	popup_dialog(editor_info_dialog)
+
+
+
