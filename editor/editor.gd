@@ -314,6 +314,10 @@ func cursor_focus():
 
 func scale_to(dir):		
 	print("****** scale_to ******")
+	# need to wait window_scroll update
+	# this prevents from cursor jumping
+	if pending_wscroll_update:
+		return
 	
 	var value = dir * (waveform_scale/10.0) #0.5
 	ui_scale += value
