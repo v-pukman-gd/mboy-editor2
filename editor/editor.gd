@@ -223,10 +223,9 @@ func _process(delta):
 		cursor_playback.set_position(cursor_static.get_position())
 		#cursor_playback.hide()
 	
-	# TODO: bring back follow
-	#if is_playing and is_follow_playing:
-	#	if cursor_playback.get_position().x >= window_scroll.get_size().x/2.0:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-	#		window_scroll.set_h_scroll(cursor_playback.get_position().x-window_scroll.get_size().x/2.0)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	if is_playing and is_follow_playing:
+		if cursor_playback.get_position().x >= window_scroll.get_size().x/2.0: 
+			window_scroll.set_h_scroll(cursor_playback.get_position().x-window_scroll.get_size().x/2.0) 
 
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
@@ -412,15 +411,16 @@ func _on_play_btn_pressed():
 
 func _input(e):
 	if not audio_loaded: return
-
+	
 	if e.is_action_pressed("editor_play"):
 		is_follow_playing = false
 		play_btn.btn.grab_focus()
-	elif e.is_action_pressed("editor_follow_play"):
-		if not is_playing:
-			is_follow_playing = true
-			play_btn.btn.grab_focus()
-			play()
+		
+		if e.is_action_pressed("editor_follow_play"):
+			if not is_playing:
+				is_follow_playing = true
+			#play_btn.btn.grab_focus()
+			#play()
 	elif e.is_action_pressed("editor_cursor_focus"):
 		cursor_focus()
 	elif e.is_action_pressed("editor_scale_up"):
