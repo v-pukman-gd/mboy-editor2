@@ -31,7 +31,7 @@ func _ready():
 	markers_c.set_position(Vector2(0, EDITOR_BAR_C.CELL_HEIGHT))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 func _process(delta):
-	if editor and editor.cursor_playback.curr_speed > 0:
+	if editor and editor.is_playing:
 		var note_x = get_global_position().x  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		var cursor_x = editor.cursor_playback.get_global_position().x  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		if cursor_x >= note_x and cursor_x <= note_x + max_width * bar.get_scale().x + get_extended_width():
