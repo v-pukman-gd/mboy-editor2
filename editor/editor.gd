@@ -184,8 +184,7 @@ func _process(delta):
 	tracks_c.set_custom_minimum_size(Vector2(OS.get_window_size().x-200, 100))
 
 	cursor_c.set_position(Vector2(cursor_c.get_position().x, window_scroll.get_v_scroll()))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-	if window_scroll_last_val != window_scroll.get_h_scroll():
-		for t in tracks: t.move_label(window_scroll.get_h_scroll())
+	
 
 	# Waveform update
 	if tempo_update_timeout > 0:
@@ -227,7 +226,11 @@ func _process(delta):
 		if cursor_playback.get_position().x >= window_scroll.get_size().x*0.5: 
 			window_scroll.set_h_scroll((int(cursor_playback.get_position().x)-int(window_scroll.get_size().x*0.5))) 
 			#window_scroll.set_h_scroll(int(track_speed*stream_player.get_playback_position()*scale_ratio)-window_scroll.get_size().x*0.5)
-
+	
+	#if window_scroll_last_val != window_scroll.get_h_scroll():
+	# Update track labels
+	for t in tracks: t.move_label(window_scroll.get_h_scroll())
+		
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
 	quarter_time_in_sec = 60.0/track_tempo
@@ -914,6 +917,5 @@ func _on_markers_updated():
 
 func _on_editor_info_btn_pressed():
 	popup_dialog(editor_info_dialog)
-
 
 

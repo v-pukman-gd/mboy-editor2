@@ -523,6 +523,5 @@ size_flags_horizontal = 3
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/EditorInfoBtn" to="." method="_on_editor_info_btn_pressed"]
 [connection signal="minimum_size_changed" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_minimum_size_changed"]
 [connection signal="resized" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_resized"]
-[connection signal="scroll_started" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_scroll_started"]
 [connection signal="value_changed" from="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC/HSlider" to="." method="_on_hslider_value_changed"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_stream_player_finished"]
