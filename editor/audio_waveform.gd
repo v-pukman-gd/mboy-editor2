@@ -9,6 +9,10 @@ var last_scroll_val = 0
 var last_scale_val = 1
 var updated = true
 
+var preview_len
+const COLOR = Color(0.68, 1, 0.18, 1)
+var step = 2
+
 func _ready():
 	pass
 	
@@ -17,6 +21,7 @@ func set_stream(stream):
 	var g = AudioStreamPreviewGenerator.new()
 	g.connect("preview_updated", self, "_on_preview_updated")
 	preview = g.generate_preview(stream) 
+	preview_len = float(preview.get_length())
 	
 func set_scroll(val):
 	if last_scroll_val != val:
@@ -47,25 +52,24 @@ func queue_update():
 func _draw_wavefrom():
 	var viewport_size = viewport_rect.size
 	var viewport_position = viewport_rect.position
-	var preview_len = float(preview.get_length())
 	
-	var color = Color(0.68, 1, 0.18, 1)
 	#var lines = PoolVector2Array()
 	#lines.resize(viewport_size.x * 2)
 
-	var idx = 0
-	var step = 2
-	for i in range(0, full_size.x, step):		
-		var ofs = i * preview_len / full_size.x
-		var ofs_n = (i+step) * preview_len / full_size.x
-		var maxi = preview.get_max(ofs, ofs_n) * 0.5 + 0.5
-		var mini = preview.get_min(ofs, ofs_n) * 0.5 + 0.5
+	#var idx = 0
+	
+	for i in range(0, full_size.x, step):
+		if i >= viewport_position.x and i < viewport_position.x + viewport_size.x:		
+			var ofs = i * preview_len / full_size.x
+			var ofs_n = (i+step) * preview_len / full_size.x
+			var maxi = preview.get_max(ofs, ofs_n) * 0.5 + 0.5
+			var mini = preview.get_min(ofs, ofs_n) * 0.5 + 0.5
 		
-		if i >= viewport_position.x and i < viewport_position.x + viewport_size.x:
+			#if i >= viewport_position.x and i < viewport_position.x + viewport_size.x:
 			#lines.insert(idx*2+0, Vector2(i+1, viewport_size.y*0.05 + mini * viewport_size.y*0.9));
 			#lines.insert(idx*2+1, Vector2(i+1, viewport_size.y*0.05 + maxi * viewport_size.y*0.9));
-			draw_line(Vector2(i+1, viewport_size.y*0.05 + mini * viewport_size.y*0.9), Vector2(i+1, viewport_size.y*0.05 + maxi * viewport_size.y*0.9), color, step, false)
-			idx += 1
+			draw_line(Vector2(i+1, viewport_size.y*0.05 + mini * viewport_size.y*0.9), Vector2(i+1, viewport_size.y*0.05 + maxi * viewport_size.y*0.9), COLOR, step, false)
+			#idx += 1
 			
 	#draw_multiline(lines, color, 2)
 	
