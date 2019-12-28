@@ -49,23 +49,25 @@ func _draw_wavefrom():
 	var viewport_position = viewport_rect.position
 	var preview_len = float(preview.get_length())
 	
-	var lines = PoolVector2Array()
-	lines.resize(viewport_size.x * 2)
-	
+	var color = Color(0.68, 1, 0.18, 1)
+	#var lines = PoolVector2Array()
+	#lines.resize(viewport_size.x * 2)
+
 	var idx = 0
-	for i in range(0, full_size.x):		
+	var step = 2
+	for i in range(0, full_size.x, step):		
 		var ofs = i * preview_len / full_size.x
-		var ofs_n = (i+1) * preview_len / full_size.x
+		var ofs_n = (i+step) * preview_len / full_size.x
 		var maxi = preview.get_max(ofs, ofs_n) * 0.5 + 0.5
 		var mini = preview.get_min(ofs, ofs_n) * 0.5 + 0.5
 		
 		if i >= viewport_position.x and i < viewport_position.x + viewport_size.x:
-			lines.insert(idx*2+0, Vector2(i+1, viewport_size.y*0.05 + mini * viewport_size.y*0.9));
-			lines.insert(idx*2+1, Vector2(i+1, viewport_size.y*0.05 + maxi * viewport_size.y*0.9));
+			#lines.insert(idx*2+0, Vector2(i+1, viewport_size.y*0.05 + mini * viewport_size.y*0.9));
+			#lines.insert(idx*2+1, Vector2(i+1, viewport_size.y*0.05 + maxi * viewport_size.y*0.9));
+			draw_line(Vector2(i+1, viewport_size.y*0.05 + mini * viewport_size.y*0.9), Vector2(i+1, viewport_size.y*0.05 + maxi * viewport_size.y*0.9), color, step, false)
 			idx += 1
-		
-	var color = Color(0.68, 1, 0.18, 1)
-	draw_multiline(lines, color, 100)	
+			
+	#draw_multiline(lines, color, 2)
 	
 func _on_preview_updated(e):
 	if not loaded:

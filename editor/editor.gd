@@ -224,8 +224,9 @@ func _process(delta):
 		#cursor_playback.hide()
 	
 	if is_playing and is_follow_playing:
-		if cursor_playback.get_position().x >= window_scroll.get_size().x/2.0: 
-			window_scroll.set_h_scroll(cursor_playback.get_position().x-window_scroll.get_size().x/2.0) 
+		if cursor_playback.get_position().x >= window_scroll.get_size().x*0.5: 
+			window_scroll.set_h_scroll((int(cursor_playback.get_position().x)-int(window_scroll.get_size().x*0.5))) 
+			#window_scroll.set_h_scroll(int(track_speed*stream_player.get_playback_position()*scale_ratio)-window_scroll.get_size().x*0.5)
 
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
@@ -238,7 +239,8 @@ func set_params():
 
 	waveform_scale = track_length/float(EDITOR_C.WAVEFORM_W)
 	waveform_length = track_length
-
+	
+	print("track_speed:", track_speed)
 	print("w scale:", waveform_scale)
 	print("t len:", track_length)
 	print("w len:", waveform_length)
@@ -292,8 +294,10 @@ func play():
 		var t = cursor_slider.get_value() / track_speed
 		t = t / scale_ratio
 		stream_player.play(t)
+	
 		#cursor_playback.set_position(cursor_static.get_position())
 		#cursor_playback.start()
+		#cursor_playback.set_position(cursor_static.get_position())
 
 	play_btn.set_playing(is_playing)
 
