@@ -53,9 +53,11 @@ onready var release_date_input = audio_c.get_node("ReleaseDate")
 #onready var license_input = audio_c.get_node("License")
 onready var download_link = audio_c.get_node("DownloadLink")
 onready var comments_input = audio_c.get_node("Comments")
+onready var required_label = audio_c.get_node("RequiredNotice")
 
 func setup(audio_file_name, audio_comments):
 	self.audio_file_name = audio_file_name
+	hide_required_notice()
 	init_genres()
 	init_audio_inputs(audio_comments)
 	init_map_inputs()
@@ -131,7 +133,10 @@ func apply_map_inputs():
 func _on_map_info_confirmed():
 	if author_input.get_text() == "" or title_input.get_text() == "" or download_link.get_text() == "":
 		# not valid
+		var pos = get_position()
 		popup()
+		set_position(pos)
+		show_required_notice()
 		return
 	apply_map_inputs()
 	apply_audio_inputs()
@@ -143,4 +148,12 @@ func set_data(author_data, audio_data):
 	apply_map_inputs()
 	apply_audio_inputs()
 
-
+# deal with text because popup didnt update height and elements overlap
+func hide_required_notice():
+	required_label.text = ""
+	
+func show_required_notice():
+	required_label.text = tr("te_editor_required_fields")
+	
+func _on_popup_hide():
+	hide_required_notice()

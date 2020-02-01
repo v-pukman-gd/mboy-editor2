@@ -3,11 +3,10 @@
 [ext_resource path="res://editor/map_info.gd" type="Script" id=1]
 
 [node name="MapInfo" type="ConfirmationDialog"]
-visible = true
 margin_left = 120.0
 margin_right = 570.0
 margin_bottom = 562.0
-rect_min_size = Vector2( 450, 540 )
+rect_min_size = Vector2( 450, 640 )
 size_flags_horizontal = 0
 window_title = "Export Info"
 script = ExtResource( 1 )
@@ -18,13 +17,14 @@ anchor_right = 0.5
 margin_left = -217.0
 margin_top = 8.0
 margin_right = 217.0
-margin_bottom = 526.0
+margin_bottom = 604.0
 mouse_filter = 0
 alignment = 1
 
 [node name="MapInfoC" type="VBoxContainer" parent="VBoxC"]
+margin_top = 30.0
 margin_right = 434.0
-margin_bottom = 88.0
+margin_bottom = 118.0
 mouse_filter = 0
 
 [node name="Control" type="Control" parent="VBoxC/MapInfoC"]
@@ -56,9 +56,9 @@ margin_right = 434.0
 margin_bottom = 88.0
 
 [node name="AudioInfoC" type="VBoxContainer" parent="VBoxC"]
-margin_top = 92.0
+margin_top = 122.0
 margin_right = 434.0
-margin_bottom = 517.0
+margin_bottom = 565.0
 mouse_filter = 0
 
 [node name="Control" type="Control" parent="VBoxC/AudioInfoC"]
@@ -76,84 +76,91 @@ size_flags_vertical = 1
 text = "te_audio"
 align = 1
 
-[node name="Label" type="Label" parent="VBoxC/AudioInfoC"]
+[node name="RequiredNotice" type="Label" parent="VBoxC/AudioInfoC"]
 margin_top = 32.0
 margin_right = 434.0
 margin_bottom = 46.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "te_editor_required_fields"
+
+[node name="Label" type="Label" parent="VBoxC/AudioInfoC"]
+margin_top = 50.0
+margin_right = 434.0
+margin_bottom = 64.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_artist"
 
 [node name="Artist" type="LineEdit" parent="VBoxC/AudioInfoC"]
-margin_top = 50.0
+margin_top = 68.0
 margin_right = 434.0
-margin_bottom = 74.0
+margin_bottom = 92.0
 rect_min_size = Vector2( 60, 24 )
 
 [node name="Label1" type="Label" parent="VBoxC/AudioInfoC"]
-margin_top = 78.0
+margin_top = 96.0
 margin_right = 434.0
-margin_bottom = 92.0
+margin_bottom = 110.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_title"
 
 [node name="Title" type="LineEdit" parent="VBoxC/AudioInfoC"]
-margin_top = 96.0
-margin_right = 434.0
-margin_bottom = 120.0
-
-[node name="Label 2" type="Label" parent="VBoxC/AudioInfoC"]
-margin_top = 124.0
+margin_top = 114.0
 margin_right = 434.0
 margin_bottom = 138.0
+
+[node name="Label 2" type="Label" parent="VBoxC/AudioInfoC"]
+margin_top = 142.0
+margin_right = 434.0
+margin_bottom = 156.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_album"
 
 [node name="Album" type="LineEdit" parent="VBoxC/AudioInfoC"]
-margin_top = 142.0
-margin_right = 434.0
-margin_bottom = 166.0
-
-[node name="Label4" type="Label" parent="VBoxC/AudioInfoC"]
-margin_top = 170.0
+margin_top = 160.0
 margin_right = 434.0
 margin_bottom = 184.0
+
+[node name="Label4" type="Label" parent="VBoxC/AudioInfoC"]
+margin_top = 188.0
+margin_right = 434.0
+margin_bottom = 202.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_genre"
 
 [node name="GenreSelect" type="OptionButton" parent="VBoxC/AudioInfoC"]
-margin_top = 188.0
-margin_right = 434.0
-margin_bottom = 208.0
-
-[node name="Label8" type="Label" parent="VBoxC/AudioInfoC"]
-margin_top = 212.0
+margin_top = 206.0
 margin_right = 434.0
 margin_bottom = 226.0
+
+[node name="Label8" type="Label" parent="VBoxC/AudioInfoC"]
+margin_top = 230.0
+margin_right = 434.0
+margin_bottom = 244.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_subgenre"
 
 [node name="Subgenre" type="LineEdit" parent="VBoxC/AudioInfoC"]
-margin_top = 230.0
-margin_right = 434.0
-margin_bottom = 254.0
-
-[node name="Label3" type="Label" parent="VBoxC/AudioInfoC"]
-margin_top = 258.0
+margin_top = 248.0
 margin_right = 434.0
 margin_bottom = 272.0
+
+[node name="Label3" type="Label" parent="VBoxC/AudioInfoC"]
+margin_top = 276.0
+margin_right = 434.0
+margin_bottom = 290.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_date"
 
 [node name="ReleaseDate" type="LineEdit" parent="VBoxC/AudioInfoC"]
-margin_top = 276.0
+margin_top = 294.0
 margin_right = 434.0
-margin_bottom = 300.0
+margin_bottom = 318.0
 
 [node name="Label5" type="Label" parent="VBoxC/AudioInfoC"]
 visible = false
@@ -186,35 +193,36 @@ margin_right = 400.0
 margin_bottom = 282.0
 
 [node name="Label9" type="Label" parent="VBoxC/AudioInfoC"]
-margin_top = 304.0
+margin_top = 322.0
 margin_right = 434.0
-margin_bottom = 318.0
+margin_bottom = 336.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_download_link"
 
 [node name="DownloadLink" type="LineEdit" parent="VBoxC/AudioInfoC"]
-margin_top = 322.0
-margin_right = 434.0
-margin_bottom = 346.0
-
-[node name="Label7" type="Label" parent="VBoxC/AudioInfoC"]
-margin_top = 350.0
+margin_top = 340.0
 margin_right = 434.0
 margin_bottom = 364.0
+
+[node name="Label7" type="Label" parent="VBoxC/AudioInfoC"]
+margin_top = 368.0
+margin_right = 434.0
+margin_bottom = 382.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_comments"
 
 [node name="Comments" type="TextEdit" parent="VBoxC/AudioInfoC"]
-margin_top = 368.0
+margin_top = 386.0
 margin_right = 434.0
-margin_bottom = 416.0
+margin_bottom = 434.0
 rect_min_size = Vector2( 0, 48 )
 
 [node name="Control 2" type="Control" parent="VBoxC/AudioInfoC"]
-margin_top = 420.0
+margin_top = 438.0
 margin_right = 434.0
-margin_bottom = 425.0
+margin_bottom = 443.0
 rect_min_size = Vector2( 0, 5 )
 [connection signal="confirmed" from="." to="." method="_on_map_info_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_popup_hide"]

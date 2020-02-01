@@ -63,7 +63,6 @@ margin_left = 355.0
 margin_right = 805.0
 
 [node name="MapInfo" parent="UI/CenterC" instance=ExtResource( 4 )]
-visible = false
 margin_left = 355.0
 margin_right = 805.0
 
@@ -392,9 +391,9 @@ label = "te_toggle_marker"
 
 [node name="Control4" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
 margin_left = 480.0
-margin_right = 1130.0
+margin_right = 1120.0
 margin_bottom = 58.0
-rect_min_size = Vector2( 650, 0 )
+rect_min_size = Vector2( 640, 0 )
 size_flags_horizontal = 3
 
 [node name="ResetBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 6 )]
@@ -474,6 +473,7 @@ custom_icons/grabber = ExtResource( 13 )
 custom_styles/slider = SubResource( 1 )
 value = 1.0
 scrollable = false
+ticks_on_borders = false
 
 [node name="CursorPlayback" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 14 )]
 
