@@ -5,6 +5,7 @@ extends Node
 
 const VERSION = "2.0.beta"
 const AUTHOR = "Victor Pukman aka VCTR_UNIQ"
+const SITE_URL = "http://www.mboy-editor.com"
 
 const WAVEFORM_H = 128
 const WAVEFORM_W = 1280 #4096
