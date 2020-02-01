@@ -105,7 +105,7 @@ window_title = "Notice"
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 392.0
-margin_bottom = 62.0
+margin_bottom = 60.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "message"
@@ -126,7 +126,7 @@ popup_exclusive = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 392.0
-margin_bottom = 62.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 380, 50 )
 bbcode_enabled = true
 bbcode_text = "[center]hey[/center]"
@@ -145,7 +145,7 @@ popup_exclusive = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 392.0
-margin_bottom = 62.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 380, 50 )
 bbcode_enabled = true
 bbcode_text = "[center]hey[/center]"
@@ -474,7 +474,6 @@ custom_icons/grabber = ExtResource( 13 )
 custom_styles/slider = SubResource( 1 )
 value = 1.0
 scrollable = false
-ticks_on_borders = true
 
 [node name="CursorPlayback" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 14 )]
 
