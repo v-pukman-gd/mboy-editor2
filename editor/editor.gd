@@ -113,7 +113,7 @@ func _ready():
 	VisualServer.set_default_clear_color(EDITOR_C.BG_COLOR)
 	get_tree().set_auto_accept_quit(false)
 	
-	editor_info_dialog.get_node("Text").bbcode_text = "[center]MBOY Editor v. %s[/center]" % EDITOR_C.VERSION
+	editor_info_dialog.get_node("Text").bbcode_text = "[center]MBOY Editor v. %s\n Created by %s[/center]" % [EDITOR_C.VERSION, EDITOR_C.AUTHOR]
 
 	set_process(true)
 	set_process_input(true)
