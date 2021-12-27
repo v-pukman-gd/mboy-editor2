@@ -12,6 +12,8 @@ var is_active = false
 
 var width_scale = 1
 var max_width = EDITOR_BAR_C.CELL_WIDTH
+var drag_x_min = 0
+var drag_x_max = 0
 var last_dragging_y = 0
 var start_dragging_y = 0
 var updated_scale = 1
@@ -87,8 +89,11 @@ func get_width():
 
 # used for import
 func set_width(value):
-	width_scale = float(value) / EDITOR_BAR_C.CELL_WIDTH
+	set_width_scale(value)
 	update()
+	
+func set_width_scale(width):
+	self.width_scale = float(width) / EDITOR_BAR_C.CELL_WIDTH
 
 func _draw():
 	var rect2 = Rect2(BORDER_LINE_W, BORDER_LINE_W, get_width()-BORDER_LINE_W*2, EDITOR_BAR_C.CELL_HEIGHT-BORDER_LINE_W*2)
@@ -129,32 +134,43 @@ func _on_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 2 to 
 					dragging_x = true
 					start_dragging_x = e.position.x
 				#var x_diff = round((e.position.x - start_dragging_x)/0.1) * 0.1
-				var x_diff = e.position.x - start_dragging_x
+				var x_diff = round((e.position.x - start_dragging_x)/float(EDITOR_BAR_C.NOTE_WIDTH_MIN))*EDITOR_BAR_C.NOTE_WIDTH_MIN
 				print("x_diff:", x_diff)
-				var x_max = bar.get_width() - self.get_width()
+				
 				self.position += Vector2(x_diff, 0)
 				
-				if self.position.x < 0:
-					self.position.x = 0
-				elif self.position.x > x_max:
-					self.position.x = x_max
+				if self.position.x < self.drag_x_min:
+					self.position.x = self.drag_x_min
+				elif self.position.x > self.drag_x_max:
+					self.position.x = self.drag_x_max
 			else:
-				dragging_x = false
+				if dragging_x:
+					print("dragging end!")
+					dragging_x = false
+					bar.sort_notes()
+					bar.update_notes_width()
+					
 				
 				if e.position.x > get_width():  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 					var w = e.position.x  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-					if w > 0:
-						var s = round( (w/EDITOR_BAR_C.CELL_WIDTH)/CELL_SCALE_MIN ) * CELL_SCALE_MIN
-						if s >= 1 and s*EDITOR_BAR_C.CELL_WIDTH <= max_width:
-							width_scale = s
-							update()
+					if w > 0:						
+						w = round(w/float(EDITOR_BAR_C.NOTE_WIDTH_MIN)) * EDITOR_BAR_C.NOTE_WIDTH_MIN
+						if w > max_width: w = max_width
+						set_width(w)
+						#var s = round( (w/EDITOR_BAR_C.CELL_WIDTH)/CELL_SCALE_MIN ) * CELL_SCALE_MIN
+						#if s >= 1 and s*EDITOR_BAR_C.CELL_WIDTH <= max_width:
+						#	width_scale = s
+						#	update()
 				elif e.position.x < get_width() - EDITOR_BAR_C.CELL_WIDTH:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 					var w = EDITOR_BAR_C.CELL_WIDTH + e.position.x  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 					if w > 0:
-						var s = round( (w/EDITOR_BAR_C.CELL_WIDTH)/CELL_SCALE_MIN ) * CELL_SCALE_MIN
-						if s >= CELL_SCALE_MIN and s*EDITOR_BAR_C.CELL_WIDTH <= max_width:
-							width_scale = s
-							update()
+						w = round(w/float(EDITOR_BAR_C.NOTE_WIDTH_MIN)) * EDITOR_BAR_C.NOTE_WIDTH_MIN
+						if w < EDITOR_BAR_C.NOTE_WIDTH_MIN: w = EDITOR_BAR_C.NOTE_WIDTH_MIN
+						set_width(w)
+						#var s = round( (w/EDITOR_BAR_C.CELL_WIDTH)/CELL_SCALE_MIN ) * CELL_SCALE_MIN
+						#if s >= CELL_SCALE_MIN and s*EDITOR_BAR_C.CELL_WIDTH <= max_width:
+						#	width_scale = s
+						#	update()
 
 
 			#dragging y
