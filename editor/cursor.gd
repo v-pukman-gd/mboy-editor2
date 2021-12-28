@@ -36,11 +36,11 @@ func set_length_offset(val):
 func _draw():
 	if is_static:
 		var pointer = PoolVector2Array()
-		pointer.push_back(Vector2(10,0))
+		pointer.push_back(Vector2(11,0))
 		pointer.push_back(Vector2(-10,0))
 		pointer.push_back(Vector2(0,10))
-		draw_colored_polygon([Vector2(12,0), Vector2(-12,0), Vector2(0,12)], Color(0,0,0,0.2))
-		draw_line(Vector2(0,0), Vector2(0, length+length_offset+DEFAULT_LENGTH_OFFSET), Color(0,0,0,0.3), 4)
+		draw_colored_polygon([Vector2(12,0), Vector2(-11,0), Vector2(0,12)], Color(0,0,0,0.3))
+		draw_line(Vector2(0,0), Vector2(0, length+length_offset+DEFAULT_LENGTH_OFFSET), Color(0,0,0,0.2), 4)
 		
 		draw_colored_polygon(pointer, COLOR)
 		draw_line(Vector2(0,0), Vector2(0, length+length_offset+DEFAULT_LENGTH_OFFSET), COLOR, 2)
