@@ -50,6 +50,19 @@ func _process(delta):
 	elif playing:
 		playing = false
 		update()
+		
+func _unhandled_input(e):
+	if e is InputEventKey:
+		if e.scancode == KEY_SHIFT:
+			if not e.pressed:				
+				cancel_dragging_x()
+				
+func cancel_dragging_x():
+	if dragging_x:				
+		print("***** dragging end! *****")
+		dragging_x = false
+		bar.sort_notes()
+		bar.update_notes_width()	
 
 func is_extended():
 	for m in markers:
@@ -103,60 +116,77 @@ func _draw():
 
 	control.set_size(Vector2(get_width(), EDITOR_BAR_C.CELL_HEIGHT))
 
+var offset = 0
+var original_x = 0
+				
 func _on_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	if editor and editor.grab_cursor_slider_focus(e):
 		return	
+		
+	#print("e:", e)
+#	if dragging_x and !Input.is_key_pressed(KEY_SHIFT):
+#		print("ZZZZZZZZZ")
+#		dragging_x = false
+#		bar.sort_notes()
+#		bar.update_notes_width()
 
 	if e is InputEventMouseButton and e.button_index == BUTTON_LEFT:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		is_pressed = e.pressed
-		if not is_pressed and dragging:
-			set_position(Vector2(get_position().x, 0))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-			dragging = false
-			last_dragging_y = 0
-			start_dragging_y = 0
+		if not is_pressed:
+			cancel_dragging_x()
+			#set_position(Vector2(get_position().x, 0))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			#dragging = false
+			#last_dragging_y = 0
+			#start_dragging_y = 0
 		if is_pressed and not is_active:
 			editor.set_active_note(self)
 
 	elif e is InputEventMouseButton and e.button_index == BUTTON_RIGHT:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		if e.pressed:
 			delete()
+			
+#	if e is InputEventKey and e.scancode == KEY_SHIFT:
+#		print("shift:", e.pressed)
+#		if dragging_x:
+#			print("dragging end! (inpk)")
+#			dragging_x = false
+#			bar.sort_notes()
+#			bar.update_notes_width()
 
 
 	if e is InputEventMouseMotion:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		
+		#if not is_pressed:
+		#	dragging_x = false
 		if is_pressed:
 
 			#if get_position().y > EDITOR_BAR_C.CELL_HEIGHT:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			#	delete()
 			#else:
-			if Input.is_key_pressed(KEY_SHIFT):
-				
+			if Input.is_key_pressed(KEY_SHIFT):				
 				if not dragging_x:
 					dragging_x = true
-					start_dragging_x = e.position.x
-				#var x_diff = round((e.position.x - start_dragging_x)/0.1) * 0.1
-				var x_diff = round((e.position.x - start_dragging_x)/float(EDITOR_BAR_C.NOTE_WIDTH_MIN))*EDITOR_BAR_C.NOTE_WIDTH_MIN
-				print("x_diff:", x_diff)
-				
-				self.position += Vector2(x_diff, 0)
-				
-				if self.position.x < self.drag_x_min:
-					self.position.x = self.drag_x_min
-				elif self.position.x > self.drag_x_max - get_width():
-					self.position.x = self.drag_x_max - get_width()
-			else:
-				if dragging_x:
-					print("dragging end!")
-					dragging_x = false
-					bar.sort_notes()
-					bar.update_notes_width()
+					offset = e.position.x 
 					
+				if dragging_x:
+					var x_diff = round((e.position.x - offset)/float(EDITOR_BAR_C.NOTE_WIDTH_MIN))*EDITOR_BAR_C.NOTE_WIDTH_MIN
+					position.x += x_diff
+
+					if position.x < drag_x_min:
+						position.x = drag_x_min
+					elif position.x > drag_x_max - get_width():
+						position.x = drag_x_max - get_width()
+			else:
+								
 				
 				if e.position.x > get_width():  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 					var w = e.position.x  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 					if w > 0:						
 						w = round(w/float(EDITOR_BAR_C.NOTE_WIDTH_MIN)) * EDITOR_BAR_C.NOTE_WIDTH_MIN
 						if w > max_width: w = max_width
-						set_width(w)
+						if w != get_width():							
+							set_width(w)
+							bar.update_notes_width()
 						#var s = round( (w/EDITOR_BAR_C.CELL_WIDTH)/CELL_SCALE_MIN ) * CELL_SCALE_MIN
 						#if s >= 1 and s*EDITOR_BAR_C.CELL_WIDTH <= max_width:
 						#	width_scale = s
@@ -166,7 +196,9 @@ func _on_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 2 to 
 					if w > 0:
 						w = round(w/float(EDITOR_BAR_C.NOTE_WIDTH_MIN)) * EDITOR_BAR_C.NOTE_WIDTH_MIN
 						if w < EDITOR_BAR_C.NOTE_WIDTH_MIN: w = EDITOR_BAR_C.NOTE_WIDTH_MIN
-						set_width(w)
+						if w != get_width():
+							set_width(w)
+							bar.update_notes_width()
 						#var s = round( (w/EDITOR_BAR_C.CELL_WIDTH)/CELL_SCALE_MIN ) * CELL_SCALE_MIN
 						#if s >= CELL_SCALE_MIN and s*EDITOR_BAR_C.CELL_WIDTH <= max_width:
 						#	width_scale = s
