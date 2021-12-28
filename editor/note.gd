@@ -141,8 +141,8 @@ func _on_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 2 to 
 				
 				if self.position.x < self.drag_x_min:
 					self.position.x = self.drag_x_min
-				elif self.position.x > self.drag_x_max:
-					self.position.x = self.drag_x_max
+				elif self.position.x > self.drag_x_max - get_width():
+					self.position.x = self.drag_x_max - get_width()
 			else:
 				if dragging_x:
 					print("dragging end!")

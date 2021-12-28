@@ -166,18 +166,18 @@ func set_note_borders2(note):
 			if nn.position.x > note_max.position.x: note_max = nn
 		left = note_max.position.x + note_max.get_width()
 		
-	var right = self.get_width() - note.get_width()
-	var max_width = self.get_width() - note_x
+	var right = self.get_width() #- note.get_width()
+	#var max_width = self.get_width() - note_x
 	if cells_after.size() > 0:
 		var note_min = cells_after[0]
 		for nn in cells_after:
 			if nn.position.x < note_min.position.x: note_min = nn
-		right = note_min.position.x - note.get_width()
-		max_width = note_min.position.x - note_x
+		right = note_min.position.x #- note.get_width()
+		#max_width = note_min.position.x - note_x
 		
 	note.drag_x_min = left
 	note.drag_x_max = right
-	note.max_width = max_width
+	note.max_width = right - note_x
 	
 	if note.max_width < note.get_width():
 		note.set_width_scale(note.max_width)
