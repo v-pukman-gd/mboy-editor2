@@ -11,7 +11,6 @@ onready var editor = get_node("/root/Editor")
 
 var note_scn = preload("res://editor/note.tscn")
 
-#var filled_cells = []
 var notes = []
 var x_pos = 0
 
@@ -70,7 +69,6 @@ func _on_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 2 to 
 			print("NOT EMPTY!")
 
 func add_note(x):
-	#filled_cells.append(int(x))
 	var n = note_scn.instance()
 	n.set_position(Vector2(x, 0))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	notes.append(n)
@@ -82,7 +80,6 @@ func add_note(x):
 func clear_notes():
 	for n in notes: remove_child(n)
 	notes = []
-	#filled_cells = []
 
 func set_notes_data(notes_data):
 	clear_notes()
@@ -111,7 +108,6 @@ func sort_notes():
 				notes[j] = t
 
 func is_cell_empty_at(x):
-	#if filled_cells.has(x): return false
 	for n in notes:
 		if x >= n.get_position().x and x < n.get_position().x + n.get_width():  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			return false
@@ -120,35 +116,10 @@ func is_cell_empty_at(x):
 
 func update_notes_width():	
 	for n in notes:
-		#n.max_width = calc_note_max_width(n.get_position().x)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-		set_note_borders2(n)
+		set_note_borders(n)
 		
-#func set_note_borders(note):
-#	var note_x = note.position.x	
-#	var cells_after = []
-#	var cells_before = []
-#	for x in filled_cells:
-#		if x > note_x:
-#			cells_after.append(x)
-#		elif x < note_x:
-#			cells_before.append(x)
-#
-#	var left = 0
-#	if cells_before.size() > 0:
-#	 	left = cells_before.max()
-#
-#	var right = get_width()
-#	if cells_after.size() > 0:
-#		right = cells_after.min()
-#
-#	note.drag_x_min = left
-#	note.drag_x_max = right
-#	note.max_width = right - note_x
-#
-#	print("L:", note.drag_x_min, "R:", note.drag_x_max, "W:", note.max_width)
-	
-func set_note_borders2(note):
-	print("set_note_borders2:")
+func set_note_borders(note):
+	print("set_note_borders:")
 	var cells_after = []
 	var cells_before = []
 	var note_x = note.position.x
@@ -166,14 +137,12 @@ func set_note_borders2(note):
 			if nn.position.x > note_max.position.x: note_max = nn
 		left = note_max.position.x + note_max.get_width()
 		
-	var right = self.get_width() #- note.get_width()
-	#var max_width = self.get_width() - note_x
+	var right = self.get_width() 
 	if cells_after.size() > 0:
 		var note_min = cells_after[0]
 		for nn in cells_after:
 			if nn.position.x < note_min.position.x: note_min = nn
-		right = note_min.position.x #- note.get_width()
-		#max_width = note_min.position.x - note_x
+		right = note_min.position.x
 		
 	note.drag_x_min = left
 	note.drag_x_max = right
@@ -184,36 +153,11 @@ func set_note_borders2(note):
 	
 	print("L:", note.drag_x_min, "R:", note.drag_x_max, "W:", note.max_width)
 
-#func calc_note_max_width(note_x):
-#	#print("****start")
-#	#var end_note_x = note_x # note_x + EDITOR_BAR_C.CELL_WIDTH
-#	var max_note_w = get_width() - note_x
-#
-#	#print("find "+ str(note_x) + "in" + str(filled_cells))
-##	for x in range(note_x, get_width(), EDITOR_BAR_C.DRAG_STEP):
-##		if filled_cells.has(int(x)):
-##			print("filled cells has", x)
-##			max_note_w = x - note_x
-##			break
-#
-#	var bigger_filled_cells = []
-#	for x in filled_cells:
-#		if x > note_x:
-#			bigger_filled_cells.append(x)
-#
-#	if bigger_filled_cells.size() > 0:
-#		 max_note_w = bigger_filled_cells.min() - note_x
-#
-#	return max_note_w
-
 func delete_note(note):
-	#print("delete note begin", filled_cells)
-	#filled_cells.erase(int(note.get_position().x))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	remove_child(note)
 	notes.erase(note)
 	editor.unset_active_note()
 	update_notes_width()
-	#print("deleted!", filled_cells)
 
 func get_first_note():
 	if notes.size() == 0: return null
