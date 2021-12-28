@@ -137,7 +137,9 @@ func _on_control_gui_input(e):
 					start_dragging_at = e.position.x 
 					
 				if dragging_x:
-					var x_diff = round((e.position.x - start_dragging_at)/float(EDITOR_BAR_C.NOTE_WIDTH_MIN))*EDITOR_BAR_C.NOTE_WIDTH_MIN
+					var x_diff_min = EDITOR_BAR_C.NOTE_WIDTH_MIN
+					if Input.is_key_pressed(KEY_ALT): x_diff_min = 1
+					var x_diff = round((e.position.x - start_dragging_at)/float(x_diff_min))*x_diff_min
 					position.x += x_diff
 
 					if position.x < drag_x_min:
