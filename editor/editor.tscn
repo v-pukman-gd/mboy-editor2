@@ -159,25 +159,26 @@ custom_constants/margin_left = 30
 
 [node name="VBoxC" type="VBoxContainer" parent="UI/MarginC"]
 margin_left = 30.0
-margin_right = 1416.0
+margin_right = 1516.0
 margin_bottom = 720.0
 mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxCOffset" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 0, 10 )
 mouse_filter = 0
 
 [node name="CenterC" type="CenterContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 14.0
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 72.0
 
 [node name="HBoxC" type="HBoxContainer" parent="UI/MarginC/VBoxC/CenterC"]
-margin_right = 1386.0
+margin_left = 50.0
+margin_right = 1436.0
 margin_bottom = 58.0
 rect_min_size = Vector2( 0, 44 )
 mouse_filter = 0
@@ -326,14 +327,14 @@ icon_name = "hdd-o"
 
 [node name="HBoxCOffset1" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 76.0
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 81.0
 rect_min_size = Vector2( 0, 5 )
 mouse_filter = 0
 
 [node name="CenterC2" type="Control" parent="UI/MarginC/VBoxC"]
 margin_top = 85.0
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 125.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
@@ -409,21 +410,21 @@ icon_name = "info"
 
 [node name="HBoxCOffset2" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 129.0
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 134.0
 rect_min_size = Vector2( 0, 5 )
 mouse_filter = 0
 
 [node name="ScrollC" type="ScrollContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 138.0
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 1102, 256 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC"]
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 582.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 0
@@ -431,7 +432,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="WaveformC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 1
@@ -470,7 +471,7 @@ is_static = true
 
 [node name="TracksC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
 margin_top = 260.0
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 360.0
 rect_min_size = Vector2( 0, 100 )
 mouse_filter = 0
@@ -478,7 +479,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
 margin_top = 364.0
-margin_right = 1386.0
+margin_right = 1486.0
 margin_bottom = 374.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
