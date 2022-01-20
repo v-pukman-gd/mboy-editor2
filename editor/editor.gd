@@ -113,8 +113,6 @@ func _ready():
 	VisualServer.set_default_clear_color(EDITOR_C.BG_COLOR)
 	get_tree().set_auto_accept_quit(false)
 	
-	editor_info_dialog.get_node("Text").bbcode_text = "[center]MBOY Editor v. %s\n Created by %s\n [url=%s]%s[/url][/center]" % [EDITOR_C.VERSION, EDITOR_C.AUTHOR, EDITOR_C.SITE_URL, EDITOR_C.SITE_URL]
-
 	set_process(true)
 	set_process_input(true)
 	#cursor_slider.connect("value_changed", self, "_on_hslider_value_changed")
