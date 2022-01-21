@@ -28,21 +28,21 @@ margin_bottom = -4.0
 bbcode_enabled = true
 bbcode_text = "[center]
 [b]Space[/b] - Play audio
-[b]Space + Shift[/b] - Play and follow the track
+[b]Shift + Space[/b] - Play and follow the track
 [b]Mouse Left Click[/b] - Add note
 [b]Mouse Right Click[/b] - Remove note
-[b]Mouse Left Click + Shift[/b] - Move note
-[b]Mouse Left Click + Shift + Alt[/b] - Move note without snapping to grid
+[b]Shift + Mouse Left Click[/b] - Move note
+[b]Shift + Alt + Mouse Left Click[/b] - Move note without snapping to grid
 [b]Control + (-)[/b] - Scale down
 [b]Contol + (+)[/b] - Scale up
 [/center]"
 text = "
 Space - Play audio
-Space + Shift - Play and follow the track
+Shift + Space - Play and follow the track
 Mouse Left Click - Add note
 Mouse Right Click - Remove note
-Mouse Left Click + Shift - Move note
-Mouse Left Click + Shift + Alt - Move note without snapping to grid
+Shift + Mouse Left Click - Move note
+Shift + Alt + Mouse Left Click - Move note without snapping to grid
 Control + (-) - Scale down
 Contol + (+) - Scale up
 "
