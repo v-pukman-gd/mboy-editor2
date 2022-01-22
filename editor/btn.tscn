@@ -18,14 +18,14 @@ script = ExtResource( 2 )
 label_text = "btn"
 
 [node name="VBoxC" type="VBoxContainer" parent="."]
-margin_right = 1280.0
-margin_bottom = 56.0
+margin_right = 1440.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 60, 40 )
 mouse_filter = 0
 
 [node name="Button" type="Button" parent="VBoxC"]
-margin_left = 610.0
-margin_right = 670.0
+margin_left = 690.0
+margin_right = 750.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
 size_flags_horizontal = 4
@@ -44,12 +44,13 @@ custom_fonts/font = SubResource( 1 )
 text = ""
 align = 1
 script = ExtResource( 4 )
+size = 16
 icon = "flag"
 
 [node name="Label" type="Label" parent="VBoxC"]
 margin_top = 34.0
-margin_right = 1280.0
-margin_bottom = 56.0
+margin_right = 1440.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 60, 14 )
 mouse_filter = 1
 size_flags_vertical = 0
