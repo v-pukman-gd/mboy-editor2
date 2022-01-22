@@ -7,7 +7,7 @@ var full_size = Vector2()
 var viewport_rect = Rect2()
 var last_scroll_val = 0
 var last_scale_val = 1
-var updated = true
+var pending_updates = 0
 
 var preview_len
 const COLOR = Color(0.68, 1, 0.18, 1)
@@ -47,7 +47,7 @@ func set_full_size(new_full_size):
 		queue_update()
 		
 func queue_update():
-	updated = false
+	pending_updates += 1
 	
 func _draw_wavefrom():
 	var viewport_size = viewport_rect.size
@@ -83,7 +83,7 @@ func _draw():
 	_draw_wavefrom()
 
 func update():
-	if not updated:
+	if pending_updates > 0:
 		#print("*update waveform*")
-		updated = true
+		pending_updates -= 1
 		.update()
