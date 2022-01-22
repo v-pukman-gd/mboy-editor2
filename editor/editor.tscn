@@ -34,6 +34,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterC" type="Control" parent="UI"]
+editor/display_folded = true
 anchor_right = 1.0
 rect_min_size = Vector2( 1160, 0 )
 size_flags_horizontal = 3
@@ -327,14 +328,14 @@ icon_name = "hdd-o"
 [node name="HBoxCOffset1" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 78.0
 margin_right = 1353.0
-margin_bottom = 83.0
-rect_min_size = Vector2( 0, 5 )
+margin_bottom = 78.0
 mouse_filter = 0
 
 [node name="CenterC2" type="Control" parent="UI/MarginC/VBoxC"]
-margin_top = 87.0
+editor/display_folded = true
+margin_top = 82.0
 margin_right = 1353.0
-margin_bottom = 127.0
+margin_bottom = 122.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 
@@ -408,10 +409,10 @@ label_text = "te_editor_info"
 icon_name = "info"
 
 [node name="HBoxCOffset2" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
-margin_top = 131.0
+margin_top = 126.0
 margin_right = 1353.0
 margin_bottom = 136.0
-rect_min_size = Vector2( 0, 5 )
+rect_min_size = Vector2( 0, 10 )
 mouse_filter = 0
 
 [node name="ScrollC" type="ScrollContainer" parent="UI/MarginC/VBoxC"]
