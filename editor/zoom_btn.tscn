@@ -1,27 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://editor/editor_theme.tres" type="Theme" id=1]
-[ext_resource path="res://editor/zoom_btn.gd" type="Script" id=2]
-[ext_resource path="res://addons/FontAwesome/fontawesome-webfont.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=4]
-
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 3 )
+[ext_resource path="res://editor/zoom_btn.gd" type="Script" id=1]
+[ext_resource path="res://addons/FontAwesome/fontawesome-webfont.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 3 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
 
 [node name="ZoomBtn" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 1.0
 margin_right = 4.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="HBoxC" type="HBoxContainer" parent="."]
-margin_left = 612.0
-margin_right = 672.0
+margin_left = 692.0
+margin_right = 752.0
 margin_bottom = 30.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -37,9 +35,10 @@ margin_left = 3.0
 margin_top = 2.0
 margin_right = 8.0
 margin_bottom = 22.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = ""
-script = ExtResource( 4 )
+script = ExtResource( 3 )
+size = 16
 icon = "search-plus"
 
 [node name="DownBtn" type="Button" parent="HBoxC"]
@@ -53,16 +52,17 @@ margin_left = 3.0
 margin_top = 2.0
 margin_right = 23.0
 margin_bottom = 25.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = ""
 align = 1
-script = ExtResource( 4 )
+script = ExtResource( 3 )
+size = 16
 icon = "search-minus"
 
 [node name="Label" type="Label" parent="."]
 margin_top = 34.0
-margin_right = 1284.0
-margin_bottom = 56.0
+margin_right = 1444.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 60, 14 )
 text = "Zoom In / Out"
 align = 1
