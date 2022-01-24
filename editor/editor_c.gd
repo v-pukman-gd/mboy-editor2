@@ -10,7 +10,7 @@ const SITE_URL = "http://www.mboy-editor.com"
 const WAVEFORM_H = 128
 const WAVEFORM_W = 1280 #4096
 
-const BG_COLOR = Color("4c4c4c") #grey
+const BG_COLOR = Color("4d4d4d") #grey
 
 const TRACK_TEMPO_DEFAULT = 120
 const TRACK_TEMPO_MAX = 900
