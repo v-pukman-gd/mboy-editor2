@@ -417,16 +417,13 @@ func _on_play_btn_pressed():
 
 func _input(e):
 	if not audio_loaded: return
-	
-	if e.is_action_pressed("editor_play"):
-		is_follow_playing = false
-		play_btn.btn.grab_focus()
 		
-		if e.is_action_pressed("editor_follow_play"):
-			if not is_playing:
-				is_follow_playing = true
-			#play_btn.btn.grab_focus()
-			#play()
+	if e.is_action_pressed("editor_follow_play"):
+		is_follow_playing = true
+		play()
+	elif e.is_action_pressed("editor_play"):
+		is_follow_playing = false
+		play()		
 	elif e.is_action_pressed("editor_cursor_focus"):
 		cursor_focus()
 	elif e.is_action_pressed("editor_scale_up"):
