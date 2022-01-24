@@ -20,9 +20,9 @@ script = ExtResource( 1 )
 label = "te_set_marker"
 
 [node name="MenuButton" type="MenuButton" parent="."]
-margin_top = 6.0
+margin_top = 4.0
 margin_right = 150.0
-margin_bottom = 36.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 60, 30 )
 
 [node name="Button" type="Button" parent="MenuButton"]
@@ -32,7 +32,10 @@ margin_left = -30.0
 margin_right = 30.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
+focus_mode = 0
 mouse_filter = 1
+toggle_mode = true
+enabled_focus_mode = 0
 
 [node name="Label" type="Label" parent="MenuButton/Button"]
 margin_left = 2.0
@@ -43,14 +46,14 @@ custom_fonts/font = SubResource( 1 )
 text = ""
 align = 1
 script = ExtResource( 3 )
-size = 16
 icon = "flag"
 
 [node name="Label" type="Label" parent="."]
-margin_top = 40.0
+margin_top = 38.0
 margin_right = 150.0
-margin_bottom = 54.0
+margin_bottom = 52.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "Name"
 align = 1
+[connection signal="pressed" from="MenuButton/Button" to="." method="_on_Button_pressed"]

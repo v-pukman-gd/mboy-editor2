@@ -20,8 +20,8 @@ rect_min_size = Vector2( 74, 44 )
 mouse_filter = 0
 
 [node name="SpinBox" type="SpinBox" parent="VBoxC"]
-margin_left = 226.0
-margin_right = 302.0
+margin_left = 227.0
+margin_right = 301.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
 size_flags_horizontal = 4

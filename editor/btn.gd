@@ -22,9 +22,14 @@ func _ready():
 
 func _on_button_pressed():
 	emit_signal("btn_pressed")
+	btn.pressed = false
 
 func set_disabled(val):
 	btn.set_disabled(val)
+	if val:
+		label.modulate = Color("82ffffff")
+	else:
+		label.modulate = Color("ffffff")
 
 func is_disabled():
 	btn.is_disabled()

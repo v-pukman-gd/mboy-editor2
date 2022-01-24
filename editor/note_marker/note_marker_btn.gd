@@ -41,8 +41,13 @@ func _on_option_selected(option_id):
 func set_disabled(val):
 	menu_btn.set_disabled(val)
 	button_node.set_disabled(val)
+	if val:
+		label_node.modulate = Color("82ffffff")
+	else:
+		label_node.modulate = Color("ffffff")
 	
 func is_disabled():
 	menu_btn.is_disabled()
 
-
+func _on_Button_pressed():
+	button_node.pressed = false

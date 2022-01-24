@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://editor/editor_theme.tres" type="Theme" id=1]
-[ext_resource path="res://editor/note_marker/note_markers_info_dialog.gd" type="Script" id=2]
+[ext_resource path="res://editor/note_marker/note_markers_info_dialog.gd" type="Script" id=1]
 
 [node name="NoteMarkersInfoDialog" type="ConfirmationDialog"]
 visible = true
@@ -9,8 +8,7 @@ margin_left = 1.0
 margin_right = 451.0
 margin_bottom = 562.0
 rect_min_size = Vector2( 450, 562 )
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="VBoxC" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -18,7 +16,7 @@ anchor_right = 0.5
 margin_left = -217.0
 margin_top = 8.0
 margin_right = 217.0
-margin_bottom = 522.0
+margin_bottom = 520.0
 mouse_filter = 0
 
 [node name="Control" type="Control" parent="VBoxC"]
@@ -29,32 +27,32 @@ rect_min_size = Vector2( 0, 20 )
 [node name="Label" type="Label" parent="VBoxC"]
 margin_top = 24.0
 margin_right = 434.0
-margin_bottom = 48.0
+margin_bottom = 38.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "te_manage_markers"
 align = 1
 
 [node name="Control 3" type="Control" parent="VBoxC"]
-margin_top = 52.0
+margin_top = 42.0
 margin_right = 434.0
-margin_bottom = 72.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="ItemsListHeader" type="HBoxContainer" parent="VBoxC"]
-margin_top = 76.0
+margin_top = 66.0
 margin_right = 434.0
-margin_bottom = 100.0
+margin_bottom = 80.0
 
 [node name="Control" type="Control" parent="VBoxC/ItemsListHeader"]
 margin_right = 35.0
-margin_bottom = 24.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 35, 0 )
 
 [node name="Label" type="Label" parent="VBoxC/ItemsListHeader"]
 margin_left = 39.0
 margin_right = 229.0
-margin_bottom = 24.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 190, 0 )
 text = "te_marker_name"
 clip_text = true
@@ -62,7 +60,7 @@ clip_text = true
 [node name="Label2" type="Label" parent="VBoxC/ItemsListHeader"]
 margin_left = 233.0
 margin_right = 308.0
-margin_bottom = 24.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 75, 0 )
 text = "te_marker_code"
 clip_text = true
@@ -70,15 +68,15 @@ clip_text = true
 [node name="Label3" type="Label" parent="VBoxC/ItemsListHeader"]
 margin_left = 312.0
 margin_right = 372.0
-margin_bottom = 24.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 60, 0 )
 text = "te_color"
 clip_text = true
 
 [node name="ScrollC" type="ScrollContainer" parent="VBoxC"]
-margin_top = 104.0
+margin_top = 84.0
 margin_right = 434.0
-margin_bottom = 401.0
+margin_bottom = 423.0
 rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 
@@ -88,34 +86,34 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 
 [node name="AlertLabel" type="Label" parent="VBoxC"]
-margin_top = 405.0
+margin_top = 427.0
 margin_right = 434.0
-margin_bottom = 429.0
+margin_bottom = 441.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 5
 custom_colors/font_color = Color( 1, 0.262745, 0, 1 )
 autowrap = true
 
 [node name="NoticeLabel" type="Label" parent="VBoxC"]
-margin_top = 433.0
+margin_top = 445.0
 margin_right = 434.0
-margin_bottom = 457.0
+margin_bottom = 459.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 5
 custom_colors/font_color = Color( 1, 1, 0, 1 )
 autowrap = true
 
 [node name="Control 5" type="Control" parent="VBoxC"]
-margin_top = 461.0
+margin_top = 463.0
 margin_right = 434.0
-margin_bottom = 486.0
+margin_bottom = 488.0
 rect_min_size = Vector2( 25, 25 )
 
 [node name="AddMarkerBtn" type="Button" parent="VBoxC"]
-margin_left = 160.0
-margin_top = 490.0
-margin_right = 273.0
-margin_bottom = 514.0
+margin_left = 164.0
+margin_top = 492.0
+margin_right = 269.0
+margin_bottom = 512.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "te_add_marker"

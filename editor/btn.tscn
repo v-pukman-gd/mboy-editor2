@@ -26,9 +26,12 @@ margin_left = 690.0
 margin_right = 750.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
+focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+toggle_mode = true
 action_mode = 0
+enabled_focus_mode = 0
 
 [node name="FontAwesome" type="Label" parent="VBoxC/Button"]
 anchor_right = 1.0
@@ -42,7 +45,6 @@ custom_fonts/font = SubResource( 1 )
 text = ""
 align = 1
 script = ExtResource( 3 )
-size = 16
 icon = "flag"
 
 [node name="Label" type="Label" parent="VBoxC"]

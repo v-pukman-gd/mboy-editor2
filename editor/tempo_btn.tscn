@@ -25,7 +25,6 @@ rect_min_size = Vector2( 138, 44 )
 mouse_filter = 0
 
 [node name="HBoxC" type="HBoxContainer" parent="VBoxC"]
-editor/display_folded = true
 margin_right = 554.0
 margin_bottom = 30.0
 mouse_filter = 0
@@ -46,6 +45,9 @@ margin_left = 286.0
 margin_right = 346.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
 
 [node name="FontAwesome" type="Label" parent="VBoxC/HBoxC/Button"]
 margin_top = 2.0
@@ -58,7 +60,6 @@ custom_fonts/font = SubResource( 1 )
 text = ""
 align = 1
 script = ExtResource( 3 )
-size = 16
 icon = "hand-pointer-o"
 
 [node name="Label" type="Label" parent="VBoxC"]

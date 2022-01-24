@@ -8,6 +8,7 @@ var tempo_meter_vals = []
 
 onready var tempo_val_input = get_node("VBoxC/HBoxC/SpinBox")
 onready var btn = get_node("VBoxC/HBoxC/Button")
+onready var label = $VBoxC/Label
 
 func _ready():
 	set_process(true)
@@ -22,6 +23,7 @@ func _process(delta):
 	
 
 func _on_meter_btn_pressed():
+	btn.pressed = false
 	if not tempo_meter_started:
 		tempo_meter_started = true
 		tempo_meter_time = 0
@@ -46,6 +48,11 @@ func _on_spin_box_changed(val):
 func set_disabled(val):
 	#tempo_val_input.set_editable(!val)
 	btn.set_disabled(val)
+	tempo_val_input.set_editable(!val)
+	if val:
+		label.modulate = Color("82ffffff")
+	else:
+		label.modulate = Color("ffffff")
 
 func get_tempo():
 	return tempo_val_input.get_value()

@@ -21,12 +21,12 @@ content_margin_left = 6.0
 content_margin_right = 6.0
 content_margin_top = 4.0
 content_margin_bottom = 4.0
-bg_color = Color( 0.203922, 0.235294, 0.270588, 1 )
+bg_color = Color( 0.247059, 0.247059, 0.247059, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color( 0.176471, 0.207843, 0.235294, 1 )
+border_color = Color( 0.271314, 0.270254, 0.270254, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -53,12 +53,12 @@ content_margin_left = 6.0
 content_margin_right = 6.0
 content_margin_top = 4.0
 content_margin_bottom = 4.0
-bg_color = Color( 0.138235, 0.161765, 0.185294, 1 )
+bg_color = Color( 0.14902, 0.172549, 0.2, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color( 0.388235, 0.411765, 0.435294, 1 )
+border_color = Color( 0.105882, 0.996078, 0.6, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -10546,22 +10546,22 @@ expand_margin_top = 24.0
 shadow_color = Color( 0, 0, 0, 0.3 )
 shadow_size = 4
 
-[sub_resource type="DynamicFont" id=2039]
+[sub_resource type="DynamicFont" id=2037]
 size = 15
 use_mipmaps = true
 use_filter = true
 extra_spacing_top = 2
 font_data = ExtResource( 1 )
 
-[sub_resource type="Theme" id=1382]
-default_font = SubResource( 2039 )
+[sub_resource type="Theme" id=2038]
+default_font = SubResource( 2037 )
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.796078, 0.803922, 0.811765, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
 Button/colors/font_color_hover = Color( 0.878431, 0.882353, 0.886275, 1 )
 Button/colors/font_color_pressed = Color( 0.878431, 0.882353, 0.886275, 1 )
 Button/colors/icon_color_hover = Color( 0.878431, 0.882353, 0.886275, 1 )
-Button/colors/icon_color_pressed = Color( 0.121765, 1.14549, 0.69, 1 )
+Button/colors/icon_color_pressed = Color( 0.878431, 0.882353, 0.886275, 1 )
 Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 3 )
@@ -11563,7 +11563,7 @@ WindowDialog/icons/close = SubResource( 511 )
 WindowDialog/icons/close_highlight = SubResource( 511 )
 WindowDialog/styles/panel = SubResource( 1381 )
 
-[sub_resource type="StyleBoxEmpty" id=1383]
+[sub_resource type="StyleBoxEmpty" id=2039]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
@@ -11571,7 +11571,7 @@ anchor_bottom = 1.0
 rect_min_size = Vector2( 1162, 600 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource( 1382 )
+theme = SubResource( 2038 )
 script = ExtResource( 2 )
 
 [node name="UI" type="Control" parent="."]
@@ -11651,7 +11651,7 @@ window_title = "Notice"
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 392.0
-margin_bottom = 62.0
+margin_bottom = 58.0
 mouse_filter = 1
 size_flags_vertical = 0
 text = "message"
@@ -11671,14 +11671,13 @@ popup_exclusive = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 392.0
-margin_bottom = 62.0
+margin_bottom = 58.0
 rect_min_size = Vector2( 380, 50 )
 bbcode_enabled = true
 bbcode_text = "[center]hey[/center]"
 text = "hey"
 
 [node name="NoteMarkersInfoDialog" parent="UI/CenterC" instance=ExtResource( 5 )]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -225.0
@@ -11706,26 +11705,25 @@ custom_constants/margin_left = 30
 
 [node name="VBoxC" type="VBoxContainer" parent="UI/MarginC"]
 margin_left = 30.0
-margin_right = 1467.0
+margin_right = 1410.0
 margin_bottom = 720.0
 mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxCOffset" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 0, 10 )
 mouse_filter = 0
 
 [node name="CenterC" type="CenterContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 14.0
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 74.0
 
 [node name="HBoxC" type="HBoxContainer" parent="UI/MarginC/VBoxC/CenterC"]
-margin_left = 29.0
-margin_right = 1408.0
+margin_right = 1379.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 0, 44 )
 mouse_filter = 0
@@ -11875,13 +11873,13 @@ icon_name = "hdd-o"
 
 [node name="HBoxCOffset1" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 78.0
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 78.0
 mouse_filter = 0
 
 [node name="CenterC2" type="Control" parent="UI/MarginC/VBoxC"]
 margin_top = 82.0
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 122.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
@@ -11957,21 +11955,21 @@ icon_name = "info"
 
 [node name="HBoxCOffset2" type="HBoxContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 126.0
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 136.0
 rect_min_size = Vector2( 0, 10 )
 mouse_filter = 0
 
 [node name="ScrollC" type="ScrollContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 140.0
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 1102, 256 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC"]
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 0
@@ -11979,7 +11977,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="WaveformC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 1
@@ -12007,9 +12005,10 @@ size_flags_vertical = 1
 custom_icons/grabber_disabled = ExtResource( 14 )
 custom_icons/grabber_highlight = ExtResource( 14 )
 custom_icons/grabber = ExtResource( 14 )
-custom_styles/slider = SubResource( 1383 )
+custom_styles/slider = SubResource( 2039 )
 value = 1.0
 scrollable = false
+ticks_on_borders = true
 
 [node name="CursorPlayback" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 15 )]
 
@@ -12018,7 +12017,7 @@ is_static = true
 
 [node name="TracksC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
 margin_top = 260.0
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 360.0
 rect_min_size = Vector2( 0, 100 )
 mouse_filter = 0
@@ -12026,7 +12025,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
 margin_top = 364.0
-margin_right = 1437.0
+margin_right = 1380.0
 margin_bottom = 374.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
