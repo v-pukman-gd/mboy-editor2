@@ -28,9 +28,7 @@ margin_bottom = 20.0
 mouse_filter = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.235294, 0.235294, 0.235294, 1 )
-custom_colors/font_outline_modulate = Color( 0.235294, 0.235294, 0.235294, 1 )
-custom_colors/font_color_shadow = Color( 0.796078, 0.796078, 0.796078, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 0.784314 )
 text = "Track n"
 align = 1
 

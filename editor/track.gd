@@ -15,6 +15,7 @@ var start_pos = 0
 var curr_scale = 1
 
 var name_updated = false
+var name_bg_updated = false
 var size_updated = false
 var start_pos_updated = true
 var is_active = false
@@ -32,7 +33,11 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	#name label length fix
+	# update name twice: 1 - updates label length, 2 - bg that depends on label
+	if name_updated and not name_bg_updated:
+		update_name()
+		name_bg_updated = true 
+		
 	if not name_updated:
 		update_name()
 		name_updated = true
@@ -89,6 +94,7 @@ func set_info(track_info):
 		real_size = get_custom_minimum_size()
 	minimized = track_info.minimized
 	name_updated = false
+	name_bg_updated = false
 	size_updated = false
 
 func update_size():
@@ -113,7 +119,6 @@ func get_label_color():
 func update_name():
 	name_label.set_text(get_full_name())
 	name_bg.color = get_label_color()
-	#name_bg.color.a = 0.9
 	name_bg.width = name_label.get_size().x
 	name_bg.height = name_label.get_size().y
 	name_bg.update()
@@ -197,5 +202,6 @@ func _on_name_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 
 func set_active(val):
 	is_active = val
 	name_bg.color = get_label_color()
+	name_bg.focused = val
 	name_bg.update()
 
