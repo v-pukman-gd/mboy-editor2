@@ -1,5 +1,5 @@
 extends Node
 
-const DEFAULT_COLOR = Color(71/255.0, 187/255.0, 255/255.0, 1)
+const DEFAULT_COLOR = Color("00a5ff")
 const TRACKS_DISTANCE = 20
 
