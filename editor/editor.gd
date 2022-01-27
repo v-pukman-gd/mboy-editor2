@@ -442,26 +442,26 @@ func _input(e):
 func _on_export_btn_pressed():
 	if not map_info_was_saved:
 		popup_dialog(map_info)
-		#map_info.popup()
 		pending_export = true
 	else:
-		export_map_dialog.set_current_path(EDITOR_C.last_file_path)
-		export_map_dialog.set_current_file("")
+		set_export_filepath()
 		popup_dialog(export_map_dialog)
-		#export_map_dialog.popup()
-		#if export_map_dialog.get_current_file() == "":
-		#	export_map_dialog.set_current_file(audio_file_name)
-		#export_map_dialog.set_current_dir(export_map_dialog.get_current_dir())
 
 func _on_map_info_saved():
 	map_info_was_saved = true
 	if pending_export:
-		export_map_dialog.set_current_path(EDITOR_C.last_file_path)
-		export_map_dialog.set_current_file("")
+		set_export_filepath()
 		popup_dialog(export_map_dialog)
-		#export_map_dialog.popup()
-		#if export_map_dialog.get_current_file() == "":
-		#	export_map_dialog.set_current_file(audio_file_name)
+		
+func set_export_filepath():
+	var file_path = EDITOR_C.last_file_path
+	var file_name_full = file_path.get_file()
+	var file_name = file_name_full.substr(0, file_name_full.find_last('.'))
+	
+	# current_file should be called first!
+	# otherwise filename is not set
+	export_map_dialog.current_file = file_name 
+	export_map_dialog.current_path = file_path
 
 func _on_export_map_file_selected(file_path):
 	export_data(file_path)

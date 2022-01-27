@@ -11638,6 +11638,7 @@ current_dir = "/Users/boom/Projects/godot/EditorPort2"
 current_path = "/Users/boom/Projects/godot/EditorPort2/"
 
 [node name="NoticeDialog" type="AcceptDialog" parent="UI/CenterC"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -200.0

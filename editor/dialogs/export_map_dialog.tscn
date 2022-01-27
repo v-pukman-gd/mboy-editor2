@@ -1,0 +1,12 @@
+[gd_scene format=2]
+
+[node name="ExportMapDialog" type="FileDialog"]
+margin_left = 280.0
+margin_right = 880.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 600, 400 )
+popup_exclusive = true
+access = 2
+filters = PoolStringArray( "*.mboy" )
+current_dir = "/Users/boom/Projects/godot/EditorPort2"
+current_path = "/Users/boom/Projects/godot/EditorPort2/"
