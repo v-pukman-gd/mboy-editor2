@@ -432,10 +432,12 @@ func _input(e):
 	elif e.is_action_pressed("editor_scale_down"):
 		scale_down_btn.grab_focus()
 		scale_to(-1)
+	elif e.is_action_pressed("editor_save"):
+		if audio_loaded:
+			_on_export_btn_pressed()
 	elif e.is_action_pressed("editor_sinfo"):
 		print("window_scroll.get_h_scroll():", window_scroll.get_h_scroll())
 		print("cursor_slider.get_value():", cursor_slider.get_value())
-
 
 # EXPORT
 

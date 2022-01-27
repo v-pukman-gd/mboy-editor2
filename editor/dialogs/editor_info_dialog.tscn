@@ -33,7 +33,8 @@ bbcode_text = "[center]
 [b]Shift + Mouse Left Click[/b] - Move note
 [b]Shift + Alt + Mouse Left Click[/b] - Move note without snapping to grid
 [b]Control + (-)[/b] - Scale down
-[b]Contol + (+)[/b] - Scale up
+[b]Control + (+)[/b] - Scale up
+[b]Control + S[/b] - Save map
 [/center]"
 text = "
 Space - Play audio
@@ -43,7 +44,8 @@ Mouse Right Click - Remove note
 Shift + Mouse Left Click - Move note
 Shift + Alt + Mouse Left Click - Move note without snapping to grid
 Control + (-) - Scale down
-Contol + (+) - Scale up
+Control + (+) - Scale up
+Control + S - Save map
 "
 
 [node name="About" type="RichTextLabel" parent="TabContainer"]
