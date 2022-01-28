@@ -95,7 +95,7 @@ func set_active(val):
 	update()
 
 func get_width():
-	return EDITOR_BAR_C.CELL_WIDTH * width_scale
+	return float(EDITOR_BAR_C.CELL_WIDTH) * width_scale
 
 # used for import
 func set_width(value):
@@ -106,9 +106,9 @@ func set_width_scale(width):
 	self.width_scale = float(width) / EDITOR_BAR_C.CELL_WIDTH
 
 func _draw():
-	var rect2 = Rect2(BORDER_LINE_W, BORDER_LINE_W, get_width()-BORDER_LINE_W*2, EDITOR_BAR_C.CELL_HEIGHT-BORDER_LINE_W*2)
+	var rect2 = Rect2(0, BORDER_LINE_W, get_width(), EDITOR_BAR_C.CELL_HEIGHT-BORDER_LINE_W*2)
 	draw_rect(rect2, get_border_color())
-	var rect = Rect2(BORDER_LINE_W, BORDER_LINE_W, get_width()-BORDER_LINE_W*3, EDITOR_BAR_C.CELL_HEIGHT-BORDER_LINE_W*3)
+	var rect = Rect2(0, BORDER_LINE_W, get_width()-BORDER_LINE_W, EDITOR_BAR_C.CELL_HEIGHT-BORDER_LINE_W*3)
 	draw_rect(rect, get_note_color())
 
 	control.set_size(Vector2(get_width(), EDITOR_BAR_C.CELL_HEIGHT))
