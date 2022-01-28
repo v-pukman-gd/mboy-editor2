@@ -6,7 +6,7 @@ const H_LINE_WIDTH = 2
 const V_LINE_COLOR = Color(250/255.0, 250/255.0, 250/255.0, 0.15)
 const V_LINE_WIDTH = 1
 
-const BG_COLOR = Color(200/255.0, 200/255.0, 200/255.0, 1) #Color(220/255.0, 220/255.0, 220/255.0, 1)
+const BG_COLOR = Color(200/255.0, 200/255.0, 200/255.0, 1)
 
 onready var bar = get_node("../")
 
@@ -21,8 +21,6 @@ func get_bg_color():
 		return BG_COLOR.linear_interpolate(Color(0,0,0), 0)
 	else:
 		return BG_COLOR.linear_interpolate(Color(0,0,0), 0.3)
-
-	#return BG_COLOR
 		
 func _draw():
 	var rect = Rect2(0, 0, bar.get_width(), bar.get_grid_height())
