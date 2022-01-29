@@ -11660,6 +11660,7 @@ align = 1
 valign = 1
 
 [node name="ConfirmDialog" type="ConfirmationDialog" parent="UI/CenterC"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -200.0
@@ -11679,6 +11680,7 @@ bbcode_text = "[center]hey[/center]"
 text = "hey"
 
 [node name="NoteMarkersInfoDialog" parent="UI/CenterC" instance=ExtResource( 5 )]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -225.0
