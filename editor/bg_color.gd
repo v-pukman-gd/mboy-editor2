@@ -1,24 +1,28 @@
 extends Node2D
 tool
 
-export var color = Color(0, 0, 0, 1)
+export var color = Color("ffff00")
 export var width = 10
 export var height = 10
-export var draw_border = true
 export var border_width = 1
 
-var focused = false
+export var radius = 0
+export var focused = false
 var focus_color = Color("1bfe99")
 
 func _ready():
 	update()
 
 func _draw():
-	if draw_border:		
-		draw_rect(Rect2(0,0, width, height), get_border_color())
-		draw_rect(Rect2(get_border_width(),get_border_width(), width-get_border_width()*2, height-get_border_width()*2), get_bg_color())
-	else:
-		draw_rect(Rect2(0,0, width, height), get_bg_color())
+	var style_box = StyleBoxFlat.new()
+	style_box.set_corner_radius_all(radius)
+	style_box.bg_color = get_bg_color()
+	style_box.border_color = get_border_color()
+	style_box.border_width_top = get_border_width()
+	style_box.border_width_right = get_border_width()
+	style_box.border_width_bottom = get_border_width()
+	style_box.border_width_left = get_border_width()
+	draw_style_box(style_box, Rect2(Vector2(0,0), Vector2(width, height)))
 		
 func get_bg_color():
 	return color

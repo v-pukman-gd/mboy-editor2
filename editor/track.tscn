@@ -20,7 +20,9 @@ size_flags_vertical = 0
 [node name="BgColor" parent="NameC" instance=ExtResource( 2 )]
 position = Vector2( 20, 0 )
 z_index = -1
+color = Color( 0.823529, 0.164706, 0.815686, 1 )
 width = 100
+radius = 10
 
 [node name="NameLabel" type="Label" parent="NameC/BgColor"]
 margin_right = 100.0
