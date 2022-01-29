@@ -5,11 +5,12 @@
 [ext_resource path="res://addons/FontAwesome/FontAwesome.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
+size = 18
 font_data = ExtResource( 2 )
 
 [node name="Btn" type="VBoxContainer"]
 anchor_right = 1.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 60, 44 )
 mouse_filter = 0
 script = ExtResource( 1 )
@@ -22,6 +23,7 @@ rect_min_size = Vector2( 60, 40 )
 mouse_filter = 0
 
 [node name="Button" type="Button" parent="VBoxC"]
+editor/display_folded = true
 margin_left = 690.0
 margin_right = 750.0
 margin_bottom = 30.0
@@ -36,7 +38,7 @@ enabled_focus_mode = 0
 [node name="FontAwesome" type="Label" parent="VBoxC/Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 3.0
+margin_top = 1.0
 margin_bottom = 3.0
 rect_min_size = Vector2( 60, 30 )
 mouse_filter = 1
@@ -45,6 +47,7 @@ custom_fonts/font = SubResource( 1 )
 text = ""
 align = 1
 script = ExtResource( 3 )
+size = 18
 icon = "flag"
 
 [node name="Label" type="Label" parent="VBoxC"]
