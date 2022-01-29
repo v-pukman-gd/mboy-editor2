@@ -3,6 +3,7 @@
 [ext_resource path="res://editor/dialogs/editor_info_dialog.gd" type="Script" id=1]
 
 [node name="EditorInfoDialog" type="AcceptDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -880.0
@@ -18,6 +19,7 @@ margin_right = 552.0
 margin_bottom = 114.0
 
 [node name="Shortcuts" type="RichTextLabel" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -35,6 +37,7 @@ bbcode_text = "[center]
 [b]Control + (-)[/b] - Scale down
 [b]Control + (+)[/b] - Scale up
 [b]Control + S[/b] - Save map
+[b]Shift + Mouse Scroll[/b] - Horizontal scroll (ignores vertical scroll)
 [/center]"
 text = "
 Space - Play audio
@@ -46,6 +49,7 @@ Shift + Alt + Mouse Left Click - Move note without snapping to grid
 Control + (-) - Scale down
 Control + (+) - Scale up
 Control + S - Save map
+Shift + Mouse Scroll - Horizontal scroll (ignores vertical scroll)
 "
 
 [node name="About" type="RichTextLabel" parent="TabContainer"]
@@ -64,3 +68,4 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 552.0
 margin_bottom = 114.0
+[connection signal="meta_clicked" from="TabContainer/About" to="." method="_on_About_meta_clicked"]
