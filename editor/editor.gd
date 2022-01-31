@@ -222,10 +222,13 @@ func _process(delta):
 		#cursor_playback.hide()
 	
 	if is_playing and is_follow_playing:
-		if cursor_playback.get_position().x >= window_scroll.get_size().x*0.5: 
-			window_scroll.set_h_scroll((int(cursor_playback.get_position().x)-int(window_scroll.get_size().x*0.5))) 
-			#window_scroll.set_h_scroll(int(track_speed*stream_player.get_playback_position()*scale_ratio)-window_scroll.get_size().x*0.5)
-	
+		var window_half = window_scroll.get_size().x*0.5		
+		if cursor_playback.get_position().x >= window_half: 
+			var h_scroll = cursor_playback.get_position().x - window_half
+			window_scroll.set_h_scroll(h_scroll) 
+			if cursor_playback.get_position().x < waveform_c.get_size().x - window_half:
+				cursor_playback.position = Vector2(window_scroll.get_h_scroll() + window_half, 0) 
+			
 	#if window_scroll_last_val != window_scroll.get_h_scroll():
 	# Update track labels
 	for t in tracks: t.move_label(window_scroll.get_h_scroll())

@@ -11581,6 +11581,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterC" type="Control" parent="UI"]
+editor/display_folded = true
 anchor_right = 1.0
 rect_min_size = Vector2( 1160, 0 )
 size_flags_horizontal = 3
