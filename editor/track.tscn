@@ -22,6 +22,7 @@ position = Vector2( 20, 0 )
 z_index = -1
 color = Color( 0.823529, 0.164706, 0.815686, 1 )
 width = 100
+border_width = 2
 radius = 10
 
 [node name="NameLabel" type="Label" parent="NameC/BgColor"]
