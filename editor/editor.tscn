@@ -34,7 +34,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterC" type="Control" parent="UI"]
-editor/display_folded = true
 anchor_right = 1.0
 rect_min_size = Vector2( 1160, 0 )
 size_flags_horizontal = 3
@@ -153,6 +152,7 @@ margin_bottom = 280.0
 rect_min_size = Vector2( 400, 280 )
 
 [node name="MarginC" type="MarginContainer" parent="UI"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -175,6 +175,7 @@ rect_min_size = Vector2( 0, 10 )
 mouse_filter = 0
 
 [node name="CenterC" type="CenterContainer" parent="UI/MarginC/VBoxC"]
+editor/display_folded = true
 margin_top = 14.0
 margin_right = 1380.0
 margin_bottom = 74.0

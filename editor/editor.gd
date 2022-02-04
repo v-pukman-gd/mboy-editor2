@@ -232,6 +232,12 @@ func _process(delta):
 	#if window_scroll_last_val != window_scroll.get_h_scroll():
 	# Update track labels
 	for t in tracks: t.move_label(window_scroll.get_h_scroll())
+	
+	if audio_loaded:
+		if tracks.size() >= EDITOR_C.MAX_TRACKS:
+			add_track_btn.set_disabled(true)
+		else:
+			add_track_btn.set_disabled(false)
 		
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
@@ -445,6 +451,12 @@ func _input(e):
 # EXPORT
 
 func _on_export_btn_pressed():
+	if tracks.size() > EDITOR_C.MAX_TRACKS:
+		popup_confirm(tr("te_limited_save_confirm").format({"number": EDITOR_C.MAX_TRACKS}), "export_btn_callback")
+	else:
+		export_btn_callback()
+
+func export_btn_callback():	
 	if not map_info_was_saved:
 		popup_dialog(map_info)
 		pending_export = true
@@ -480,8 +492,22 @@ func get_curr_date():
 
 func export_data(file_path):
 	var tracks_data = []
-	for t in tracks: tracks_data.append(t.get_data())
+	var tracks_to_clear = []
 	
+#	for i in range(0, min(tracks.size(), EDITOR_C.MAX_TRACKS), 1):
+#		var t = tracks[i]
+#		tracks_data.append(t.get_data())
+	
+	# export only allowed count of tracks
+	# remove all others
+	var count = 0
+	for t in tracks:
+		if count < EDITOR_C.MAX_TRACKS:
+			tracks_data.append(t.get_data())
+			count += 1
+		else:
+			tracks_to_clear.append(t)
+			
 	var markers_data = EDITOR_NOTE_MARKER_C.get_markers_data()
 	
 	var data = {
@@ -494,10 +520,13 @@ func export_data(file_path):
 		tracks = tracks_data,
 		markers = markers_data
 	}
-
+	
 	Utils.write_json_file(file_path, data)
 	update_last_file_path(file_path)
 	print("data exported")
+	
+	for tt in tracks_to_clear: destroy_track(tt)
+	tracks_to_clear = []
 
 
 # IMPORT
@@ -690,8 +719,8 @@ func update_controls():
 	if audio_loaded:
 		load_audio_btn.set_disabled(true) # restart editor to load audio again
 
-		play_btn.set_disabled(false)
-		add_track_btn.set_disabled(false)
+		play_btn.set_disabled(false)		
+		add_track_btn.set_disabled(false)		
 		scale_btn.set_disabled(false)
 		export_btn.set_disabled(false)
 		tempo_btn.set_disabled(false)
@@ -716,6 +745,7 @@ func update_controls():
 		
 
 		window_scroll.hide()
+		
 
 func _on_tempo_changed():
 	print("_on_tempo_changed:")
