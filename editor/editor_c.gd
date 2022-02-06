@@ -20,6 +20,7 @@ const TRACK_DISTANCE = 50
 const CURSOR_FOCUS_OFFSET = 20
 
 const MAX_TRACKS = 3
+const PRICING_PLAN = "free"
 
 #var last_load_audio_path = "//"
 #var last_import_map_path = "//"

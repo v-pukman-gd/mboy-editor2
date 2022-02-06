@@ -18,7 +18,6 @@ margin_right = 552.0
 margin_bottom = 114.0
 
 [node name="Shortcuts" type="RichTextLabel" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

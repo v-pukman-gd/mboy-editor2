@@ -494,10 +494,6 @@ func export_data(file_path):
 	var tracks_data = []
 	var tracks_to_clear = []
 	
-#	for i in range(0, min(tracks.size(), EDITOR_C.MAX_TRACKS), 1):
-#		var t = tracks[i]
-#		tracks_data.append(t.get_data())
-	
 	# export only allowed count of tracks
 	# remove all others
 	var count = 0
