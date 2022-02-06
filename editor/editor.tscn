@@ -471,18 +471,25 @@ scrollable = false
 [node name="CursorStatic" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC" instance=ExtResource( 15 )]
 is_static = true
 
-[node name="TracksC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
+[node name="VBoxC2" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
 margin_top = 260.0
 margin_right = 1380.0
-margin_bottom = 360.0
+margin_bottom = 262.0
+rect_min_size = Vector2( 0, 2 )
+size_flags_horizontal = 3
+
+[node name="TracksC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
+margin_top = 266.0
+margin_right = 1380.0
+margin_bottom = 366.0
 rect_min_size = Vector2( 0, 100 )
 mouse_filter = 0
 size_flags_horizontal = 3
 
 [node name="VBoxC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
-margin_top = 364.0
+margin_top = 370.0
 margin_right = 1380.0
-margin_bottom = 374.0
+margin_bottom = 380.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
 
