@@ -72,6 +72,6 @@ te_markers_in_use1,Alert: markers,Маркеры
 te_markers_in_use2,"are in use. After press OK, they will be deleted from the map","используются. После нажатия ОК, они будут удалены из карты"
 te_marker_exists1,Notice: marker,Маркер
 te_marker_exists2,already exists,уже существует
-te_editor_info,Get Info,Инфо
+te_editor_info,About,О программе
 te_editor_required_fields,"* - required to fill", "* обязательно к заполнению"
 te_limited_save_confirm,"Only first {number} tracks will be saved. Continue?","Только первые {number} дорожки будут сохранены. Продолжить?"
