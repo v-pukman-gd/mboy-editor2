@@ -8,10 +8,14 @@ const V_LINE_WIDTH = 1
 
 const BG_COLOR = Color(200/255.0, 200/255.0, 200/255.0, 1)
 
+var show_grid = true
+
 onready var bar = get_node("../")
+onready var editor = get_node("/root/Editor")
 
 func _ready():
 	update()
+	editor.connect("toogle_grid", self, "on_toggle_grid")
 
 func get_bg_color():
 	#var color_value = bar.index/4.0 - floor(bar.index/4.0)
@@ -40,16 +44,21 @@ func _draw():
 		cell_counter += 1
 		if cell_counter >= EDITOR_BAR_C.CELLS_IN_QUARTER_COUNT*2: cell_counter = 0
 		
-		var w = V_LINE_WIDTH
-		#if x == 0: w *= 2
-		
-		var c = V_LINE_COLOR
-		if x == 0: c = H_LINE_COLOR
-		draw_line(Vector2(col_pos, 0), Vector2(col_pos, bar.get_grid_height()), c, w)
+		if show_grid:
+			var w = V_LINE_WIDTH
+			#if x == 0: w *= 2
+			
+			var c = V_LINE_COLOR
+			if x == 0: c = H_LINE_COLOR
+			
+			draw_line(Vector2(col_pos, 0), Vector2(col_pos, bar.get_grid_height()), c, w)
 
 	for y in range(2):
 		var row_pos = y * EDITOR_BAR_C.CELL_HEIGHT
 		draw_line(Vector2(0, row_pos), Vector2(bar.get_width(), row_pos), H_LINE_COLOR, H_LINE_WIDTH)
 
 
-
+func on_toggle_grid(val):
+	print("on_toggle_grid", val)
+	show_grid = val
+	update()

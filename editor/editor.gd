@@ -1,6 +1,7 @@
 extends Control
 
 #signal audio_load_success
+signal toogle_grid
 
 var geditor = Geditor.new()
 var wav_file_path
@@ -33,6 +34,7 @@ var tempo_update_in_process = false
 var ui_scale
 var scale_ratio
 var prev_scale_ratio
+var show_grid = true
 
 var bar_size
 var bars_count
@@ -342,6 +344,7 @@ func scale_to(dir):
 		scale_ratio = 0.1
 		ui_scale -= value
 		print("scale_ratio:", scale_ratio)
+		toggle_grid(scale_ratio)
 		return
 
 #	if scale_ratio == 0.1:
@@ -397,6 +400,7 @@ func scale_to(dir):
 	prev_scale_ratio = scale_ratio
 
 	print("scale updated!")
+	toggle_grid(scale_ratio)
 
 
 func _on_scale_up_btn_pressed():
@@ -943,4 +947,15 @@ func _on_markers_updated():
 func _on_editor_info_btn_pressed():
 	popup_dialog(editor_info_dialog)
 
-
+func _on_toggle_grid_pressed():
+	show_grid = !show_grid
+	emit_signal("toogle_grid", show_grid)
+	
+func toggle_grid(scale):
+	if scale < 0.5 and show_grid:
+		show_grid = false
+		emit_signal("toogle_grid", show_grid)
+	elif scale >= 0.5 and !show_grid:
+		show_grid = true
+		emit_signal("toogle_grid", show_grid)
+		

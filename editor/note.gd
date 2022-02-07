@@ -9,9 +9,9 @@ var is_deleted = false
 var playing = false
 var is_active = false
 
-var width_scale = 1
+var width_scale = 1.0
 var max_width = EDITOR_BAR_C.CELL_WIDTH
-var updated_scale = 1
+var updated_scale = 1.0
 var drag_x_min = 0
 var drag_x_max = 0
 var dragging_x = false
@@ -103,7 +103,7 @@ func set_width(value):
 	update()
 	
 func set_width_scale(width):
-	self.width_scale = float(width) / EDITOR_BAR_C.CELL_WIDTH
+	self.width_scale = float(width) / float(EDITOR_BAR_C.CELL_WIDTH)
 
 func _draw():
 	var rect2 = Rect2(0, BORDER_LINE_W, get_width(), EDITOR_BAR_C.CELL_HEIGHT-BORDER_LINE_W*2)
