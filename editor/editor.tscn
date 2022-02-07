@@ -382,43 +382,29 @@ label = "te_toggle_marker"
 
 [node name="Control4" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
 margin_left = 480.0
-margin_right = 1080.0
+margin_right = 1130.0
 margin_bottom = 60.0
-rect_min_size = Vector2( 600, 0 )
+rect_min_size = Vector2( 650, 0 )
 size_flags_horizontal = 3
-
-[node name="GridBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
-anchor_right = 0.0
-margin_left = 1084.0
-margin_right = 1183.0
-margin_bottom = 60.0
-label_text = "te_toggle_grid"
-icon_name = "th-large"
-
-[node name="Control5" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
-margin_left = 1187.0
-margin_right = 1197.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 10, 0 )
 
 [node name="ResetBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
 anchor_right = 0.0
-margin_left = 1201.0
-margin_right = 1262.0
+margin_left = 1134.0
+margin_right = 1195.0
 margin_bottom = 60.0
 label_text = "te_reset"
 icon_name = "eraser"
 
 [node name="Control6" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
-margin_left = 1266.0
-margin_right = 1276.0
+margin_left = 1199.0
+margin_right = 1209.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="EditorInfoBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
 anchor_right = 0.0
-margin_left = 1280.0
-margin_right = 1375.0
+margin_left = 1213.0
+margin_right = 1308.0
 margin_bottom = 60.0
 label_text = "te_editor_info"
 icon_name = "info"
@@ -528,7 +514,6 @@ size_flags_horizontal = 3
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/ExportBtn" to="." method="_on_export_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/MarkerManagerBtn" to="." method="_on_marker_manager_btn_pressed"]
 [connection signal="note_marker_btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/MarkerBtn" to="." method="_on_note_marker_btn_pressed"]
-[connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/GridBtn" to="." method="_on_toggle_grid_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/EditorInfoBtn" to="." method="_on_editor_info_btn_pressed"]
 [connection signal="minimum_size_changed" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_minimum_size_changed"]

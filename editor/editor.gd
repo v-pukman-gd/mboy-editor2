@@ -102,7 +102,6 @@ onready var marker_manger_btn = btn_c2.get_node("MarkerManagerBtn")
 onready var marker_btn = btn_c2.get_node("MarkerBtn")
 
 onready var reset_btn = btn_c2.get_node("ResetBtn")
-onready var exit_btn = btn_c2.get_node("ExitBtn")
 
 #tracks
 onready var tracks_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/TracksC")
@@ -440,10 +439,8 @@ func _input(e):
 	elif e.is_action_pressed("editor_cursor_focus"):
 		cursor_focus()
 	elif e.is_action_pressed("editor_scale_up"):
-		scale_up_btn.grab_focus()
 		scale_to(1)
 	elif e.is_action_pressed("editor_scale_down"):
-		scale_down_btn.grab_focus()
 		scale_to(-1)
 	elif e.is_action_pressed("editor_save"):
 		if audio_loaded:
@@ -946,10 +943,6 @@ func _on_markers_updated():
 
 func _on_editor_info_btn_pressed():
 	popup_dialog(editor_info_dialog)
-
-func _on_toggle_grid_pressed():
-	show_grid = !show_grid
-	emit_signal("toogle_grid", show_grid)
 	
 func toggle_grid(scale):
 	if scale < 0.5 and show_grid:
