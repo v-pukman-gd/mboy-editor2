@@ -30,8 +30,8 @@ bbcode_text = "[center]
 [b]Shift + Space[/b] - Play and follow the track
 [b]Mouse Left Click[/b] - Add note
 [b]Mouse Right Click[/b] - Remove note
-[b]Shift + Mouse Left Click[/b] - Move note
-[b]Shift + Alt + Mouse Left Click[/b] - Move note without snapping to grid
+[b]Shift + Mouse Left Press[/b] - Move note
+[b]Shift + Alt + Mouse Left Press[/b] - Move note without snapping to grid
 [b]Control + (-)[/b] - Scale down
 [b]Control + (+)[/b] - Scale up
 [b]Control + S[/b] - Save map
@@ -42,8 +42,8 @@ Space - Play audio
 Shift + Space - Play and follow the track
 Mouse Left Click - Add note
 Mouse Right Click - Remove note
-Shift + Mouse Left Click - Move note
-Shift + Alt + Mouse Left Click - Move note without snapping to grid
+Shift + Mouse Left Press - Move note
+Shift + Alt + Mouse Left Press - Move note without snapping to grid
 Control + (-) - Scale down
 Control + (+) - Scale up
 Control + S - Save map

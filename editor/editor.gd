@@ -237,8 +237,16 @@ func _process(delta):
 	if audio_loaded:
 		if tracks.size() >= EDITOR_C.MAX_TRACKS:
 			add_track_btn.set_disabled(true)
+			add_track_btn.btn.set_tooltip(get_track_btn_disabled_msg())
 		else:
 			add_track_btn.set_disabled(false)
+			add_track_btn.btn.set_tooltip("")
+
+func get_track_btn_disabled_msg():
+	if EDITOR_C.PRICING_PLAN == "free":
+		return "Free version is limited to %s tracks" % EDITOR_C.MAX_TRACKS
+	else:
+		return "Editor supports %s tracks only" % EDITOR_C.MAX_TRACKS
 		
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
