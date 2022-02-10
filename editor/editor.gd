@@ -647,7 +647,7 @@ func copy_audio(input_file_path):
 #			show_notice("te_wav_to_ogg_failed")
 #			return false
 	else:
-		show_notice(str(file_format) +  tr("te_format_is_not_supported"))
+		show_notice(str(file_format) + " " + tr("te_format_is_not_supported"))
 		return false
 
 	print("copy finished")
