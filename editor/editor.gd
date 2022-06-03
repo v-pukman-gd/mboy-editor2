@@ -112,6 +112,26 @@ var confirm_callback = ""
 var editor_dir
 
 func _ready():
+	# handle hidpi
+	var screen_number = OS.get_current_screen()
+	print(OS.get_screen_size(screen_number), " ", OS.get_screen_dpi(screen_number))
+	if OS.get_screen_dpi(screen_number) < 150:
+		print("low dpi -> stretch down!")
+		OS.set_window_size(Vector2(1440, 720))
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED, SceneTree.STRETCH_ASPECT_EXPAND, Vector2(1440, 720), 1)
+	else:
+		print("high dpi -> stretch up!")
+		OS.set_window_size(Vector2(2880, 1440))
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED, SceneTree.STRETCH_ASPECT_EXPAND, Vector2(2880, 1440), 2)	
+	
+	print(OS.get_window_size())
+	
+	# center window
+	var screen_size = OS.get_screen_size(screen_number)
+	var window_size = OS.get_window_size()
+	OS.set_window_position(screen_size*0.5 - window_size*0.5)
+	
+	# process	
 	VisualServer.set_default_clear_color(EDITOR_C.BG_COLOR)
 	get_tree().set_auto_accept_quit(false)
 	
@@ -849,10 +869,7 @@ func clear_tracks():
 	for t in tracks: destroy_track(t)
 
 func update_track(track):
-	if track_info.pending_destroy:
-		destroy_track(track)
-	else:
-		track.set_info(track_info)
+	track.set_info(track_info)
 
 func set_active_track(track):
 	print("SET ACTIVE:", track)
@@ -960,3 +977,10 @@ func toggle_grid(scale):
 		show_grid = true
 		emit_signal("toogle_grid", show_grid)
 		
+
+func _on_track_destroy_pressed():
+	popup_confirm(tr("te_track_destroy_confirm"), "_on_track_destroy")
+
+func _on_track_destroy():
+	if track_info.track:
+		destroy_track(track_info.track)

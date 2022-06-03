@@ -56,4 +56,5 @@ mouse_filter = 1
 size_flags_vertical = 0
 text = "Name"
 align = 1
+
 [connection signal="pressed" from="MenuButton/Button" to="." method="_on_Button_pressed"]

@@ -1,7 +1,7 @@
 extends Control
 
 const LABEL_LEFT_OFFSET = 20
-const LABEL_H = 20
+const LABEL_H = 24
 
 var instrument = EDITOR_TRACK_INSTRUMENT_C.OTHER
 var track_name = ""

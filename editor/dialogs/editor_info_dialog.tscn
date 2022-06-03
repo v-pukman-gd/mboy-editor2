@@ -14,8 +14,8 @@ script = ExtResource( 1 )
 [node name="TabContainer" type="TabContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 552.0
-margin_bottom = 114.0
+margin_right = 1992.0
+margin_bottom = 834.0
 
 [node name="Shortcuts" type="RichTextLabel" parent="TabContainer"]
 anchor_right = 1.0
@@ -32,8 +32,8 @@ bbcode_text = "[center]
 [b]Mouse Right Click[/b] - Remove note
 [b]Shift + Mouse Left Press[/b] - Move note
 [b]Shift + Alt + Mouse Left Press[/b] - Move note without snapping to grid
-[b]Control + (-)[/b] - Scale down
-[b]Control + (+)[/b] - Scale up
+[b]Control + (-)  / Q[/b] - Scale down
+[b]Control + (+)  / W[/b] - Scale up
 [b]Control + S[/b] - Save map
 [b]Shift + Mouse Scroll[/b] - Horizontal scroll (ignores vertical scroll)
 [/center]"
@@ -44,8 +44,8 @@ Mouse Left Click - Add note
 Mouse Right Click - Remove note
 Shift + Mouse Left Press - Move note
 Shift + Alt + Mouse Left Press - Move note without snapping to grid
-Control + (-) - Scale down
-Control + (+) - Scale up
+Control + (-)  / Q - Scale down
+Control + (+)  / W - Scale up
 Control + S - Save map
 Shift + Mouse Scroll - Horizontal scroll (ignores vertical scroll)
 "
@@ -64,6 +64,7 @@ bbcode_enabled = true
 visible = false
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 552.0
-margin_bottom = 114.0
+margin_right = 1992.0
+margin_bottom = 834.0
+
 [connection signal="meta_clicked" from="TabContainer/About" to="." method="_on_About_meta_clicked"]

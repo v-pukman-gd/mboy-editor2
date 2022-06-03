@@ -3,7 +3,6 @@
 [ext_resource path="res://editor/note_marker/note_markers_info_dialog.gd" type="Script" id=1]
 
 [node name="NoteMarkersInfoDialog" type="ConfirmationDialog"]
-visible = true
 margin_left = 1.0
 margin_right = 451.0
 margin_bottom = 562.0
@@ -16,7 +15,7 @@ anchor_right = 0.5
 margin_left = -217.0
 margin_top = 8.0
 margin_right = 217.0
-margin_bottom = 520.0
+margin_bottom = 526.0
 mouse_filter = 0
 
 [node name="Control" type="Control" parent="VBoxC"]
@@ -76,7 +75,7 @@ clip_text = true
 [node name="ScrollC" type="ScrollContainer" parent="VBoxC"]
 margin_top = 84.0
 margin_right = 434.0
-margin_bottom = 423.0
+margin_bottom = 429.0
 rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 
@@ -86,37 +85,38 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 
 [node name="AlertLabel" type="Label" parent="VBoxC"]
-margin_top = 427.0
+margin_top = 433.0
 margin_right = 434.0
-margin_bottom = 441.0
+margin_bottom = 447.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 5
 custom_colors/font_color = Color( 1, 0.262745, 0, 1 )
 autowrap = true
 
 [node name="NoticeLabel" type="Label" parent="VBoxC"]
-margin_top = 445.0
+margin_top = 451.0
 margin_right = 434.0
-margin_bottom = 459.0
+margin_bottom = 465.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 5
 custom_colors/font_color = Color( 1, 1, 0, 1 )
 autowrap = true
 
 [node name="Control 5" type="Control" parent="VBoxC"]
-margin_top = 463.0
+margin_top = 469.0
 margin_right = 434.0
-margin_bottom = 488.0
+margin_bottom = 494.0
 rect_min_size = Vector2( 25, 25 )
 
 [node name="AddMarkerBtn" type="Button" parent="VBoxC"]
 margin_left = 164.0
-margin_top = 492.0
+margin_top = 498.0
 margin_right = 269.0
-margin_bottom = 512.0
+margin_bottom = 518.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "te_add_marker"
+
 [connection signal="about_to_show" from="." to="." method="_on_dialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_dialog_confirmed"]
 [connection signal="pressed" from="VBoxC/AddMarkerBtn" to="." method="_on_add_btn_pressed"]

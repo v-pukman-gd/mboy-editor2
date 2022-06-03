@@ -3,7 +3,6 @@
 [ext_resource path="res://editor/track_info.gd" type="Script" id=1]
 
 [node name="TrackInfo" type="ConfirmationDialog"]
-editor/display_folded = true
 margin_right = 450.0
 margin_bottom = 340.0
 rect_min_size = Vector2( 450, 340 )
@@ -15,7 +14,7 @@ anchor_right = 0.5
 margin_left = -217.0
 margin_top = 8.0
 margin_right = 217.0
-margin_bottom = 326.0
+margin_bottom = 310.0
 mouse_filter = 0
 
 [node name="Control" type="Control" parent="VBoxC"]
@@ -92,10 +91,19 @@ margin_right = 434.0
 margin_bottom = 274.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="DestroyBtn" type="CheckButton" parent="VBoxC"]
+[node name="DestroyBtn" type="Button" parent="VBoxC"]
+margin_left = 177.0
 margin_top = 278.0
-margin_right = 434.0
-margin_bottom = 318.0
+margin_right = 256.0
+margin_bottom = 298.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "te_destroy"
-align = 2
+
+[node name="Control2" type="Control" parent="VBoxC"]
+margin_top = 302.0
+margin_right = 434.0
+margin_bottom = 302.0
+
 [connection signal="confirmed" from="." to="." method="_on_dialog_confirmed"]
+[connection signal="pressed" from="VBoxC/DestroyBtn" to="." method="_on_DestroyBtn_pressed"]

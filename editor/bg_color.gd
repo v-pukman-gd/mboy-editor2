@@ -10,6 +10,7 @@ export var radius = 0
 export var focused = false
 var focus_color = Color("1bfe99")
 export var border_color = Color(1,1,1)
+export var border_value = 0.7
 
 func _ready():
 	update()
@@ -29,13 +30,14 @@ func get_bg_color():
 	return color
 
 func get_border_color():
-	if focused:
-		return focus_color
-	else:
-		return Color(get_bg_color()).linear_interpolate(border_color, 0.7)
+	#if focused:
+	#	return focus_color
+	#else:
+	return Color(get_bg_color()).linear_interpolate(border_color, border_value)
 
 func get_border_width():
 	if focused:
 		return border_width
 	else:
+		# keep same for now
 		return border_width
