@@ -1,11 +1,10 @@
 extends Node
 
-# fix load map error
-#const VERSION = "1.4.1"
-
-const VERSION = "2.1"
+const VERSION = "2.1.1"
 const AUTHOR = "Victor Pukman"
 const SITE_URL = "http://www.mboy-editor.com"
+
+const FORMAT_VERSION = "2.0"
 
 const WAVEFORM_H = 128
 const WAVEFORM_W = 1280 #4096

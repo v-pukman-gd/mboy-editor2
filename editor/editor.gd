@@ -536,7 +536,8 @@ func export_data(file_path):
 	var markers_data = EDITOR_NOTE_MARKER_C.get_markers_data()
 	
 	var data = {
-		editor = "music_boy_editor_v"+str(EDITOR_C.VERSION),
+		editor = "mboy-editor-"+str(EDITOR_C.VERSION),
+		format_version = EDITOR_C.FORMAT_VERSION,
 		audio = map_info.audio_info,
 		author = map_info.author,
 		date = get_curr_date(),
