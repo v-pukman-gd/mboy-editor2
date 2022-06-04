@@ -56,8 +56,8 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.ogg" )
-current_dir = "/Users/victor/Projects/godot/mboy_editor2-version-2.1-limit"
-current_path = "/Users/victor/Projects/godot/mboy_editor2-version-2.1-limit/"
+current_dir = "/Users/victor/Projects/godot/mboy_editor2"
+current_path = "/Users/victor/Projects/godot/mboy_editor2/"
 
 [node name="TrackInfo" parent="UI/CenterC" instance=ExtResource( 3 )]
 margin_left = 355.0
@@ -76,8 +76,8 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.mboy" )
-current_dir = "/Users/victor/Projects/godot/mboy_editor2-version-2.1-limit"
-current_path = "/Users/victor/Projects/godot/mboy_editor2-version-2.1-limit/"
+current_dir = "/Users/victor/Projects/godot/mboy_editor2"
+current_path = "/Users/victor/Projects/godot/mboy_editor2/"
 
 [node name="ExportMapDialog" type="FileDialog" parent="UI/CenterC"]
 margin_left = 280.0
@@ -87,8 +87,8 @@ rect_min_size = Vector2( 600, 400 )
 popup_exclusive = true
 access = 2
 filters = PoolStringArray( "*.mboy" )
-current_dir = "/Users/victor/Projects/godot/mboy_editor2-version-2.1-limit"
-current_path = "/Users/victor/Projects/godot/mboy_editor2-version-2.1-limit/"
+current_dir = "/Users/victor/Projects/godot/mboy_editor2"
+current_path = "/Users/victor/Projects/godot/mboy_editor2/"
 
 [node name="NoticeDialog" type="AcceptDialog" parent="UI/CenterC"]
 anchor_left = 0.5
