@@ -1,4 +1,4 @@
-0. move repo to github
+X 0. move repo to github
 X 1. add Numpad + / -
 X 2.1 bump version
 - 2.2 add version to editor bottom
