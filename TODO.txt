@@ -1,7 +1,7 @@
 0. move repo to github
-1. add Numpad + / -
-2.1 bump version
-2.2 add version to editor bottom
-3. add version to map ???
-4. remove version from build name (macos)
-5. compile x64 for windows and linux
+X 1. add Numpad + / -
+X 2.1 bump version
+- 2.2 add version to editor bottom
+X 3. add version to map ???
+X 4. remove version from build name (macos)
+X 5. compile x64 for windows and linux
