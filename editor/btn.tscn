@@ -58,4 +58,5 @@ mouse_filter = 1
 size_flags_vertical = 0
 text = "btn"
 align = 1
+
 [connection signal="pressed" from="VBoxC/Button" to="." method="_on_button_pressed"]

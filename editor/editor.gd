@@ -78,6 +78,7 @@ onready var notice_dialog = dialog_c.get_node("NoticeDialog")
 onready var confirm_dialog = dialog_c.get_node("ConfirmDialog")
 onready var note_markers_info_dialog = dialog_c.get_node("NoteMarkersInfoDialog")
 onready var editor_info_dialog = dialog_c.get_node("EditorInfoDialog")
+onready var login_dialog = dialog_c.get_node("LoginDialog")
 
 var opened_dialog 
 
@@ -985,3 +986,7 @@ func _on_track_destroy_pressed():
 func _on_track_destroy():
 	if track_info.track:
 		destroy_track(track_info.track)
+
+
+func _on_login_btn_pressed():
+	popup_dialog(login_dialog)
