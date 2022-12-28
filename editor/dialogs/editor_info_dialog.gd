@@ -9,7 +9,7 @@ func _on_About_meta_clicked(meta):
 		OS.shell_open(EDITOR_C.SITE_URL)
 
 func pricing_plan_info():
-	if EDITOR_C.PRICING_PLAN == "free":
-		return "FREE VERSION (limited to %s tracks)" % EDITOR_C.MAX_TRACKS
-	else:
-		return ""
+	#if EDITOR_C.PRICING_PLAN == "free":
+	return "FREE VERSION (limited to %s tracks)" % EDITOR_C.MAX_TRACKS
+	#else:
+	#	return ""

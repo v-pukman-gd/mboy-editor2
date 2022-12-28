@@ -113,6 +113,7 @@ var confirm_callback = ""
 var editor_dir
 
 var current_user = null
+var pro_version_enabled = false
 
 func _ready():
 	# handle hidpi
@@ -268,10 +269,10 @@ func _process(delta):
 			add_track_btn.btn.set_tooltip("")
 
 func get_track_btn_disabled_msg():
-	if EDITOR_C.PRICING_PLAN == "free":
-		return "Free version is limited to %s tracks" % EDITOR_C.MAX_TRACKS
-	else:
+	if pro_version_enabled:
 		return "Editor supports %s tracks only" % EDITOR_C.MAX_TRACKS
+	else:
+		return "Free version is limited to %s tracks" % EDITOR_C.MAX_TRACKS
 		
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
@@ -1002,6 +1003,8 @@ func _on_login_btn_pressed():
 
 func setup_user():
 	current_user = null
+	enable_pro_version(false)
+	
 	var user = EditorSession.get_value("user")
 	if user:
 		if user.has("id") and user.has("subscription_ends_at"):
@@ -1009,6 +1012,20 @@ func setup_user():
 				"id": user.id, 
 				"subscription_ends_at": user.subscription_ends_at
 			}
+			
+			if user.subscription_ends_at:
+				# get_datetime_dict_from_datetime_string
+				var ends_at = parse_date(user.subscription_ends_at)
+				var now = OS.get_datetime(true)
+				print("user.subscription_ends_at", ends_at)
+				print("now", now)
+				
+				var diff = OS.get_unix_time_from_datetime(ends_at) - OS.get_unix_time_from_datetime(now)
+				print("diff", diff)
+				print("diff minutes", diff/60.0)
+				if diff > 0:
+					enable_pro_version(true)
+					
 			
 	if current_user:
 		login_btn.label.text = tr("te_editor_logout")
@@ -1026,6 +1043,29 @@ func _on_logged_in(response):
 func logout_user():
 	EditorSession.save_value("user", null)
 	setup_user()
+	
+#TODO: update Godot, change to Time.get_datetime_dict_from_datetime_string
+func parse_date(iso_date):
+	var date = iso_date.split("T")[0].split("-")
+	var time = iso_date.split("T")[1].trim_suffix("Z").split(":")
+
+	return {
+		year = date[0],
+		month = date[1],
+		day = date[2],
+		hour = time[0],
+		minute = time[1],
+		second = time[2],
+	}
+	
+func enable_pro_version(val):
+	if val:
+		pro_version_enabled = true
+		EDITOR_C.MAX_TRACKS = EDITOR_C.MAX_TRACKS_PRO
+	else:
+		pro_version_enabled = false
+		EDITOR_C.MAX_TRACKS = EDITOR_C.MAX_TRACKS_FREE
+
 
 ### user end
 
