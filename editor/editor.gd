@@ -101,8 +101,8 @@ onready var set_start_input = btn_c.get_node("SetStartInput")
 onready var btn_c2 = get_node("UI/MarginC/VBoxC/CenterC2/HBoxC2")
 onready var marker_manger_btn = btn_c2.get_node("MarkerManagerBtn")
 onready var marker_btn = btn_c2.get_node("MarkerBtn")
-
 onready var reset_btn = btn_c2.get_node("ResetBtn")
+onready var login_btn = btn_c2.get_node("LoginBtn")
 
 #tracks
 onready var tracks_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/TracksC")
@@ -111,6 +111,8 @@ var track_scn = preload("res://editor/track.tscn")
 var editor_scn_path = "res://editor/editor.tscn"
 var confirm_callback = ""
 var editor_dir
+
+var current_user = null
 
 func _ready():
 	# handle hidpi
@@ -151,6 +153,8 @@ func _ready():
 		d.connect("popup_hide", self, "enable_inputs")
 	
 	setup_markers()
+	
+	setup_user()
 	
 	#TODO: remove this
 	#Uncomment to Quick start file preload
@@ -988,5 +992,40 @@ func _on_track_destroy():
 		destroy_track(track_info.track)
 
 
+### user
+
 func _on_login_btn_pressed():
-	popup_dialog(login_dialog)
+	if current_user:
+		popup_confirm(tr("te_logout_confirm"), "logout_user")
+	else:
+		popup_dialog(login_dialog)
+
+func setup_user():
+	current_user = null
+	var user = EditorSession.get_value("user")
+	if user:
+		if user.has("id") and user.has("subscription_ends_at"):
+			current_user = {
+				"id": user.id, 
+				"subscription_ends_at": user.subscription_ends_at
+			}
+			
+	if current_user:
+		login_btn.label.text = tr("te_editor_logout")
+		login_btn.icon_label.icon = "user"
+	else:
+		login_btn.label.text = tr("te_editor_login")
+		login_btn.icon_label.icon = "user-o"
+
+func _on_logged_in(response):
+	if response:
+		print("_on_logged_in", response)
+		EditorSession.save_value("user", response)
+		setup_user()
+
+func logout_user():
+	EditorSession.save_value("user", null)
+	setup_user()
+
+### user end
+

@@ -14,7 +14,7 @@ script = ExtResource( 1 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 442.0
-margin_bottom = 189.0
+margin_bottom = 194.0
 
 [node name="Control" type="Control" parent="VBoxC"]
 margin_right = 434.0

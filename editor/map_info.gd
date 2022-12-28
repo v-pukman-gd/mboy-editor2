@@ -34,8 +34,6 @@ const AUDIO_FIELD_NAMES = [
 var audio_info = {}
 var audio_file_name = ""
 var author
-var session_file_path = "user://editor/session"
-var session_data = {}
 
 onready var audio_c = get_node("VBoxC/AudioInfoC")
 onready var map_c = get_node("VBoxC/MapInfoC")
@@ -72,11 +70,7 @@ func init_audio_inputs(audio_comments):
 		title_input.set_text(audio_file_name)
 
 func init_map_inputs():
-	session_data = Utils.read_json_file(session_file_path)
-	if not session_data: 
-		session_data = {}
-		return
-	author = str(session_data.author)
+	author = str(EditorSession.get_value("author"))
 	author_input.set_text(author)	
 
 func set_audio_inputs_from(data):
@@ -126,9 +120,9 @@ func apply_audio_inputs():
 	audio_info["genre"] = EDITOR_C.GENRES[genre_select.get_selected()]
 
 func apply_map_inputs():
-	author = author_input.get_text()
-	session_data["author"] = author
-	Utils.write_json_file(session_file_path, session_data)
+	author = author_input.get_text()	
+	if author != EditorSession.get_value("author"):
+		EditorSession.save_value("author", author)
 
 func _on_map_info_confirmed():
 	if author_input.get_text() == "" or title_input.get_text() == "" or download_link.get_text() == "":

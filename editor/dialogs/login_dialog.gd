@@ -1,5 +1,7 @@
 extends ConfirmationDialog
 
+signal logged_in
+
 onready var email_input = $VBoxC/Email
 onready var password_input = $VBoxC/Password
 onready var error_label = $VBoxC/ErrorLabel
@@ -13,14 +15,15 @@ func _on_confirmed():
 	clear_error()
 	
 	if email_input.text == "" or password_input.text == "":
-		var pos = get_position()
-		popup()
-		set_position(pos)
+		keep_opened()
 		show_error(tr("te_editor_required_fields"))
 		return
 	
-	var body = to_json({"user": {"email": email_input.text, "password": password_input.text }})
+	var body = JSON.print({"user": {"email": email_input.text, "password": password_input.text }})
 	http_request.request("http://localhost:5000/api/v1/login", ["User-Agent: MBOYEditor", "Content-Type: application/json"], false, HTTPClient.METHOD_POST, body)
+	keep_opened()
+	
+func keep_opened():
 	var pos = get_position()
 	popup()
 	set_position(pos)
@@ -34,11 +37,27 @@ func clear_error():
 func show_error(text):
 	error_label.text = text
 
-
+# OK = 0
 func _on_request_completed(result, response_code, headers, body):
 	print(result, " ", response_code, headers)
 	
-	var response = parse_json(body.get_string_from_utf8())
+	if result != HTTPRequest.RESULT_SUCCESS:
+		show_error(tr("te_request_failed"))
+		return
+	
+	var json = JSON.parse(body.get_string_from_utf8())
+	if json.error != OK:
+		show_error(tr("te_parse_result_failed"))
+		return
+		
+	var response = json.result
 	print(response)
-	if response["error"]:
+	
+	if response.has("error"):
 		show_error(response.error)
+	elif response.has("id"):
+		print("request success:", response)		
+		emit_signal("logged_in", response)
+		hide()
+	else:
+		show_error(tr("te_response_no_data"))
