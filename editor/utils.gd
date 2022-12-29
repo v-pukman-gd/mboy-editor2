@@ -29,3 +29,26 @@ func write_json_file(file_path, data):
 		
 	file.store_line(JSON.print(data))
 	file.close()
+
+#TODO: in new Godot can be replaced by Time.get_datetime_dict_from_datetime_string
+func parse_date(iso_date):
+	var date = iso_date.split("T")[0].split("-")
+	var time = iso_date.split("T")[1].trim_suffix("Z").split(":")
+
+	return {
+		year = date[0],
+		month = date[1],
+		day = date[2],
+		hour = time[0],
+		minute = time[1],
+		second = time[2],
+	}
+	
+func time_left(iso_date):
+	var ends_at = parse_date(iso_date)
+	var now = OS.get_datetime(true)
+
+	var diff = OS.get_unix_time_from_datetime(ends_at) - OS.get_unix_time_from_datetime(now)
+	#print("diff", diff)
+	#print("diff minutes", diff/60.0)
+	return diff

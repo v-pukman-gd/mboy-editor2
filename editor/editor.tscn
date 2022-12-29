@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://editor/editor_theme2.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://editor/icons/grabber_transparent.png" type="Texture" id=14]
 [ext_resource path="res://editor/cursor.tscn" type="PackedScene" id=15]
 [ext_resource path="res://editor/dialogs/login_dialog.tscn" type="PackedScene" id=16]
+[ext_resource path="res://editor/dialogs/profile_dialog.tscn" type="PackedScene" id=17]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -65,7 +66,6 @@ margin_left = 355.0
 margin_right = 805.0
 
 [node name="MapInfo" parent="UI/CenterC" instance=ExtResource( 4 )]
-visible = true
 margin_left = 355.0
 margin_right = 805.0
 
@@ -151,6 +151,8 @@ margin_bottom = 280.0
 rect_min_size = Vector2( 400, 280 )
 
 [node name="LoginDialog" parent="UI/CenterC" instance=ExtResource( 16 )]
+
+[node name="ProfileDialog" parent="UI/CenterC" instance=ExtResource( 17 )]
 
 [node name="MarginC" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
@@ -520,6 +522,7 @@ size_flags_horizontal = 3
 [connection signal="confirmed" from="UI/CenterC/ConfirmDialog" to="." method="_on_action_confirmed"]
 [connection signal="markers_updated" from="UI/CenterC/NoteMarkersInfoDialog" to="." method="_on_markers_updated"]
 [connection signal="logged_in" from="UI/CenterC/LoginDialog" to="." method="_on_logged_in"]
+[connection signal="logout_user" from="UI/CenterC/ProfileDialog" to="." method="_on_logout_user"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/LoadAudioBtn" to="." method="_on_load_audio_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/ImportBtn" to="." method="_on_import_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC/HBoxC/AddTrackBtn" to="." method="_on_add_track_btn_pressed"]

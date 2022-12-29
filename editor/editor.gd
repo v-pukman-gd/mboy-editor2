@@ -79,6 +79,7 @@ onready var confirm_dialog = dialog_c.get_node("ConfirmDialog")
 onready var note_markers_info_dialog = dialog_c.get_node("NoteMarkersInfoDialog")
 onready var editor_info_dialog = dialog_c.get_node("EditorInfoDialog")
 onready var login_dialog = dialog_c.get_node("LoginDialog")
+onready var profile_dialog = dialog_c.get_node("ProfileDialog")
 
 var opened_dialog 
 
@@ -997,7 +998,7 @@ func _on_track_destroy():
 
 func _on_login_btn_pressed():
 	if current_user:
-		popup_confirm(tr("te_logout_confirm"), "logout_user")
+		popup_dialog(profile_dialog)
 	else:
 		popup_dialog(login_dialog)
 
@@ -1007,56 +1008,39 @@ func setup_user():
 	
 	var user = EditorSession.get_value("user")
 	if user:
-		if user.has("id") and user.has("subscription_ends_at"):
+		if user.has("id"):
 			current_user = {
 				"id": user.id, 
-				"subscription_ends_at": user.subscription_ends_at
+				"subscription_ends_at": user.subscription_ends_at,
+				"email": user.email,
+				"created_at": user.created_at
 			}
 			
 			if user.subscription_ends_at:
-				# get_datetime_dict_from_datetime_string
-				var ends_at = parse_date(user.subscription_ends_at)
-				var now = OS.get_datetime(true)
-				print("user.subscription_ends_at", ends_at)
-				print("now", now)
-				
-				var diff = OS.get_unix_time_from_datetime(ends_at) - OS.get_unix_time_from_datetime(now)
-				print("diff", diff)
-				print("diff minutes", diff/60.0)
-				if diff > 0:
+				if Utils.time_left(user.subscription_ends_at) > 0:
 					enable_pro_version(true)
-					
 			
 	if current_user:
-		login_btn.label.text = tr("te_editor_logout")
+		login_btn.label.text = tr("te_my_profile")
 		login_btn.icon_label.icon = "user"
 	else:
 		login_btn.label.text = tr("te_editor_login")
 		login_btn.icon_label.icon = "user-o"
+		
+	profile_dialog.setup(current_user)
 
-func _on_logged_in(response):
+func _on_logged_in(response, auth_header):
 	if response:
-		print("_on_logged_in", response)
+		print("_on_logged_in", response, auth_header)
 		EditorSession.save_value("user", response)
 		setup_user()
 
-func logout_user():
+func _on_logout_user():
+	popup_confirm(tr("te_logout_confirm"), "on_logout_user_confirmed")
+
+func on_logout_user_confirmed():
 	EditorSession.save_value("user", null)
 	setup_user()
-	
-#TODO: update Godot, change to Time.get_datetime_dict_from_datetime_string
-func parse_date(iso_date):
-	var date = iso_date.split("T")[0].split("-")
-	var time = iso_date.split("T")[1].trim_suffix("Z").split(":")
-
-	return {
-		year = date[0],
-		month = date[1],
-		day = date[2],
-		hour = time[0],
-		minute = time[1],
-		second = time[2],
-	}
 	
 func enable_pro_version(val):
 	if val:

@@ -19,8 +19,9 @@ func _on_confirmed():
 		show_error(tr("te_editor_required_fields"))
 		return
 	
+	#TODO: add editor version to header
 	var body = JSON.print({"user": {"email": email_input.text, "password": password_input.text }})
-	http_request.request("http://localhost:5000/api/v1/login", ["User-Agent: MBOYEditor", "Content-Type: application/json"], false, HTTPClient.METHOD_POST, body)
+	http_request.request(EDITOR_C.API.login, ["User-Agent: MBOYEditor", "Content-Type: application/json"], false, HTTPClient.METHOD_POST, body)
 	keep_opened()
 	
 func keep_opened():
@@ -52,12 +53,20 @@ func _on_request_completed(result, response_code, headers, body):
 		
 	var response = json.result
 	print(response)
-	
+			
 	if response.has("error"):
 		show_error(response.error)
 	elif response.has("id"):
-		print("request success:", response)		
-		emit_signal("logged_in", response)
+		print("request success:", response)
+		
+		var auth_header = null
+		for h in headers:
+			if "Authorization:" in str(h):
+				auth_header = h
+				break
+		
+		emit_signal("logged_in", response, auth_header)
+		password_input.text = ""
 		hide()
 	else:
 		show_error(tr("te_response_no_data"))
