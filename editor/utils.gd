@@ -1,13 +1,24 @@
 extends Node
 
-func read_json_file(file_path):
+# to generate key for open_encrypted case:
+# "string_key".sha256_buffer()
+# https://github.com/godotengine/godot/blob/58ca3031419cacb35c530cebe68e87a4c27dde06/core/io/file_access_encrypted.cpp#open_and_parse_password
+func read_json_file(file_path, password=null, key=null):
 	var file = File.new()
 	if not file.file_exists(file_path):
 		print("File not found!", file_path)
 		return
-
-	if file.open(file_path, File.READ) != OK:
-		print("File openning error!", file_path)
+	
+	var result
+	if password != null:
+		result = file.open_encrypted_with_pass(file_path, File.READ, password)
+	elif key != null:
+		result = file.open_encrypted(file_path, File.READ, key)
+	else:
+		result = file.open(file_path, File.READ)
+	
+	if result != OK:
+		print("File openning error!", file_path, " result: ", result)
 		return
 
 	if not file.get_as_text():
@@ -21,10 +32,19 @@ func read_json_file(file_path):
 
 	return json.result
 	
-func write_json_file(file_path, data):
+func write_json_file(file_path, data, password=null, key=null):
 	var file = File.new()
-	if file.open(file_path, File.WRITE) != OK:
-		print("File cant be opened to write", file_path)
+	
+	var result
+	if password != null:
+		result = file.open_encrypted_with_pass(file_path, File.WRITE, str(password))
+	elif key != null:
+		result = file.open_encrypted(file_path, File.WRITE, key)
+	else:
+		result = file.open(file_path, File.WRITE)
+	
+	if result != OK:
+		print("File cant be opened to write", file_path, " result: ", result)
 		return
 		
 	file.store_line(JSON.print(data))

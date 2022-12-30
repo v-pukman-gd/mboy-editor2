@@ -40,7 +40,7 @@ func show_error(text):
 
 # OK = 0
 func _on_request_completed(result, response_code, headers, body):
-	print(result, " ", response_code, headers)
+	#print(result, " ", response_code, headers)
 	
 	if result != HTTPRequest.RESULT_SUCCESS:
 		show_error(tr("te_request_failed"))
@@ -57,7 +57,7 @@ func _on_request_completed(result, response_code, headers, body):
 	if response.has("error"):
 		show_error(response.error)
 	elif response.has("id"):
-		print("request success:", response)
+		print("request success:")
 		
 		var auth_header = null
 		for h in headers:

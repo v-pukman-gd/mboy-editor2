@@ -1017,7 +1017,9 @@ func setup_user():
 			}
 			
 			if user.subscription_ends_at:
-				if Utils.time_left(user.subscription_ends_at) > 0:
+				var diff = Utils.time_left(user.subscription_ends_at)
+				print("sub diff:", diff)
+				if diff > 0:
 					enable_pro_version(true)
 			
 	if current_user:
