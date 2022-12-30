@@ -21,7 +21,7 @@ func _on_confirmed():
 	
 	#TODO: add editor version to header
 	var body = JSON.print({"user": {"email": email_input.text, "password": password_input.text }})
-	http_request.request(EDITOR_C.API.login, ["User-Agent: MBOYEditor", "Content-Type: application/json"], false, HTTPClient.METHOD_POST, body)
+	http_request.request(EDITOR_C.API.login, ["User-Agent: MBOYEditor", "Content-Type: application/json"], true, HTTPClient.METHOD_POST, body)
 	keep_opened()
 	
 func keep_opened():

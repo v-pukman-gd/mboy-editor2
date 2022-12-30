@@ -2,8 +2,8 @@ extends Node
 
 const VERSION = "2.1.1"
 const AUTHOR = "Victor Pukman"
-const SITE_URL = "http://localhost:5000"  #"http://www.mboy-editor.com"
-
+#const SITE_URL = "https://mboy-games.com"
+const SITE_URL = "http://localhost:5000"
 const PRO_URL = SITE_URL + "/?header=buy-pro"
 const API_URL = SITE_URL + "/api/v1"
 const API = {
