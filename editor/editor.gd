@@ -806,15 +806,6 @@ func unset_active_note():
 	if active_note != null: active_note.set_active(false)
 	active_note = null
 
-#func add_note_marker(marker):
-#	if active_note != null: active_note.add_markers([marker])
-
-#func _on_mark_accent_btn_pressed(): add_note_marker(EDITOR_NOTE_MARKER_C.ACCENT)
-#func _on_mark_epic_btn_pressed(): add_note_marker(EDITOR_NOTE_MARKER_C.EPIC)
-#func _on_mark_extended_btn_pressed(): add_note_marker(EDITOR_NOTE_MARKER_C.EXTENDED)
-#func _on_mark_mix_btn_pressed(): add_note_marker(EDITOR_NOTE_MARKER_C.MIX)
-#func _on_mark_autoplay_btn_pressed(): add_note_marker(EDITOR_NOTE_MARKER_C.AUTOPLAY)
-
 func _on_note_marker_btn_pressed(marker):
 	if active_note != null: active_note.add_markers([marker])
 
@@ -822,8 +813,6 @@ func _on_start_pos_input_changed(val):
 	map_start_pos = val
 	for t in tracks:
 		t.set_start_position(map_start_pos)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-
-
 
 func _on_stream_player_finished():
 	if is_playing: play()
