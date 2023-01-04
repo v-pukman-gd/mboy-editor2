@@ -3,19 +3,18 @@ extends Control
 #signal audio_load_success
 signal toogle_grid
 
-var wav_file_path
-var ogg_file_path
-var mp3_file_path
 var active_note
 var active_track
 var window_size = 950
 var is_playing = false
 var is_follow_playing = false
 var sample  #Sample.new()
-var stream = AudioStreamOGGVorbis.new()
+var stream #AudioStreamOGGVorbis.new()
 
-var audio_file_name = ""
-var audio_load_thread= Thread.new()
+var audio_file_name = "" # original file name
+var audio_file_path = ""
+var audio_file_format = ""
+var audio_load_thread = Thread.new()
 var audio_loaded = false
 
 var track_tempo = 130
@@ -636,39 +635,27 @@ func copy_audio(input_file_path):
 	#store original name
 	audio_file_name = file_name.substr(0, file_name.find_last('.'))
 
-	wav_file_path = editor_dir + "/" + "audio" + ".wav"
-	ogg_file_path = editor_dir + "/" + "audio" + ".ogg"
-	mp3_file_path = editor_dir + "/" + "audio" + ".mp3"
-	#var res
+	var wav_file_path = editor_dir + "/" + "audio" + ".wav"
+	var ogg_file_path = editor_dir + "/" + "audio" + ".ogg"
+	var mp3_file_path = editor_dir + "/" + "audio" + ".mp3"
 
-	# we need ogg and wav
-	# we support ogg, mp3, wav on input
 	if file_format == "ogg":
-		#ogg_file_path = input_file_path
 		dir.copy(input_file_path, ogg_file_path)
-		#res = geditor.ogg_to_wav(ogg_file_path, wav_file_path)
-		#if res == 0:
-		#	show_notice("te_ogg_to_wav_failed")
-		#	return false
-#	elif file_format == "mp3":
-#		dir.copy(input_file_path, mp3_file_path)
-#		res = geditor.mp3_to_wav(mp3_file_path, wav_file_path)
-#		if res < 0:
-#			show_notice("te_mp3_to_wav_failed")
-#			return false
-#		res = geditor.wav_to_ogg(wav_file_path, ogg_file_path)
-#		if res == 0:
-#			show_notice("te_wav_to_ogg_failed")
-#			return false
-#	elif file_format == "wav":
-#		dir.copy(input_file_path, wav_file_path)
-#		#wav_file_path = input_file_path
-#		res = geditor.wav_to_ogg(wav_file_path, ogg_file_path)
-#		if res == 0:
-#			show_notice("te_wav_to_ogg_failed")
-#			return false
+		audio_file_path = ogg_file_path
+		audio_file_format = file_format
+	elif file_format == "mp3":
+		dir.copy(input_file_path, mp3_file_path)
+		audio_file_path = mp3_file_path
+		audio_file_format = file_format
+	# NOTE: don't support wav for now, it may have noise and other issues
+	#elif file_format == "wav":
+	#	dir.copy(input_file_path, wav_file_path)
+	#	audio_file_path = wav_file_path
+	#	audio_file_format = file_format
 	else:
 		show_notice(str(file_format) + " " + tr("te_format_is_not_supported"))
+		audio_file_path = ""
+		audio_file_format = ""
 		return false
 
 	print("copy finished")
@@ -679,12 +666,12 @@ func check_audio():
 	#if not checker.file_exists(wav_file_path):
 	#	show_notice(wav_file_path + tr("te_is_not_found"))
 	#	return false
-	if not checker.file_exists(ogg_file_path):
-		show_notice(ogg_file_path + tr("te_is_not_found"))
+	if not checker.file_exists(str(audio_file_path)):
+		show_notice("audio file " + tr("te_is_not_found"))
 		return false
 	return true
 
-func is_audio_loaded(audio_data):
+func is_audio_data_loaded(audio_data):
 	if audio_data == null:
 		show_notice("te_audio_is_not_loaded")
 		audio_load_thread.wait_to_finish()
@@ -693,14 +680,25 @@ func is_audio_loaded(audio_data):
 	else:
 		return true
 
-func load_ogg(path):
-	var ogg_file = File.new()
-	ogg_file.open(path, File.READ)
-	var bytes = ogg_file.get_buffer(ogg_file.get_len())
-	var stream = AudioStreamOGGVorbis.new()
-	stream.data = bytes
-	ogg_file.close()
-	return stream
+func load_audio_data():
+	var file = File.new()
+	file.open(audio_file_path, File.READ)
+	var bytes = file.get_buffer(file.get_len())
+	var audio_stream = null
+	if audio_file_format == "ogg":
+		audio_stream = AudioStreamOGGVorbis.new()
+	elif audio_file_format == "mp3":
+		audio_stream = AudioStreamMP3.new()
+	# NOTE: don't support wav for now, it may have noise and other issues
+	#elif audio_file_format == "wav":
+	#	audio_stream = AudioStreamSample.new()
+	else:
+		file.close()
+		return null
+
+	audio_stream.data = bytes
+	file.close()
+	return audio_stream
 
 func load_audio(input_file_path):
 	print("loading started " , input_file_path)
@@ -721,9 +719,8 @@ func load_audio(input_file_path):
 
 	update_load_audio(tr("te_loading_2_3"))
 
-	stream = load_ogg(ogg_file_path)
-	print("FILE:", ogg_file_path, stream)
-	if not is_audio_loaded(stream): return
+	stream = load_audio_data()	
+	if not is_audio_data_loaded(stream): return
 	stream_player.set_stream(stream)
 	update_load_audio(tr("te_loading_3_3"))
 
@@ -793,7 +790,6 @@ func _on_ScrollC_resized():
 	# Update waveform viewport size and position
 	waveform_n.set_viewport_rect(Rect2(Vector2(window_scroll_last_val, 0),Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
 	
-
 
 # ACTIVE NOTE
 func set_active_note(note):

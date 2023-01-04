@@ -57,7 +57,7 @@ popup_exclusive = true
 window_title = "Open a File"
 mode = 0
 access = 2
-filters = PoolStringArray( "*.ogg" )
+filters = PoolStringArray( "*.ogg", "*.mp3" )
 current_dir = "/Users/boom/Projects/MBOY/mboy-editor2"
 current_path = "/Users/boom/Projects/MBOY/mboy-editor2/"
 
