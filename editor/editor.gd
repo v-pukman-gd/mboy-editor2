@@ -3,7 +3,6 @@ extends Control
 #signal audio_load_success
 signal toogle_grid
 
-var geditor = Geditor.new()
 var wav_file_path
 var ogg_file_path
 var mp3_file_path
@@ -310,13 +309,7 @@ func set_params():
 	scale_to(0)
 
 func load_waveform(stream):
-	#print("load_waveform")
-	#var img = geditor.waveform_image(sample, EDITOR_C.WAVEFORM_W, EDITOR_C.WAVEFORM_H)
-	#var txt = ImageTexture.new()
-	#txt.create_from_image(img)
-	#waveform_node.set_texture(txt)
 	waveform_n.set_stream(stream)
-
 
 func update_cursor_length():
 	var offset = 0
@@ -737,7 +730,7 @@ func load_audio(input_file_path):
 	load_waveform(stream)
 	set_params()
 
-	map_info.setup(audio_file_name, geditor.ogg_comments(ogg_file_path))
+	map_info.setup(audio_file_name, "")
 
 	enable_load_audio(true)
 	audio_loaded = true
@@ -959,14 +952,6 @@ func _on_action_confirmed():
 	confirm_callback = ""
 	if callback != "":
 		call(callback)
-
-
-class Geditor:
-	func waveform_image():
-		pass
-	func ogg_comments(file):
-		return ""
-
 
 func _on_marker_manager_btn_pressed():
 	popup_dialog(note_markers_info_dialog)
