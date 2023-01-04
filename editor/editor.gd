@@ -1025,7 +1025,7 @@ func setup_user():
 		login_btn.label.text = tr("te_my_profile")
 		login_btn.icon_label.icon = "user"
 	else:
-		login_btn.label.text = tr("te_editor_login")
+		login_btn.label.text = tr("te_login")
 		login_btn.icon_label.icon = "user-o"
 		
 	profile_dialog.setup(current_user)

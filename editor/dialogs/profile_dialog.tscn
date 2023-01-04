@@ -86,7 +86,7 @@ margin_bottom = 14.0
 size_flags_horizontal = 7
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.121569, 1, 0.176471, 1 )
-text = "Yes"
+text = "te_yes"
 
 [node name="NoLabel" type="Label" parent="VBoxC/HBoxC"]
 margin_left = 219.0
@@ -95,7 +95,7 @@ margin_bottom = 14.0
 size_flags_horizontal = 7
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.847059, 0.847059, 0.847059, 1 )
-text = "No"
+text = "te_no"
 
 [node name="HBoxC2" type="HBoxContainer" parent="VBoxC"]
 margin_top = 88.0

@@ -151,8 +151,20 @@ margin_bottom = 280.0
 rect_min_size = Vector2( 400, 280 )
 
 [node name="LoginDialog" parent="UI/CenterC" instance=ExtResource( 16 )]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -225.0
+margin_right = 225.0
+margin_bottom = 277.0
 
 [node name="ProfileDialog" parent="UI/CenterC" instance=ExtResource( 17 )]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -225.0
+margin_right = 225.0
+margin_bottom = 263.0
 
 [node name="MarginC" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
@@ -424,7 +436,7 @@ anchor_right = 0.0
 margin_left = 1245.0
 margin_right = 1305.0
 margin_bottom = 61.0
-label_text = "te_editor_login"
+label_text = "te_login"
 icon_name = "user-o"
 
 [node name="HBoxCOffset2" type="HBoxContainer" parent="UI/MarginC/VBoxC"]

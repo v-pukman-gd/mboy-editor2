@@ -64,7 +64,7 @@ margin_bottom = 162.0
 rect_min_size = Vector2( 0, 5 )
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="VBoxC"]
+[node name="RegisterBtn" type="Button" parent="VBoxC"]
 margin_left = 177.0
 margin_top = 166.0
 margin_right = 257.0
@@ -77,4 +77,5 @@ text = "te_register"
 
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_popup_hide"]
+[connection signal="pressed" from="VBoxC/RegisterBtn" to="." method="_on_register_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_request_completed"]

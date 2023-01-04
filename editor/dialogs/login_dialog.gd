@@ -75,3 +75,7 @@ func _on_request_completed(result, response_code, headers, body):
 		hide()
 	else:
 		show_error(tr("te_response_no_data"))
+
+func _on_register_pressed():
+	OS.shell_open(EDITOR_C.REGISTER_URL)
+	hide()
