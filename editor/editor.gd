@@ -543,7 +543,7 @@ func export_data(file_path):
 	var markers_data = EDITOR_NOTE_MARKER_C.get_markers_data()
 	
 	var data = {
-		editor = "mboy-editor-"+str(EDITOR_C.VERSION),
+		editor = EDITOR_C.EDITOR_NAME,
 		format_version = EDITOR_C.FORMAT_VERSION,
 		audio = map_info.audio_info,
 		author = map_info.author,
@@ -1012,8 +1012,7 @@ func setup_user():
 			current_user = {
 				"id": user.id, 
 				"subscription_ends_at": user.subscription_ends_at,
-				"email": user.email,
-				"created_at": user.created_at
+				"email": user.email
 			}
 			
 			if user.subscription_ends_at:
@@ -1033,7 +1032,6 @@ func setup_user():
 
 func _on_logged_in(response, auth_header):
 	if response:
-		print("_on_logged_in", response, auth_header)
 		EditorSession.save_value("user", response)
 		setup_user()
 

@@ -1,6 +1,7 @@
 extends Node
 
 const VERSION = "2.1.1"
+const EDITOR_NAME = "mboy-editor_" + str(VERSION)
 const AUTHOR = "Victor Pukman"
 #const SITE_URL = "https://mboy-games.com"
 const SITE_URL = "http://localhost:5000"

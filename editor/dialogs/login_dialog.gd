@@ -21,7 +21,13 @@ func _on_confirmed():
 	
 	#TODO: add editor version to header
 	var body = JSON.print({"user": {"email": email_input.text, "password": password_input.text }})
-	http_request.request(EDITOR_C.API.login, ["User-Agent: MBOYEditor", "Content-Type: application/json"], true, HTTPClient.METHOD_POST, body)
+	http_request.request(
+		EDITOR_C.API.login, 
+		["User-Agent: " + str(EDITOR_C.EDITOR_NAME), "Content-Type: application/json"], 
+		true, 
+		HTTPClient.METHOD_POST, 
+		body
+	)
 	keep_opened()
 	
 func keep_opened():
@@ -39,9 +45,7 @@ func show_error(text):
 	error_label.text = text
 
 # OK = 0
-func _on_request_completed(result, response_code, headers, body):
-	#print(result, " ", response_code, headers)
-	
+func _on_request_completed(result, response_code, headers, body):	
 	if result != HTTPRequest.RESULT_SUCCESS:
 		show_error(tr("te_request_failed"))
 		return
@@ -60,10 +64,11 @@ func _on_request_completed(result, response_code, headers, body):
 		print("request success:")
 		
 		var auth_header = null
-		for h in headers:
-			if "Authorization:" in str(h):
-				auth_header = h
-				break
+		#TODO: 1. add back when token will be needed, 2. remove debug traces with token 
+		#for h in headers:
+		#	if "Authorization:" in str(h):
+		#		auth_header = h
+		#		break
 		
 		emit_signal("logged_in", response, auth_header)
 		password_input.text = ""
