@@ -36,7 +36,7 @@ te_track_name,Name,Название
 te_color,Color,Цвет
 te_hide,Hide,Скрыть
 te_destroy,Destroy,Удалить
-te_map_author,Author (*required),Автор (*обязательно)
+te_map_author,Created by (*required),Создатель карты (*обязательно)
 te_map,Map,Карта
 te_audio,Audio,Аудио
 te_artist,Artist (*required),Исполнитель  (*обязательно)

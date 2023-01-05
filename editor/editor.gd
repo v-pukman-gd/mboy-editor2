@@ -145,7 +145,7 @@ func _ready():
 	update_controls()
 	setup_editor_dir()
 
-	update_last_file_path(EDITOR_C.last_file_path)
+	load_last_file_path()
 
 	# disable shortcuts in popups
 	for d in dialog_c.get_children():
@@ -168,8 +168,14 @@ func _notification(what):
 func disable_inputs(): set_process_input(false)
 func enable_inputs(): set_process_input(true)
 
-func update_last_file_path(file_path):
+func save_last_file_path(file_path):
 	EDITOR_C.last_file_path = file_path
+	EditorSession.save_value("last_file_path", EDITOR_C.last_file_path)
+	
+func load_last_file_path():	
+	EDITOR_C.last_file_path = EditorSession.get_value("last_file_path")
+	if !EDITOR_C.last_file_path:
+		EDITOR_C.last_file_path = "//"
 
 func setup_editor_dir():
 	# hint editor folder
@@ -500,13 +506,11 @@ func _on_map_info_saved():
 		
 func set_export_filepath():
 	var file_path = EDITOR_C.last_file_path
-	var file_name_full = file_path.get_file()
-	var file_name = file_name_full.substr(0, file_name_full.find_last('.'))
-	
+
 	# current_file should be called first!
 	# otherwise filename is not set
-	export_map_dialog.current_file = file_name 
-	export_map_dialog.current_path = file_path
+	export_map_dialog.current_file = file_path.get_basename().get_file()
+	export_map_dialog.current_path = file_path.get_basename()
 
 func _on_export_map_file_selected(file_path):
 	export_data(file_path)
@@ -547,7 +551,7 @@ func export_data(file_path):
 	}
 	
 	Utils.write_json_file(file_path, data)
-	update_last_file_path(file_path)
+	save_last_file_path(file_path)
 	print("data exported")
 	
 	for tt in tracks_to_clear: destroy_track(tt)
@@ -602,7 +606,7 @@ func import_data(file_path):
 
 	update_cursor_length()
 
-	update_last_file_path(file_path)
+	save_last_file_path(file_path)
 	print("data imported")
 	
 	
@@ -663,9 +667,6 @@ func copy_audio(input_file_path):
 
 func check_audio():
 	var checker = File.new()
-	#if not checker.file_exists(wav_file_path):
-	#	show_notice(wav_file_path + tr("te_is_not_found"))
-	#	return false
 	if not checker.file_exists(str(audio_file_path)):
 		show_notice("audio file " + tr("te_is_not_found"))
 		return false
@@ -734,7 +735,7 @@ func load_audio(input_file_path):
 	update_controls()
 
 	audio_load_thread.wait_to_finish()
-	update_last_file_path(input_file_path)
+	save_last_file_path(input_file_path)
 
 	print("audio loaded")
 

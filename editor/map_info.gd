@@ -70,7 +70,7 @@ func init_audio_inputs(audio_comments):
 		title_input.set_text(audio_file_name)
 
 func init_map_inputs():
-	author = str(EditorSession.get_value("author"))
+	author = EditorSession.get_value("author")
 	author_input.set_text(author)	
 
 func set_audio_inputs_from(data):

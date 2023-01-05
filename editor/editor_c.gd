@@ -29,10 +29,6 @@ const MAX_TRACKS_FREE = 3
 const MAX_TRACKS_PRO = 1000
 var MAX_TRACKS = MAX_TRACKS_FREE
 
-
-#var last_load_audio_path = "//"
-#var last_import_map_path = "//"
-#var last_export_map_path = "//"
 var last_file_path = "//"
 
 const GENRES = [
