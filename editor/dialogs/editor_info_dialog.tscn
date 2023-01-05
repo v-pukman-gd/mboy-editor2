@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://editor/dialogs/editor_info_dialog.gd" type="Script" id=1]
+[ext_resource path="res://editor/fonts/Helvetica-Font/helvetica-rounded-bold-5871d05ead8de.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 15
+font_data = ExtResource( 2 )
 
 [node name="EditorInfoDialog" type="AcceptDialog"]
 anchor_right = 1.0
@@ -24,10 +29,12 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]
 [b]Space[/b] - Play audio
 [b]Shift + Space[/b] - Play and follow the track
+[b]Control + F[/b] - Find cursor
 [b]Mouse Left Click[/b] - Add note
 [b]Mouse Right Click[/b] - Remove note
 [b]Shift + Mouse Left Press[/b] - Move note
@@ -40,6 +47,7 @@ bbcode_text = "[center]
 text = "
 Space - Play audio
 Shift + Space - Play and follow the track
+Control + F - Find cursor
 Mouse Left Click - Add note
 Mouse Right Click - Remove note
 Shift + Mouse Left Press - Move note

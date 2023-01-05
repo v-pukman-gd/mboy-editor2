@@ -1,6 +1,7 @@
 extends Node
 
 const VERSION = "2.1.1"
+const FORMAT_VERSION = "2.0"
 const EDITOR_NAME = "mboy-editor_" + str(VERSION)
 const AUTHOR = "Victor Pukman"
 #const SITE_URL = "https://mboy-games.com"
@@ -11,9 +12,6 @@ const API_URL = SITE_URL + "/api/v1"
 const API = {
 	"login": API_URL + "/login"
 }
-
-
-const FORMAT_VERSION = "2.0"
 
 const WAVEFORM_H = 128
 const WAVEFORM_W = 1280 #4096
