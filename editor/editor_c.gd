@@ -27,7 +27,7 @@ const CURSOR_FOCUS_OFFSET = 20
 
 const MAX_TRACKS_FREE = 3
 const MAX_TRACKS_PRO = 1000
-var MAX_TRACKS = MAX_TRACKS_FREE
+var max_tracks = MAX_TRACKS_FREE
 
 var last_file_path = "//"
 

@@ -266,7 +266,7 @@ func _process(delta):
 	for t in tracks: t.move_label(window_scroll.get_h_scroll())
 	
 	if audio_loaded:
-		if tracks.size() >= EDITOR_C.MAX_TRACKS:
+		if tracks.size() >= EDITOR_C.max_tracks:
 			add_track_btn.set_disabled(true)
 			add_track_btn.btn.set_tooltip(get_track_btn_disabled_msg())
 		else:
@@ -275,9 +275,9 @@ func _process(delta):
 
 func get_track_btn_disabled_msg():
 	if pro_version_enabled:
-		return tr("te_max_tracks_number").format({"number": EDITOR_C.MAX_TRACKS})
+		return tr("te_max_tracks_number").format({"number": EDITOR_C.max_tracks})
 	else:
-		return tr("te_limited_tracks_number").format({"number": EDITOR_C.MAX_TRACKS})
+		return tr("te_limited_tracks_number").format({"number": EDITOR_C.max_tracks})
 		
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
@@ -498,8 +498,8 @@ func _on_map_info_saved():
 		popup_export_dialog()
 		
 func popup_export_dialog():
-	if tracks.size() > EDITOR_C.MAX_TRACKS:
-		show_notice(tr("te_limited_save_notice").format({"number": EDITOR_C.MAX_TRACKS}))
+	if tracks.size() > EDITOR_C.max_tracks:
+		show_notice(tr("te_limited_save_notice").format({"number": EDITOR_C.max_tracks}))
 	else:
 		set_export_filepath()
 		popup_dialog(export_map_dialog)
@@ -524,7 +524,7 @@ func get_curr_date():
 
 func export_data(file_path):	
 	# don't save if limit exceeded
-	if tracks.size() > EDITOR_C.MAX_TRACKS:
+	if tracks.size() > EDITOR_C.max_tracks:
 		return
 		
 	var tracks_data = []
@@ -1007,10 +1007,10 @@ func on_logout_user_confirmed():
 func enable_pro_version(val):
 	if val:
 		pro_version_enabled = true
-		EDITOR_C.MAX_TRACKS = EDITOR_C.MAX_TRACKS_PRO
+		EDITOR_C.max_tracks = EDITOR_C.MAX_TRACKS_PRO
 	else:
 		pro_version_enabled = false
-		EDITOR_C.MAX_TRACKS = EDITOR_C.MAX_TRACKS_FREE
+		EDITOR_C.max_tracks = EDITOR_C.MAX_TRACKS_FREE
 
 
 ### user end
