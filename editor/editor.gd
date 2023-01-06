@@ -275,9 +275,9 @@ func _process(delta):
 
 func get_track_btn_disabled_msg():
 	if pro_version_enabled:
-		return "Editor supports %s tracks only" % EDITOR_C.MAX_TRACKS
+		return tr("te_max_tracks_number").format({"number": EDITOR_C.MAX_TRACKS})
 	else:
-		return "Free version is limited to %s tracks" % EDITOR_C.MAX_TRACKS
+		return tr("te_limited_tracks_number").format({"number": EDITOR_C.MAX_TRACKS})
 		
 func set_params():
 	sample_duration_in_sec = stream.get_length() # sample.get_length()/float(sample.get_mix_rate())
@@ -485,22 +485,22 @@ func _input(e):
 # EXPORT
 
 func _on_export_btn_pressed():
-	if tracks.size() > EDITOR_C.MAX_TRACKS:
-		popup_confirm(tr("te_limited_save_confirm").format({"number": EDITOR_C.MAX_TRACKS}), "export_btn_callback")
-	else:
-		export_btn_callback()
-
-func export_btn_callback():	
 	if not map_info_was_saved:
 		popup_dialog(map_info)
 		pending_export = true
 	else:
-		set_export_filepath()
-		popup_dialog(export_map_dialog)
+		popup_export_dialog()
 
 func _on_map_info_saved():
 	map_info_was_saved = true
 	if pending_export:
+		pending_export = false
+		popup_export_dialog()
+		
+func popup_export_dialog():
+	if tracks.size() > EDITOR_C.MAX_TRACKS:
+		show_notice(tr("te_limited_save_notice").format({"number": EDITOR_C.MAX_TRACKS}))
+	else:
 		set_export_filepath()
 		popup_dialog(export_map_dialog)
 		
@@ -522,19 +522,14 @@ func get_curr_date():
 	var today = OS.get_date()
 	return ("%s-%02d-%02d" % [today.year,today.month, today.day])
 
-func export_data(file_path):
+func export_data(file_path):	
+	# don't save if limit exceeded
+	if tracks.size() > EDITOR_C.MAX_TRACKS:
+		return
+		
 	var tracks_data = []
-	var tracks_to_clear = []
-	
-	# export only allowed count of tracks
-	# remove all others
-	var count = 0
 	for t in tracks:
-		if count < EDITOR_C.MAX_TRACKS:
-			tracks_data.append(t.get_data())
-			count += 1
-		else:
-			tracks_to_clear.append(t)
+		tracks_data.append(t.get_data())
 			
 	var markers_data = EDITOR_NOTE_MARKER_C.get_markers_data()
 	
@@ -553,10 +548,6 @@ func export_data(file_path):
 	Utils.write_json_file(file_path, data)
 	save_last_file_path(file_path)
 	print("data exported")
-	
-	for tt in tracks_to_clear: destroy_track(tt)
-	tracks_to_clear = []
-
 
 # IMPORT
 

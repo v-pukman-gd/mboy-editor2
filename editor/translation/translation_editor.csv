@@ -74,7 +74,9 @@ te_marker_exists1,Notice: marker,Маркер
 te_marker_exists2,already exists,уже существует
 te_editor_info,About,О программе
 te_editor_required_fields,"* - required to fill", "* обязательно к заполнению"
-te_limited_save_confirm,"Only first {number} tracks will be saved. Continue?","Только первые {number} дорожки будут сохранены. Продолжить?"
+te_limited_save_notice,"Free version is limited to {number} tracks. Please remove extra tracks and try again","Бесплатная версия разрешает только {number} дорожки. Удалите лишние дорожки и повторите попытку."
+te_limited_tracks_number, "Free version is limited to {number} tracks", "Бесплатная версия разрешает только {number} дорожки"
+te_max_tracks_number, "Editor supports {number} tracks only", "Редактор поддерживает только {number} дорожек"
 te_track_destroy_confirm,"Destroy this track?","Удалить эту дорожку?"
 te_my_profile,"My Profile","Мой профиль"
 te_login,"Log in","Войти"
