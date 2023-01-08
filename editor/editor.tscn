@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://editor/editor_theme2.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://editor/cursor.tscn" type="PackedScene" id=15]
 [ext_resource path="res://editor/dialogs/login_dialog.tscn" type="PackedScene" id=16]
 [ext_resource path="res://editor/dialogs/profile_dialog.tscn" type="PackedScene" id=17]
+[ext_resource path="res://update_checker.tscn" type="PackedScene" id=18]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -58,8 +59,6 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.mp3", "*.ogg" )
-current_dir = "/Users/boom/Projects/MBOY/mboy-editor2"
-current_path = "/Users/boom/Projects/MBOY/mboy-editor2/"
 
 [node name="TrackInfo" parent="UI/CenterC" instance=ExtResource( 3 )]
 margin_left = 355.0
@@ -78,8 +77,6 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.mboy" )
-current_dir = "/Users/boom/Projects/MBOY/mboy-editor2"
-current_path = "/Users/boom/Projects/MBOY/mboy-editor2/"
 
 [node name="ExportMapDialog" type="FileDialog" parent="UI/CenterC"]
 margin_left = 280.0
@@ -89,8 +86,6 @@ rect_min_size = Vector2( 600, 400 )
 popup_exclusive = true
 access = 2
 filters = PoolStringArray( "*.mboy" )
-current_dir = "/Users/boom/Projects/MBOY/mboy-editor2"
-current_path = "/Users/boom/Projects/MBOY/mboy-editor2/"
 
 [node name="NoticeDialog" type="AcceptDialog" parent="UI/CenterC"]
 anchor_left = 0.5
@@ -524,6 +519,8 @@ size_flags_horizontal = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="UpdateChecker" parent="." instance=ExtResource( 18 )]
+
 [connection signal="minimum_size_changed" from="." to="." method="_on_editor_minimum_size_changed"]
 [connection signal="file_selected" from="UI/CenterC/LoadAudioDialog" to="." method="_on_load_audio_dialog_file_selected"]
 [connection signal="track_destroy_pressed" from="UI/CenterC/TrackInfo" to="." method="_on_track_destroy_pressed"]
@@ -555,3 +552,4 @@ size_flags_horizontal = 3
 [connection signal="resized" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_resized"]
 [connection signal="value_changed" from="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC/HSlider" to="." method="_on_hslider_value_changed"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_stream_player_finished"]
+[connection signal="update_available" from="UpdateChecker" to="." method="_on_update_available"]

@@ -23,7 +23,7 @@ func _on_confirmed():
 	var body = JSON.print({"user": {"email": email_input.text, "password": password_input.text }})
 	http_request.request(
 		EDITOR_C.API.login, 
-		["User-Agent: " + str(EDITOR_C.EDITOR_NAME), "Content-Type: application/json"], 
+		EDITOR_C.HTTP_HEADERS, 
 		true, 
 		HTTPClient.METHOD_POST, 
 		body
@@ -56,7 +56,6 @@ func _on_request_completed(result, response_code, headers, body):
 		return
 		
 	var response = json.result
-	print(response)
 			
 	if response.has("error"):
 		show_error(response.error)

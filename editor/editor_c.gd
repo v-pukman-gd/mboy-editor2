@@ -1,7 +1,7 @@
 extends Node
 
 const VERSION = "2.1.1"
-const FORMAT_VERSION = "2.0"
+const FORMAT_VERSION = "2.0" # mboy format version
 const EDITOR_NAME = "mboy-editor_" + str(VERSION)
 const AUTHOR = "Victor Pukman"
 #const SITE_URL = "https://mboy-games.com"
@@ -10,8 +10,13 @@ const PRO_URL = SITE_URL + "/?header=buy-pro"
 const REGISTER_URL = SITE_URL + '/signup'
 const API_URL = SITE_URL + "/api/v1"
 const API = {
-	"login": API_URL + "/login"
+	"login": API_URL + "/login",
+	"versions": API_URL + "/editor/versions"
 }
+const HTTP_HEADERS = [
+	"User-Agent: " + str(EDITOR_NAME), 
+	"Content-Type: application/json"
+]
 
 const WAVEFORM_H = 128
 const WAVEFORM_W = 1280 #4096

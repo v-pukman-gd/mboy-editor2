@@ -113,6 +113,7 @@ var editor_dir
 
 var current_user = null
 var pro_version_enabled = false
+var new_version_info = null
 
 func _ready():
 	# handle hidpi
@@ -1015,3 +1016,22 @@ func enable_pro_version(val):
 
 ### user end
 
+# UPDATES
+func _on_update_available(new_version_info):
+	self.new_version_info = new_version_info
+	
+	var confirmed_updates = EditorSession.get_value("confirmed_updates", {})
+	if confirmed_updates.has(str(new_version_info.number)): 
+		print("version is already confirmed!")
+		return	
+		
+	popup_confirm(tr("te_update_available"), "on_update_confirm")
+	
+func on_update_confirm():
+	if !new_version_info: return
+		
+	OS.shell_open(new_version_info.download_link)
+	
+	var confirmed_updates = EditorSession.get_value("confirmed_updates", {})
+	confirmed_updates[str(new_version_info.number)] = true
+	EditorSession.save_value("confirmed_updates", confirmed_updates)
