@@ -75,7 +75,7 @@ onready var track_info = dialog_c.get_node("TrackInfo")
 onready var notice_dialog = dialog_c.get_node("NoticeDialog")
 onready var confirm_dialog = dialog_c.get_node("ConfirmDialog")
 onready var note_markers_info_dialog = dialog_c.get_node("NoteMarkersInfoDialog")
-onready var editor_info_dialog = dialog_c.get_node("EditorInfoDialog")
+onready var editor_config_dialog = dialog_c.get_node("EditorConfigDialog")
 onready var login_dialog = dialog_c.get_node("LoginDialog")
 onready var profile_dialog = dialog_c.get_node("ProfileDialog")
 
@@ -937,8 +937,8 @@ func _on_marker_manager_btn_pressed():
 func _on_markers_updated():
 	marker_btn.setup()
 
-func _on_editor_info_btn_pressed():
-	popup_dialog(editor_info_dialog)
+func _on_editor_config_btn_pressed():
+	popup_dialog(editor_config_dialog)
 	
 func toggle_grid(scale):
 	if scale < 0.5 and show_grid:

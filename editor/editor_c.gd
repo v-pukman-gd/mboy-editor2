@@ -18,6 +18,8 @@ const HTTP_HEADERS = [
 	"Content-Type: application/json"
 ]
 
+const SUPPORT_EMAIL = "vic.rock.official@gmail.com"
+
 const WAVEFORM_H = 128
 const WAVEFORM_W = 1280 #4096
 

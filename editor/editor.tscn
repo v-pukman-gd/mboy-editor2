@@ -5,7 +5,7 @@
 [ext_resource path="res://editor/track_info.tscn" type="PackedScene" id=3]
 [ext_resource path="res://editor/map_info.tscn" type="PackedScene" id=4]
 [ext_resource path="res://editor/note_marker/note_markers_info_dialog.tscn" type="PackedScene" id=5]
-[ext_resource path="res://editor/dialogs/editor_info_dialog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://editor/dialogs/editor_config_dialog.tscn" type="PackedScene" id=6]
 [ext_resource path="res://editor/btn.tscn" type="PackedScene" id=7]
 [ext_resource path="res://editor/play_btn.gd" type="Script" id=8]
 [ext_resource path="res://editor/zoom_btn.tscn" type="PackedScene" id=9]
@@ -65,8 +65,8 @@ margin_left = 355.0
 margin_right = 805.0
 
 [node name="MapInfo" parent="UI/CenterC" instance=ExtResource( 4 )]
-margin_left = 355.0
-margin_right = 805.0
+visible = false
+margin_bottom = 719.0
 
 [node name="ImportMapDialog" type="FileDialog" parent="UI/CenterC"]
 margin_left = 280.0
@@ -136,15 +136,6 @@ margin_bottom = 401.0
 size_flags_horizontal = 5
 popup_exclusive = true
 
-[node name="EditorInfoDialog" parent="UI/CenterC" instance=ExtResource( 6 )]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_left = -200.0
-margin_right = 200.0
-margin_bottom = 280.0
-rect_min_size = Vector2( 400, 280 )
-
 [node name="LoginDialog" parent="UI/CenterC" instance=ExtResource( 16 )]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -160,6 +151,14 @@ anchor_bottom = 0.0
 margin_left = -225.0
 margin_right = 225.0
 margin_bottom = 263.0
+
+[node name="EditorConfigDialog" parent="UI/CenterC" instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -225.0
+margin_right = 225.0
+margin_bottom = 330.0
 
 [node name="MarginC" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
@@ -412,13 +411,13 @@ margin_right = 1163.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="EditorInfoBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
+[node name="EditorConfigBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 1167.0
 margin_right = 1227.0
 margin_bottom = 61.0
-label_text = "te_editor_info"
-icon_name = "info"
+label_text = "te_editor_config"
+icon_name = "gear"
 
 [node name="Control7" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
 margin_left = 1231.0
@@ -546,7 +545,7 @@ size_flags_horizontal = 3
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/MarkerManagerBtn" to="." method="_on_marker_manager_btn_pressed"]
 [connection signal="note_marker_btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/MarkerBtn" to="." method="_on_note_marker_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/ResetBtn" to="." method="_on_reset_btn_pressed"]
-[connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/EditorInfoBtn" to="." method="_on_editor_info_btn_pressed"]
+[connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/EditorConfigBtn" to="." method="_on_editor_config_btn_pressed"]
 [connection signal="btn_pressed" from="UI/MarginC/VBoxC/CenterC2/HBoxC2/LoginBtn" to="." method="_on_login_btn_pressed"]
 [connection signal="minimum_size_changed" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_minimum_size_changed"]
 [connection signal="resized" from="UI/MarginC/VBoxC/ScrollC" to="." method="_on_ScrollC_resized"]
