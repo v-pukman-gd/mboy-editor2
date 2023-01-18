@@ -21,16 +21,23 @@ func _ready():
 func clear():
 	for m in markers:
 		m.queue_free()
+	
+	for m in deleted_markers:
+		m.queue_free()
+		
+	for m in updated_markers:
+		m.queue_free()
+	
 	markers = []
 	ids = []
+	deleted_markers = []
+	updated_markers = []
 
 func load_default_markers():
 	load_marker({ 'id': ACCENT, 'code': '*', 'color': COLOR })
 	load_marker({ 'id': EXTENDED, 'code': '->', 'color': COLOR })
 
 func load_markers(markers_data):
-	clear()
-
 	if markers_data:
 		for m in markers_data:
 			load_marker(m)

@@ -116,6 +116,7 @@ var pro_version_enabled = false
 var new_version_info = null
 
 func _ready():
+	print("EDITOR _ready()")
 	# handle hidpi
 	var screen_number = OS.get_current_screen()
 	print(OS.get_screen_size(screen_number), " ", OS.get_screen_dpi(screen_number))
@@ -153,6 +154,7 @@ func _ready():
 		d.connect("about_to_show", self, "disable_inputs")
 		d.connect("popup_hide", self, "enable_inputs")
 	
+	EDITOR_NOTE_MARKER_C.clear()
 	setup_markers()
 	
 	setup_user()
