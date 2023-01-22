@@ -17,7 +17,7 @@
 [ext_resource path="res://editor/cursor.tscn" type="PackedScene" id=15]
 [ext_resource path="res://editor/dialogs/login_dialog.tscn" type="PackedScene" id=16]
 [ext_resource path="res://editor/dialogs/profile_dialog.tscn" type="PackedScene" id=17]
-[ext_resource path="res://update_checker.tscn" type="PackedScene" id=18]
+[ext_resource path="res://editor/update_checker.tscn" type="PackedScene" id=18]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -447,6 +447,7 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 1102, 256 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+scroll_vertical_enabled = false
 
 [node name="VBoxC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC"]
 margin_right = 1380.0
@@ -497,22 +498,29 @@ is_static = true
 [node name="VBoxC2" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
 margin_top = 260.0
 margin_right = 1380.0
-margin_bottom = 262.0
-rect_min_size = Vector2( 0, 2 )
+margin_bottom = 260.0
 size_flags_horizontal = 3
 
-[node name="TracksC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
-margin_top = 266.0
+[node name="ScrollC" type="ScrollContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
+margin_top = 264.0
 margin_right = 1380.0
-margin_bottom = 366.0
+margin_bottom = 565.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="TracksC" type="VBoxContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/ScrollC"]
+margin_right = 1380.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 mouse_filter = 0
 size_flags_horizontal = 3
 
 [node name="VBoxC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
-margin_top = 370.0
+margin_top = 569.0
 margin_right = 1380.0
-margin_bottom = 380.0
+margin_bottom = 579.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
 

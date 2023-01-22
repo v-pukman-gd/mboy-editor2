@@ -104,7 +104,7 @@ onready var reset_btn = btn_c2.get_node("ResetBtn")
 onready var login_btn = btn_c2.get_node("LoginBtn")
 
 #tracks
-onready var tracks_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/TracksC")
+onready var tracks_c = get_node("UI/MarginC/VBoxC/ScrollC/VBoxC/ScrollC/TracksC")
 var track_scn = preload("res://editor/track.tscn")
 
 var editor_scn_path = "res://editor/editor.tscn"
