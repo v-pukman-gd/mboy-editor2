@@ -1,6 +1,6 @@
 extends Node
 
-const VERSION = "2.1.1"
+const VERSION = "2.2"
 const FORMAT_VERSION = "2.0" # mboy format version
 const EDITOR_NAME = "mboy-editor_" + str(VERSION)
 const AUTHOR = "Victor Pukman"
