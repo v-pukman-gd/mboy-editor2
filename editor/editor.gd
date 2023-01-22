@@ -564,11 +564,16 @@ func _on_import_map_file_selected(file_path):
 	map_load_thread.start(self, "import_data", file_path)
 
 func import_data(file_path):
+	enable_import_btn(false)
+	set_import_btn_label(tr("te_loading_1_3"))
+	
 	var data = Utils.read_json_file(file_path)
 	if not data: 
 		map_load_thread.wait_to_finish()
-		return
-
+		enable_import_btn(true)
+		return	
+	
+	set_import_btn_label(tr("te_loading_2_3"))
 	#update editor
 	track_tempo = int(data.tempo)
 	tempo_btn.set_tempo(track_tempo)
@@ -583,13 +588,14 @@ func import_data(file_path):
 	clear_tracks()
 	set_params()
 	scale_to(0)
-		
+	
 	# markers
 	var markers_data = null
 	if data.has("markers"): 
 		markers_data = data.markers
 	setup_markers(markers_data)
 	
+	set_import_btn_label(tr("te_loading_3_3"))
 	# tracks
 	var y = EDITOR_BAR_C.CELL_HEIGHT + EDITOR_C.TRACK_DISTANCE
 	for track_data in data.tracks:
@@ -607,7 +613,8 @@ func import_data(file_path):
 	update_cursor_length()
 
 	save_last_file_path(file_path)
-	map_load_thread.wait_to_finish()
+	enable_import_btn(true)
+	map_load_thread.wait_to_finish()	
 	print("data imported")
 	
 	
@@ -620,7 +627,7 @@ func _on_load_audio_btn_pressed():
 func _on_load_audio_dialog_file_selected(file_path):
 	audio_load_thread.start(self, "load_audio", file_path)
 
-func enable_load_audio(enabled):
+func enable_load_audio_btn(enabled):
 	if enabled:
 		load_audio_btn.label.set_text("te_load_audio")
 		load_audio_btn.set_disabled(false)
@@ -628,9 +635,21 @@ func enable_load_audio(enabled):
 		load_audio_btn.label.set_text("te_loading")
 		load_audio_btn.set_disabled(true)
 
-func update_load_audio(text):
+func set_load_audio_btn_label(text):
 	if load_audio_btn.btn.is_disabled():
 		load_audio_btn.label.set_text(text)
+
+func enable_import_btn(enabled):		
+	if enabled:
+		import_btn.label.set_text("te_import_map")
+		import_btn.set_disabled(false)
+	else:
+		import_btn.label.set_text("te_loading")
+		import_btn.set_disabled(true)	
+		
+func set_import_btn_label(text):
+	if import_btn.btn.is_disabled():
+		import_btn.label.set_text(text)
 
 func copy_audio(input_file_path):
 	print("copy started")
@@ -677,7 +696,7 @@ func is_audio_data_loaded(audio_data):
 	if audio_data == null:
 		show_notice("te_audio_is_not_loaded")
 		audio_load_thread.wait_to_finish()
-		enable_load_audio(true)
+		enable_load_audio_btn(true)
 		return false
 	else:
 		return true
@@ -704,39 +723,39 @@ func load_audio_data():
 
 func load_audio(input_file_path):
 	print("loading started " , input_file_path)
-	enable_load_audio(false)
+	enable_load_audio_btn(false)
 
-	update_load_audio(tr("te_loading_1_3"))
+	set_load_audio_btn_label(tr("te_loading_1_3"))
 
 	var is_copied = copy_audio(input_file_path)
 	if not is_copied:
 		audio_load_thread.wait_to_finish()
-		enable_load_audio(true)
+		enable_load_audio_btn(true)
 		return
 
 	if not check_audio():
 		audio_load_thread.wait_to_finish()
-		enable_load_audio(true)
+		enable_load_audio_btn(true)
 		return
 
-	update_load_audio(tr("te_loading_2_3"))
+	set_load_audio_btn_label(tr("te_loading_2_3"))
 
 	stream = load_audio_data()	
 	if not is_audio_data_loaded(stream): return
 	stream_player.set_stream(stream)
-	update_load_audio(tr("te_loading_3_3"))
+	set_load_audio_btn_label(tr("te_loading_3_3"))
 
 	load_waveform(stream)
 	set_params()
 
 	map_info.setup(audio_file_name, "")
 
-	enable_load_audio(true)
+	enable_load_audio_btn(true)
 	audio_loaded = true
 	update_controls()
 
-	audio_load_thread.wait_to_finish()
 	save_last_file_path(input_file_path)
+	audio_load_thread.wait_to_finish()
 
 	print("audio loaded")
 
@@ -911,6 +930,7 @@ func _on_exit_btn_pressed():
 
 func exit_editor():
 	if audio_load_thread.is_active(): audio_load_thread.wait_to_finish()
+	if map_load_thread.is_active(): map_load_thread.wait_to_finish()
 	#if has_node("/root/SceneLoader"):
 	#	get_node("/root/SceneLoader").goto_scene("res://ui/start_ui.tscn")
 	#else:
@@ -922,6 +942,7 @@ func _on_reset_btn_pressed():
 
 func reset_editor():
 	if audio_load_thread.is_active(): audio_load_thread.wait_to_finish()
+	if map_load_thread.is_active(): map_load_thread.wait_to_finish()
 	#if has_node("/root/SceneLoader"):
 	#	get_node("/root/SceneLoader").goto_scene("res://editor/editor.tscn")
 	#else:

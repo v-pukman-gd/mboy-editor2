@@ -188,8 +188,8 @@ margin_right = 1380.0
 margin_bottom = 75.0
 
 [node name="HBoxC" type="HBoxContainer" parent="UI/MarginC/VBoxC/CenterC"]
-margin_left = 75.0
-margin_right = 1304.0
+margin_left = 53.0
+margin_right = 1327.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 0, 44 )
 mouse_filter = 0
@@ -212,82 +212,83 @@ rect_min_size = Vector2( 10, 0 )
 [node name="ImportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 123.0
-margin_right = 183.0
+margin_right = 228.0
 margin_bottom = 61.0
+rect_min_size = Vector2( 105, 44 )
 label_text = "te_import_map"
 icon_name = "file-text-o"
 
 [node name="Control7" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 187.0
-margin_right = 197.0
+margin_left = 232.0
+margin_right = 242.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="AddTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
-margin_left = 201.0
-margin_right = 261.0
+margin_left = 246.0
+margin_right = 306.0
 margin_bottom = 61.0
 label_text = "te_add_track"
 icon_name = "map"
 
 [node name="Control8" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 265.0
-margin_right = 275.0
+margin_left = 310.0
+margin_right = 320.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="EditTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
-margin_left = 279.0
-margin_right = 339.0
+margin_left = 324.0
+margin_right = 384.0
 margin_bottom = 61.0
 label_text = "te_edit_track"
 icon_name = "map-o,pencil"
 
 [node name="Control4" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 343.0
-margin_right = 393.0
+margin_left = 388.0
+margin_right = 438.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 50, 0 )
 
 [node name="PlayBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
-margin_left = 397.0
-margin_right = 457.0
+margin_left = 442.0
+margin_right = 502.0
 margin_bottom = 61.0
 script = ExtResource( 8 )
 label_text = "Btn"
 
 [node name="Control1" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 461.0
-margin_right = 601.0
+margin_left = 506.0
+margin_right = 646.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 140, 0 )
 
 [node name="Control2" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 605.0
-margin_right = 615.0
+margin_left = 650.0
+margin_right = 660.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Control3" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 619.0
-margin_right = 629.0
+margin_left = 664.0
+margin_right = 674.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="ZoomBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 9 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 633.0
+margin_left = 678.0
 margin_top = 0.0
-margin_right = 736.0
+margin_right = 781.0
 margin_bottom = 61.0
 
 [node name="Control6" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 740.0
-margin_right = 760.0
+margin_left = 785.0
+margin_right = 805.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 20, 0 )
 
@@ -295,44 +296,44 @@ rect_min_size = Vector2( 20, 0 )
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 764.0
+margin_left = 809.0
 margin_top = 0.0
-margin_right = 904.0
+margin_right = 949.0
 margin_bottom = 61.0
 
 [node name="SetStartInput" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 11 )]
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 908.0
+margin_left = 953.0
 margin_top = 0.0
-margin_right = 1063.0
+margin_right = 1108.0
 margin_bottom = 61.0
 
 [node name="Control5" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 1067.0
-margin_right = 1087.0
+margin_left = 1112.0
+margin_right = 1132.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="InfoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
-margin_left = 1091.0
-margin_right = 1151.0
+margin_left = 1136.0
+margin_right = 1196.0
 margin_bottom = 61.0
 label_text = "te_set_info"
 icon_name = "list-alt"
 
 [node name="Control9" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
-margin_left = 1155.0
-margin_right = 1165.0
+margin_left = 1200.0
+margin_right = 1210.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="ExportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
-margin_left = 1169.0
-margin_right = 1229.0
+margin_left = 1214.0
+margin_right = 1274.0
 margin_bottom = 61.0
 label_text = "te_save_map"
 icon_name = "hdd-o"
