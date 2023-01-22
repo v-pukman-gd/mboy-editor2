@@ -17,7 +17,9 @@ func setup():
 
 	self.markers = EDITOR_NOTE_MARKER_C.markers
 	set_options()
-	menu_btn.get_popup().connect("id_pressed", self, "_on_option_selected")
+	
+	if not menu_btn.get_popup().is_connected("id_pressed", self, "_on_option_selected"):
+		menu_btn.get_popup().connect("id_pressed", self, "_on_option_selected")
 
 func clear_options():
 	menu_btn.get_popup().clear()

@@ -156,8 +156,7 @@ func _ready():
 		d.connect("about_to_show", self, "disable_inputs")
 		d.connect("popup_hide", self, "enable_inputs")
 	
-	EDITOR_NOTE_MARKER_C.clear()
-	setup_markers()
+	reset_markers()
 	
 	setup_user()
 	
@@ -191,6 +190,10 @@ func setup_editor_dir():
 		dir.make_dir(editor_dir)
 
 	print("editor_dir:", editor_dir)
+	
+func reset_markers():
+	EDITOR_NOTE_MARKER_C.clear()
+	setup_markers()
 	
 func setup_markers(markers_data=null):
 	EDITOR_NOTE_MARKER_C.load_markers(markers_data)
@@ -562,6 +565,7 @@ func _on_import_btn_pressed():
 
 func _on_import_map_file_selected(file_path):
 	clear_tracks()
+	reset_markers()
 	map_load_thread = Thread.new()
 	map_load_thread.start(self, "import_data", file_path)
 
