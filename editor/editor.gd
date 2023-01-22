@@ -17,12 +17,12 @@ var audio_file_format = ""
 var audio_load_thread = Thread.new()
 var audio_loaded = false
 
-var map_load_thread = Thread.new()
+var map_load_thread = null #Thread.new()
 
 var track_tempo = 130
 var map_start_pos = 0
 var map_info_was_saved = false
-var pending_export = false #TODO: reset it after audio reload
+var pending_export = false
 var track_length
 var track_speed
 
@@ -561,6 +561,8 @@ func _on_import_btn_pressed():
 	popup_dialog(import_map_dialog)
 
 func _on_import_map_file_selected(file_path):
+	clear_tracks()
+	map_load_thread = Thread.new()
 	map_load_thread.start(self, "import_data", file_path)
 
 func import_data(file_path):
@@ -569,12 +571,12 @@ func import_data(file_path):
 	
 	var data = Utils.read_json_file(file_path)
 	if not data: 
-		map_load_thread.wait_to_finish()
+		map_load_thread.call_deferred("wait_to_finish")
 		enable_import_btn(true)
-		return	
+		return
 	
-	set_import_btn_label(tr("te_loading_2_3"))
 	#update editor
+	set_import_btn_label(tr("te_loading_2_3"))
 	track_tempo = int(data.tempo)
 	tempo_btn.set_tempo(track_tempo)
 
@@ -585,7 +587,6 @@ func import_data(file_path):
 	map_info_was_saved = false
 	pending_export = false
 
-	clear_tracks()
 	set_params()
 	scale_to(0)
 	
@@ -595,8 +596,8 @@ func import_data(file_path):
 		markers_data = data.markers
 	setup_markers(markers_data)
 	
-	set_import_btn_label(tr("te_loading_3_3"))
 	# tracks
+	set_import_btn_label(tr("te_loading_3_3"))
 	var y = EDITOR_BAR_C.CELL_HEIGHT + EDITOR_C.TRACK_DISTANCE
 	for track_data in data.tracks:
 		var t = track_scn.instance()
@@ -614,7 +615,7 @@ func import_data(file_path):
 
 	save_last_file_path(file_path)
 	enable_import_btn(true)
-	map_load_thread.wait_to_finish()	
+	map_load_thread.call_deferred("wait_to_finish")
 	print("data imported")
 	
 	
@@ -695,7 +696,7 @@ func check_audio():
 func is_audio_data_loaded(audio_data):
 	if audio_data == null:
 		show_notice("te_audio_is_not_loaded")
-		audio_load_thread.wait_to_finish()
+		audio_load_thread.call_deferred("wait_to_finish")
 		enable_load_audio_btn(true)
 		return false
 	else:
@@ -729,12 +730,12 @@ func load_audio(input_file_path):
 
 	var is_copied = copy_audio(input_file_path)
 	if not is_copied:
-		audio_load_thread.wait_to_finish()
+		audio_load_thread.call_deferred("wait_to_finish")
 		enable_load_audio_btn(true)
 		return
 
 	if not check_audio():
-		audio_load_thread.wait_to_finish()
+		audio_load_thread.call_deferred("wait_to_finish")
 		enable_load_audio_btn(true)
 		return
 
@@ -755,8 +756,7 @@ func load_audio(input_file_path):
 	update_controls()
 
 	save_last_file_path(input_file_path)
-	audio_load_thread.wait_to_finish()
-
+	audio_load_thread.call_deferred("wait_to_finish")
 	print("audio loaded")
 
 func update_controls():
@@ -867,13 +867,21 @@ func add_track():
 
 func destroy_track(track):
 	if active_track == track: active_track = null
+	active_note = null
 	tracks_c.remove_child(track)
 	tracks.erase(track)
 	update_cursor_length()
 
-
 func clear_tracks():
-	for t in tracks: destroy_track(t)
+	# don't use "destroy_track" since "tracks.erase" breaks order and brings bugs
+	for track in tracks:
+		tracks_c.remove_child(track)
+		track.queue_free()
+		
+	tracks = []
+	active_track = null
+	active_note = null
+	update_cursor_length()
 
 func update_track(track):
 	track.set_info(track_info)
