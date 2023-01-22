@@ -36,6 +36,7 @@ const MAX_TRACKS_FREE = 3
 const MAX_TRACKS_PRO = 1000
 var max_tracks = MAX_TRACKS_FREE
 
+const EDITOR_DIR = "user://" + str(EDITOR_NAME)
 var last_file_path = "//"
 
 const GENRES = [

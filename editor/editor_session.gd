@@ -1,6 +1,6 @@
 extends Node
 
-var session_file_path = "user://editor/session"
+var session_file_path = EDITOR_C.EDITOR_DIR + "/session"
 var session_data = {}
 #var pw = ('776fab579d752808b562943922a8f708ca769e15bb784fbccfa23329fee25c32' + OS.get_unique_id()).sha256_text()
 var key = ("776fab579d752808b562943922a8f708ca769e15bb784fbccfa23329fee25c32" + OS.get_unique_id()).sha256_buffer()

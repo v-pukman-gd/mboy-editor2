@@ -109,7 +109,7 @@ var track_scn = preload("res://editor/track.tscn")
 
 var editor_scn_path = "res://editor/editor.tscn"
 var confirm_callback = ""
-var editor_dir
+var editor_dir = EDITOR_C.EDITOR_DIR
 
 var current_user = null
 var pro_version_enabled = false
@@ -184,7 +184,6 @@ func setup_editor_dir():
 	# hint editor folder
 	print("user data dir:", OS.get_user_data_dir())
 
-	editor_dir = "user://editor"
 	var dir = Directory.new()
 	if not dir.open(editor_dir) == OK:
 		dir.make_dir(editor_dir)
