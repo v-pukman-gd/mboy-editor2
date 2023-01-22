@@ -1,6 +1,6 @@
 extends Node2D
 
-const DEFAULT_LENGTH_OFFSET = 30
+const DEFAULT_LENGTH_OFFSET = 40
 const COLOR = Color('#ff66e3')
 
 var speed = 0
