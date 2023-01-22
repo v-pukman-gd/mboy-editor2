@@ -1,11 +1,12 @@
 extends Node
 
 signal update_available
-var thread
+#var thread
 
 func _ready():
-	thread = Thread.new()
-	thread.start(self, "check_update")
+	#thread = Thread.new()
+	#thread.start(self, "check_update")
+	check_update()
 	
 func check_update():
 	$HTTPRequest.request(
@@ -15,12 +16,12 @@ func check_update():
 		HTTPClient.METHOD_GET
 	)
 	
-func _exit_tree():
-	thread.wait_to_finish()
+#func _exit_tree():
+#	thread.wait_to_finish()
 
 func _on_request_completed(result, response_code, headers, body):
 	#print(result, " ", response_code, " ", headers, " ", body.get_string_from_utf8())
-	thread.wait_to_finish()
+	#thread.wait_to_finish()
 	
 	if result != HTTPRequest.RESULT_SUCCESS:
 		print("update_checker: request failed")
