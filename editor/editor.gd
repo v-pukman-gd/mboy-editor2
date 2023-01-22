@@ -17,6 +17,8 @@ var audio_file_format = ""
 var audio_load_thread = Thread.new()
 var audio_loaded = false
 
+var map_load_thread = Thread.new()
+
 var track_tempo = 130
 var map_start_pos = 0
 var map_info_was_saved = false
@@ -444,7 +446,7 @@ func _on_scale_down_btn_pressed():
 	scale_to(-1)
 
 func _on_hslider_value_changed( value ):
-	print("slider val changed:", value)
+	#print("slider val changed:", value)
 	
 	if tempo_update_in_process:
 		return
@@ -559,11 +561,13 @@ func _on_import_btn_pressed():
 	popup_dialog(import_map_dialog)
 
 func _on_import_map_file_selected(file_path):
-	import_data(file_path)
+	map_load_thread.start(self, "import_data", file_path)
 
 func import_data(file_path):
 	var data = Utils.read_json_file(file_path)
-	if not data: return
+	if not data: 
+		map_load_thread.wait_to_finish()
+		return
 
 	#update editor
 	track_tempo = int(data.tempo)
@@ -593,13 +597,17 @@ func import_data(file_path):
 		t.set_data(track_data)
 		t.set_position(Vector2(0, y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		t.set_start_position(map_start_pos)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-		tracks_c.add_child(t)
+		#tracks_c.add_child(t)
+		# https://docs.godotengine.org/en/stable/tutorials/performance/threads/thread_safe_apis.html
+		# https://docs.godotengine.org/en/stable/tutorials/performance/threads/using_multiple_threads.html
+		tracks_c.call_deferred("add_child", t)
 		tracks.append(t)
 		y += t.get_height()
 
 	update_cursor_length()
 
 	save_last_file_path(file_path)
+	map_load_thread.wait_to_finish()
 	print("data imported")
 	
 	

@@ -55,7 +55,7 @@ func _unhandled_input(e):
 				
 func cancel_dragging_x():
 	if dragging_x:				
-		print("***** dragging end! *****")
+		#print("***** dragging end! *****")
 		dragging_x = false
 		start_dragging_at = 0
 		bar.sort_notes()
@@ -189,7 +189,7 @@ func add_markers(markers_list):
 	for marker in markers_list:
 		if not markers.has(marker): markers.append(marker)
 		else: markers.erase(marker)
-	print(markers)
+	#print(markers)
 	update_markers()
 	bar.track.update_height()
 

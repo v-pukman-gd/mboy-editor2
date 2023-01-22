@@ -58,7 +58,7 @@ func _on_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 2 to 
 
 	# if e.is_action_pressed("editor_click"):
 	if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT and e.pressed) or (e is InputEventScreenTouch):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-		print("bar "+str(index)+" Clicked at", e.position)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		#print("bar "+str(index)+" Clicked at", e.position)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 		var i = floor( e.position.x/float(EDITOR_BAR_C.CELL_WIDTH) )  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		var x = int(i * EDITOR_BAR_C.CELL_WIDTH)
@@ -119,7 +119,7 @@ func update_notes_width():
 		set_note_borders(n)
 		
 func set_note_borders(note):
-	print("set_note_borders:")
+	#print("set_note_borders:")
 	var cells_after = []
 	var cells_before = []
 	var note_x = note.position.x
@@ -151,7 +151,7 @@ func set_note_borders(note):
 	if note.max_width < note.get_width():
 		note.set_width_scale(note.max_width)
 	
-	print("L:", note.drag_x_min, "R:", note.drag_x_max, "W:", note.max_width)
+	#print("L:", note.drag_x_min, "R:", note.drag_x_max, "W:", note.max_width)
 
 func delete_note(note):
 	remove_child(note)
