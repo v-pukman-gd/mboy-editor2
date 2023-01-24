@@ -598,7 +598,7 @@ func import_data(file_path):
 	var markers_data = null
 	if data.has("markers"): 
 		markers_data = data.markers
-	setup_markers(markers_data)
+	call_deferred("setup_markers", markers_data)
 	
 	# tracks
 	set_import_btn_label(tr("te_loading_3_3"))
@@ -606,9 +606,8 @@ func import_data(file_path):
 	for track_data in data.tracks:
 		var t = track_scn.instance()
 		t.set_data(track_data)
-		t.set_position(Vector2(0, y))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-		t.set_start_position(map_start_pos)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-		#tracks_c.add_child(t)
+		t.set_position(Vector2(0, y))
+		t.set_start_position(map_start_pos)
 		# https://docs.godotengine.org/en/stable/tutorials/performance/threads/thread_safe_apis.html
 		# https://docs.godotengine.org/en/stable/tutorials/performance/threads/using_multiple_threads.html
 		tracks_c.call_deferred("add_child", t)
