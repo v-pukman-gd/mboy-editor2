@@ -120,6 +120,7 @@ var new_version_info = null
 func _ready():
 	print("EDITOR _ready()")
 	# handle hidpi
+	OS.window_fullscreen = false
 	var screen_number = OS.get_current_screen()
 	print(OS.get_screen_size(screen_number), " ", OS.get_screen_dpi(screen_number))
 	if OS.get_screen_dpi(screen_number) < 150:
@@ -941,7 +942,7 @@ func _on_exit_btn_pressed():
 
 func exit_editor():
 	if audio_load_thread.is_active(): audio_load_thread.wait_to_finish()
-	if map_load_thread.is_active(): map_load_thread.wait_to_finish()
+	if map_load_thread and map_load_thread.is_active(): map_load_thread.wait_to_finish()
 	#if has_node("/root/SceneLoader"):
 	#	get_node("/root/SceneLoader").goto_scene("res://ui/start_ui.tscn")
 	#else:
@@ -953,7 +954,7 @@ func _on_reset_btn_pressed():
 
 func reset_editor():
 	if audio_load_thread.is_active(): audio_load_thread.wait_to_finish()
-	if map_load_thread.is_active(): map_load_thread.wait_to_finish()
+	if map_load_thread and map_load_thread.is_active(): map_load_thread.wait_to_finish()
 	#if has_node("/root/SceneLoader"):
 	#	get_node("/root/SceneLoader").goto_scene("res://editor/editor.tscn")
 	#else:
