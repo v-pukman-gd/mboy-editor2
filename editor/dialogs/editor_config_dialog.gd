@@ -1,6 +1,6 @@
 extends AcceptDialog
 
-const MAILTO = "mailto:%s?subject=MBOYEditor&body=Hi Vic!\n" % EDITOR_C.SUPPORT_EMAIL
+const MAILTO = "mailto:%s?subject=MBOY Editor %s&body=Hi Vic!\n" % [EDITOR_C.SUPPORT_EMAIL, EDITOR_C.VERSION]
 
 func _ready():
 	#show()
