@@ -10,6 +10,7 @@ var key = ("776fab579d752808b562943922a8f708ca769e15bb784fbccfa23329fee25c32" + 
 # user {id, email, subscription_ends_at, created_at, updated_at}
 # last_file_path
 # confirmed_updates
+# tutorial_clicked
 
 func _ready():
 	setup()

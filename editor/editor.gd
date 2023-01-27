@@ -80,6 +80,7 @@ onready var note_markers_info_dialog = dialog_c.get_node("NoteMarkersInfoDialog"
 onready var editor_config_dialog = dialog_c.get_node("EditorConfigDialog")
 onready var login_dialog = dialog_c.get_node("LoginDialog")
 onready var profile_dialog = dialog_c.get_node("ProfileDialog")
+onready var tutorial_dialog = dialog_c.get_node("TutorialDialog")
 
 var opened_dialog 
 
@@ -158,13 +159,12 @@ func _ready():
 		d.connect("popup_hide", self, "enable_inputs")
 	
 	reset_markers()
-	
-	setup_user()
+	setup_user()	
 	
 	#TODO: remove this
 	#Uncomment to Quick start file preload
 	#load_audio("user://editor/audio_mock.ogg")
-
+		
 func _notification(what):
 	# Confirm before exit
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -1077,3 +1077,4 @@ func on_update_confirm():
 	var confirmed_updates = EditorSession.get_value("confirmed_updates", {})
 	confirmed_updates[str(new_version_info.number)] = true
 	EditorSession.save_value("confirmed_updates", confirmed_updates)
+

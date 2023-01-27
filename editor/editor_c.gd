@@ -18,6 +18,8 @@ const HTTP_HEADERS = [
 	"Content-Type: application/json"
 ]
 
+const TUTORIAL_URL = "https://www.youtube.com/watch?v=U-CIW7VL-I0"
+
 const SUPPORT_EMAIL = "vic.rock.official@gmail.com"
 
 const WAVEFORM_H = 128

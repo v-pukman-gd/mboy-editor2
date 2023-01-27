@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://editor/editor_theme2.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://editor/dialogs/login_dialog.tscn" type="PackedScene" id=16]
 [ext_resource path="res://editor/dialogs/profile_dialog.tscn" type="PackedScene" id=17]
 [ext_resource path="res://editor/update_checker.tscn" type="PackedScene" id=18]
+[ext_resource path="res://editor/dialogs/tutorial_dialog.tscn" type="PackedScene" id=19]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -38,12 +39,14 @@ size_flags_vertical = 3
 
 [node name="CenterC" type="Control" parent="UI"]
 anchor_right = 1.0
-rect_min_size = Vector2( 1160, 0 )
+rect_min_size = Vector2( 1160, 720 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="TutorialDialog" parent="UI/CenterC" instance=ExtResource( 19 )]
 
 [node name="LoadAudioDialog" type="FileDialog" parent="UI/CenterC"]
 anchor_left = 0.5
@@ -65,7 +68,6 @@ margin_left = 355.0
 margin_right = 805.0
 
 [node name="MapInfo" parent="UI/CenterC" instance=ExtResource( 4 )]
-visible = false
 margin_bottom = 719.0
 
 [node name="ImportMapDialog" type="FileDialog" parent="UI/CenterC"]
