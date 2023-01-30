@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://editor/tutorial_splash2.png" type="Texture" id=1]
+[ext_resource path="res://editor/tutorial_splash.png" type="Texture" id=1]
 [ext_resource path="res://editor/dialogs/tutorial_dialog.gd" type="Script" id=2]
 [ext_resource path="res://editor/fonts/label_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://editor/icons/yt-play.png" type="Texture" id=4]

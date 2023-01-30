@@ -1,7 +1,6 @@
 extends Popup
 
 func _ready():
-	#EditorSession.set_value("tutorial_clicked", false)
 	show_tutorial_popup()
 	
 func show_tutorial_popup():
