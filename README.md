@@ -6,7 +6,7 @@ Create rhythm maps aka flow/charts/beatmaps in the editor, then use it in any ga
 
 Get rhythm maps examples at https://mboy-games.com/
 
-Download complied version from Itch https://vfpe.itch.io/mboy-editor
+Download compiled version from Itch https://vfpe.itch.io/mboy-editor
 
 ## Supported Godot version
 
@@ -17,6 +17,16 @@ To run the project you need to compile Godot engine with the custom audio wavefo
 Get the the module from this repo and follow the instructions in its readme file:
 https://github.com/v-pukman-gd/godot-audio-waveform-module
 
+
+## Games examples
+
+Beat shooter https://github.com/v-pukman-gd/beat-shooter-godot
+
+Music tiles https://github.com/v-pukman-gd/music-tiles
+
+Guitar Hero clone https://github.com/v-pukman-gd/guitar-hero-clone
+
+Related YouTube videos https://www.youtube.com/@vfpe2203/videos
 
 ## Push to Itch (Notes for myself)
 add `version.txt` to folder and make a `.zip` file
@@ -39,4 +49,4 @@ butler push LINUX64.zip vfpe/mboy-editor:linux --userversion 2.1.1
 
 The project is open for the community contribution.
 
-Let's make interesting rhythm games together!
+Let's make interesting rhythm-based games together!
