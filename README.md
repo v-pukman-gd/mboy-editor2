@@ -49,4 +49,6 @@ butler push LINUX64.zip vfpe/mboy-editor:linux --userversion 2.1.1
 
 The project is open for the community contribution.
 
+Initially created by Victor Pukman.
+
 Let's make interesting rhythm-based games together!
