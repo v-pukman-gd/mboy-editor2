@@ -50,6 +50,8 @@ var window_scroll_last_pos = 0
 
 var tracks = []
 
+
+
 onready var ui_node = get_node("UI")
 onready var window_scroll = get_node("UI/MarginC/VBoxC/ScrollC")
 
@@ -320,6 +322,10 @@ func set_params():
 	scale_ratio = 1
 	prev_scale_ratio = 1
 	scale_to(0)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("editor_click"):
+		unset_active_note()
 
 func load_waveform(stream):
 	waveform_n.set_stream(stream)
@@ -836,6 +842,7 @@ func unset_active_note():
 func _on_note_marker_btn_pressed(marker):
 	if not active_notes.empty():
 		for note in active_notes:
+			print(note.markers)
 			note.add_markers([marker])
 
 func _on_start_pos_input_changed(val):
@@ -1086,3 +1093,7 @@ func on_update_confirm():
 	confirmed_updates[str(new_version_info.number)] = true
 	EditorSession.save_value("confirmed_updates", confirmed_updates)
 
+func _on_selection_box_selected_notes(notes : Array):
+	for note in notes:
+		active_notes.append(note)
+		note.set_active(true)

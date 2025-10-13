@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://editor/editor_theme2.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://editor/dialogs/profile_dialog.tscn" type="PackedScene" id=17]
 [ext_resource path="res://editor/update_checker.tscn" type="PackedScene" id=18]
 [ext_resource path="res://editor/dialogs/tutorial_dialog.tscn" type="PackedScene" id=19]
+[ext_resource path="res://editor/selection_box.gd" type="Script" id=20]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -26,6 +27,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1162, 600 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -34,12 +36,14 @@ script = ExtResource( 2 )
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterC" type="Control" parent="UI"]
 anchor_right = 1.0
 rect_min_size = Vector2( 1160, 720 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 __meta__ = {
@@ -165,6 +169,7 @@ margin_bottom = 330.0
 [node name="MarginC" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 30
@@ -174,7 +179,7 @@ custom_constants/margin_left = 30
 margin_left = 30.0
 margin_right = 1410.0
 margin_bottom = 720.0
-mouse_filter = 0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -182,19 +187,20 @@ size_flags_vertical = 3
 margin_right = 1380.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 0, 10 )
-mouse_filter = 0
+mouse_filter = 2
 
 [node name="CenterC" type="CenterContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 14.0
 margin_right = 1380.0
 margin_bottom = 75.0
+mouse_filter = 2
 
 [node name="HBoxC" type="HBoxContainer" parent="UI/MarginC/VBoxC/CenterC"]
 margin_left = 53.0
 margin_right = 1327.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 0, 44 )
-mouse_filter = 0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="LoadAudioBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
@@ -202,6 +208,7 @@ anchor_right = 0.0
 margin_right = 105.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 105, 44 )
+mouse_filter = 2
 label_text = "te_load_audio"
 icon_name = "file-audio-o"
 
@@ -210,6 +217,7 @@ margin_left = 109.0
 margin_right = 119.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="ImportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
@@ -217,6 +225,7 @@ margin_left = 123.0
 margin_right = 228.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 105, 44 )
+mouse_filter = 2
 label_text = "te_import_map"
 icon_name = "file-text-o"
 
@@ -225,12 +234,14 @@ margin_left = 232.0
 margin_right = 242.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="AddTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 246.0
 margin_right = 306.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_add_track"
 icon_name = "map"
 
@@ -239,12 +250,14 @@ margin_left = 310.0
 margin_right = 320.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="EditTrackBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 324.0
 margin_right = 384.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_edit_track"
 icon_name = "map-o,pencil"
 
@@ -253,12 +266,14 @@ margin_left = 388.0
 margin_right = 438.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 50, 0 )
+mouse_filter = 2
 
 [node name="PlayBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 442.0
 margin_right = 502.0
 margin_bottom = 61.0
+mouse_filter = 2
 script = ExtResource( 8 )
 label_text = "Btn"
 
@@ -267,18 +282,21 @@ margin_left = 506.0
 margin_right = 646.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 140, 0 )
+mouse_filter = 2
 
 [node name="Control2" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
 margin_left = 650.0
 margin_right = 660.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="Control3" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
 margin_left = 664.0
 margin_right = 674.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="ZoomBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 9 )]
 anchor_right = 0.0
@@ -287,12 +305,14 @@ margin_left = 678.0
 margin_top = 0.0
 margin_right = 781.0
 margin_bottom = 61.0
+mouse_filter = 2
 
 [node name="Control6" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
 margin_left = 785.0
 margin_right = 805.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
 
 [node name="TempoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 10 )]
 anchor_top = 0.0
@@ -302,6 +322,7 @@ margin_left = 809.0
 margin_top = 0.0
 margin_right = 949.0
 margin_bottom = 61.0
+mouse_filter = 2
 
 [node name="SetStartInput" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 11 )]
 anchor_top = 0.0
@@ -311,18 +332,21 @@ margin_left = 953.0
 margin_top = 0.0
 margin_right = 1108.0
 margin_bottom = 61.0
+mouse_filter = 2
 
 [node name="Control5" type="Control" parent="UI/MarginC/VBoxC/CenterC/HBoxC"]
 margin_left = 1112.0
 margin_right = 1132.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
 
 [node name="InfoBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 1136.0
 margin_right = 1196.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_set_info"
 icon_name = "list-alt"
 
@@ -331,12 +355,14 @@ margin_left = 1200.0
 margin_right = 1210.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="ExportBtn" parent="UI/MarginC/VBoxC/CenterC/HBoxC" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 1214.0
 margin_right = 1274.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_save_map"
 icon_name = "hdd-o"
 
@@ -344,13 +370,14 @@ icon_name = "hdd-o"
 margin_top = 79.0
 margin_right = 1380.0
 margin_bottom = 79.0
-mouse_filter = 0
+mouse_filter = 2
 
 [node name="CenterC2" type="Control" parent="UI/MarginC/VBoxC"]
 margin_top = 83.0
 margin_right = 1380.0
 margin_bottom = 123.0
 rect_min_size = Vector2( 0, 40 )
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="HBoxC2" type="HBoxContainer" parent="UI/MarginC/VBoxC/CenterC2"]
@@ -363,19 +390,21 @@ margin_top = -21.0
 margin_right = 638.5
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 48 )
-mouse_filter = 0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
 margin_right = 250.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 2
 
 [node name="MarkerManagerBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 254.0
 margin_right = 314.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_manage_markers"
 icon_name = "flag-o,pencil"
 
@@ -384,6 +413,7 @@ margin_left = 318.0
 margin_right = 328.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="MarkerBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 12 )]
 anchor_left = 0.0
@@ -391,6 +421,7 @@ anchor_right = 0.0
 margin_left = 332.0
 margin_right = 392.0
 margin_bottom = 61.0
+mouse_filter = 2
 label = "te_toggle_marker"
 
 [node name="Control4" type="Control" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2"]
@@ -398,6 +429,7 @@ margin_left = 396.0
 margin_right = 1085.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 500, 0 )
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="ResetBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
@@ -405,6 +437,7 @@ anchor_right = 0.0
 margin_left = 1089.0
 margin_right = 1149.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_reset"
 icon_name = "eraser"
 
@@ -413,12 +446,14 @@ margin_left = 1153.0
 margin_right = 1163.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="EditorConfigBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 1167.0
 margin_right = 1227.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_editor_config"
 icon_name = "gear"
 
@@ -427,12 +462,14 @@ margin_left = 1231.0
 margin_right = 1241.0
 margin_bottom = 61.0
 rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
 
 [node name="LoginBtn" parent="UI/MarginC/VBoxC/CenterC2/HBoxC2" instance=ExtResource( 7 )]
 anchor_right = 0.0
 margin_left = 1245.0
 margin_right = 1305.0
 margin_bottom = 61.0
+mouse_filter = 2
 label_text = "te_login"
 icon_name = "user-o"
 
@@ -441,13 +478,14 @@ margin_top = 127.0
 margin_right = 1380.0
 margin_bottom = 137.0
 rect_min_size = Vector2( 0, 10 )
-mouse_filter = 0
+mouse_filter = 2
 
 [node name="ScrollC" type="ScrollContainer" parent="UI/MarginC/VBoxC"]
 margin_top = 141.0
 margin_right = 1380.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 1102, 256 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_vertical_enabled = false
@@ -456,7 +494,7 @@ scroll_vertical_enabled = false
 margin_right = 1380.0
 margin_bottom = 579.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -464,27 +502,27 @@ size_flags_vertical = 3
 margin_right = 1380.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="AudioWaveform" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC" instance=ExtResource( 13 )]
 margin_right = 3000.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 1, 256 )
-mouse_filter = 1
+mouse_filter = 2
 color = Color( 0.262745, 0.258824, 0.258824, 1 )
 
 [node name="CursorC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 1
 
 [node name="HSlider" type="HSlider" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC"]
 margin_right = 3000.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 1
+mouse_filter = 2
 size_flags_vertical = 1
 custom_icons/grabber_disabled = ExtResource( 14 )
 custom_icons/grabber_highlight = ExtResource( 14 )
@@ -502,6 +540,7 @@ is_static = true
 margin_top = 260.0
 margin_right = 1380.0
 margin_bottom = 260.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="ScrollC" type="ScrollContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
@@ -509,6 +548,7 @@ margin_top = 264.0
 margin_right = 1380.0
 margin_bottom = 565.0
 rect_min_size = Vector2( 0, 100 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -517,7 +557,7 @@ scroll_horizontal_enabled = false
 margin_right = 1380.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-mouse_filter = 0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="VBoxC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
@@ -525,11 +565,15 @@ margin_top = 569.0
 margin_right = 1380.0
 margin_bottom = 579.0
 rect_min_size = Vector2( 0, 10 )
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="UpdateChecker" parent="." instance=ExtResource( 18 )]
+
+[node name="SelectionBox" type="Node2D" parent="."]
+script = ExtResource( 20 )
 
 [connection signal="minimum_size_changed" from="." to="." method="_on_editor_minimum_size_changed"]
 [connection signal="file_selected" from="UI/CenterC/LoadAudioDialog" to="." method="_on_load_audio_dialog_file_selected"]
@@ -563,3 +607,4 @@ size_flags_horizontal = 3
 [connection signal="value_changed" from="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC/HSlider" to="." method="_on_hslider_value_changed"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_stream_player_finished"]
 [connection signal="update_available" from="UpdateChecker" to="." method="_on_update_available"]
+[connection signal="selectedNotes" from="SelectionBox" to="." method="_on_selection_box_selected_notes"]
