@@ -3,7 +3,7 @@ extends Control
 #signal audio_load_success
 signal toogle_grid
 
-var active_note
+var active_notes : Array
 var active_track
 var window_size = 950
 var is_playing = false
@@ -210,9 +210,9 @@ func _process(delta):
 		pending_wscroll_update = false
 
 	#update note buttons
-	if active_note:
+	if not active_notes.empty():
 		marker_btn.set_disabled(EDITOR_NOTE_MARKER_C.markers.size() == 0)
-	elif active_note == null:
+	elif active_notes.empty():
 		marker_btn.set_disabled(true)
 
 	if active_track and active_track.is_active:
@@ -818,17 +818,25 @@ func _on_ScrollC_resized():
 
 # ACTIVE NOTE
 func set_active_note(note):
-	if active_note != null: active_note.set_active(false)
-	active_note = note
-	active_note.set_active(true)
+	if not active_notes.empty():
+		for note in active_notes:
+			note.set_active(false)
+	#if active_note != null: active_note.set_active(false)
+	active_notes.clear()
+	active_notes.append(note)
+	note.set_active(true)
 	set_active_track(note.bar.track)
 
 func unset_active_note():
-	if active_note != null: active_note.set_active(false)
-	active_note = null
+	if not active_notes.empty(): 
+		for note in active_notes:
+			note.set_active(false)
+	active_notes.clear()
 
 func _on_note_marker_btn_pressed(marker):
-	if active_note != null: active_note.add_markers([marker])
+	if not active_notes.empty():
+		for note in active_notes:
+			note.add_markers([marker])
 
 func _on_start_pos_input_changed(val):
 	map_start_pos = val
@@ -871,7 +879,7 @@ func add_track():
 
 func destroy_track(track):
 	if active_track == track: active_track = null
-	active_note = null
+	active_notes.clear()
 	tracks_c.remove_child(track)
 	tracks.erase(track)
 	update_cursor_length()
@@ -884,7 +892,7 @@ func clear_tracks():
 		
 	tracks = []
 	active_track = null
-	active_note = null
+	active_notes.clear()
 	update_cursor_length()
 
 func update_track(track):
