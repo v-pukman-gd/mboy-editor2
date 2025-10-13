@@ -826,6 +826,11 @@ func _on_ScrollC_resized():
 func set_active_note(note):
 	if not Input.is_key_pressed(KEY_SHIFT):
 		unset_active_note()
+	print(note.is_active)
+	if Input.is_key_pressed(KEY_SHIFT) and note.is_active:
+		active_notes.erase(note)
+		note.set_active(false)
+		return
 	
 	active_notes.append(note)
 	note.set_active(true)
