@@ -824,11 +824,9 @@ func _on_ScrollC_resized():
 
 # ACTIVE NOTE
 func set_active_note(note):
-	if not active_notes.empty():
-		for note in active_notes:
-			note.set_active(false)
-	#if active_note != null: active_note.set_active(false)
-	active_notes.clear()
+	if not Input.is_key_pressed(KEY_SHIFT):
+		unset_active_note()
+	
 	active_notes.append(note)
 	note.set_active(true)
 	set_active_track(note.bar.track)
@@ -841,9 +839,27 @@ func unset_active_note():
 
 func _on_note_marker_btn_pressed(marker):
 	if not active_notes.empty():
+		#Check if all the notes have that marker
+		var allNotesHaveSameMarker : bool = true
 		for note in active_notes:
-			print(note.markers)
-			note.add_markers([marker])
+			if not note.markers.has(marker):
+				allNotesHaveSameMarker = false
+				break
+		
+		print(allNotesHaveSameMarker)
+		
+		if allNotesHaveSameMarker:
+			#then reverse those markers
+			var count = 0
+			print("Active")
+			for note in active_notes:
+				count += 1
+				print(count)
+				note.add_markers([marker])
+		else:
+			#If not, toggle them all on
+			for note in active_notes:
+				note.toggle_marker_on([marker])
 
 func _on_start_pos_input_changed(val):
 	map_start_pos = val
@@ -1094,6 +1110,9 @@ func on_update_confirm():
 	EditorSession.save_value("confirmed_updates", confirmed_updates)
 
 func _on_selection_box_selected_notes(notes : Array):
+	if not Input.is_key_pressed(KEY_SHIFT):
+		unset_active_note()
+	
 	for note in notes:
 		active_notes.append(note)
 		note.set_active(true)

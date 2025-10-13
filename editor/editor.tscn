@@ -485,7 +485,6 @@ margin_top = 141.0
 margin_right = 1380.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 1102, 256 )
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_vertical_enabled = false
@@ -494,7 +493,7 @@ scroll_vertical_enabled = false
 margin_right = 1380.0
 margin_bottom = 579.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 2
+mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -502,27 +501,22 @@ size_flags_vertical = 3
 margin_right = 1380.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 2
 
 [node name="AudioWaveform" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC" instance=ExtResource( 13 )]
 margin_right = 3000.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 1, 256 )
-mouse_filter = 2
 color = Color( 0.262745, 0.258824, 0.258824, 1 )
 
 [node name="CursorC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 2
-mouse_default_cursor_shape = 1
 
 [node name="HSlider" type="HSlider" parent="UI/MarginC/VBoxC/ScrollC/VBoxC/WaveformC/CursorC"]
 margin_right = 3000.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
-mouse_filter = 2
 size_flags_vertical = 1
 custom_icons/grabber_disabled = ExtResource( 14 )
 custom_icons/grabber_highlight = ExtResource( 14 )
@@ -540,7 +534,6 @@ is_static = true
 margin_top = 260.0
 margin_right = 1380.0
 margin_bottom = 260.0
-mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="ScrollC" type="ScrollContainer" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
@@ -548,7 +541,6 @@ margin_top = 264.0
 margin_right = 1380.0
 margin_bottom = 565.0
 rect_min_size = Vector2( 0, 100 )
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -557,7 +549,7 @@ scroll_horizontal_enabled = false
 margin_right = 1380.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
-mouse_filter = 2
+mouse_filter = 0
 size_flags_horizontal = 3
 
 [node name="VBoxC" type="Control" parent="UI/MarginC/VBoxC/ScrollC/VBoxC"]
@@ -565,7 +557,6 @@ margin_top = 569.0
 margin_right = 1380.0
 margin_bottom = 579.0
 rect_min_size = Vector2( 0, 10 )
-mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

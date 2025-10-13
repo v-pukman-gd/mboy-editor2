@@ -193,6 +193,14 @@ func add_markers(markers_list):
 	update_markers()
 	bar.track.update_height()
 
+##Add markers, but will not erase the marker if it already
+##exists
+func toggle_marker_on(markers_list):
+	for marker in markers_list:
+		if not markers.has(marker): markers.append(marker)
+	update_markers()
+	bar.track.update_height()
+
 func delete_markers(markers_list):
 	var changed = false
 	for marker in markers_list:
