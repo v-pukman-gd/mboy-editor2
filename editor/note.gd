@@ -121,7 +121,7 @@ func _on_control_gui_input(e):
 		is_pressed = e.pressed
 		if not is_pressed:
 			cancel_dragging_x()
-		if is_pressed and not is_active:
+		if is_pressed:
 			editor.set_active_note(self)
 
 	elif e is InputEventMouseButton and e.button_index == BUTTON_RIGHT:
@@ -190,6 +190,14 @@ func add_markers(markers_list):
 		if not markers.has(marker): markers.append(marker)
 		else: markers.erase(marker)
 	#print(markers)
+	update_markers()
+	bar.track.update_height()
+
+##Add markers, but will not erase the marker if it already
+##exists
+func toggle_marker_on(markers_list):
+	for marker in markers_list:
+		if not markers.has(marker): markers.append(marker)
 	update_markers()
 	bar.track.update_height()
 

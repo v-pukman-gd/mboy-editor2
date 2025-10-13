@@ -3,7 +3,7 @@ extends Control
 #signal audio_load_success
 signal toogle_grid
 
-var active_note
+var active_notes : Array
 var active_track
 var window_size = 950
 var is_playing = false
@@ -49,6 +49,8 @@ var window_scroll_and_cursor_d = 0
 var window_scroll_last_pos = 0
 
 var tracks = []
+
+
 
 onready var ui_node = get_node("UI")
 onready var window_scroll = get_node("UI/MarginC/VBoxC/ScrollC")
@@ -210,9 +212,9 @@ func _process(delta):
 		pending_wscroll_update = false
 
 	#update note buttons
-	if active_note:
+	if not active_notes.empty():
 		marker_btn.set_disabled(EDITOR_NOTE_MARKER_C.markers.size() == 0)
-	elif active_note == null:
+	elif active_notes.empty():
 		marker_btn.set_disabled(true)
 
 	if active_track and active_track.is_active:
@@ -320,6 +322,10 @@ func set_params():
 	scale_ratio = 1
 	prev_scale_ratio = 1
 	scale_to(0)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("editor_click"):
+		unset_active_note()
 
 func load_waveform(stream):
 	waveform_n.set_stream(stream)
@@ -818,17 +824,47 @@ func _on_ScrollC_resized():
 
 # ACTIVE NOTE
 func set_active_note(note):
-	if active_note != null: active_note.set_active(false)
-	active_note = note
-	active_note.set_active(true)
+	if not Input.is_key_pressed(KEY_SHIFT):
+		unset_active_note()
+	print(note.is_active)
+	if Input.is_key_pressed(KEY_SHIFT) and note.is_active:
+		active_notes.erase(note)
+		note.set_active(false)
+		return
+	
+	active_notes.append(note)
+	note.set_active(true)
 	set_active_track(note.bar.track)
 
 func unset_active_note():
-	if active_note != null: active_note.set_active(false)
-	active_note = null
+	if not active_notes.empty(): 
+		for note in active_notes:
+			note.set_active(false)
+	active_notes.clear()
 
 func _on_note_marker_btn_pressed(marker):
-	if active_note != null: active_note.add_markers([marker])
+	if not active_notes.empty():
+		#Check if all the notes have that marker
+		var allNotesHaveSameMarker : bool = true
+		for note in active_notes:
+			if not note.markers.has(marker):
+				allNotesHaveSameMarker = false
+				break
+		
+		print(allNotesHaveSameMarker)
+		
+		if allNotesHaveSameMarker:
+			#then reverse those markers
+			var count = 0
+			print("Active")
+			for note in active_notes:
+				count += 1
+				print(count)
+				note.add_markers([marker])
+		else:
+			#If not, toggle them all on
+			for note in active_notes:
+				note.toggle_marker_on([marker])
 
 func _on_start_pos_input_changed(val):
 	map_start_pos = val
@@ -871,7 +907,7 @@ func add_track():
 
 func destroy_track(track):
 	if active_track == track: active_track = null
-	active_note = null
+	active_notes.clear()
 	tracks_c.remove_child(track)
 	tracks.erase(track)
 	update_cursor_length()
@@ -884,7 +920,7 @@ func clear_tracks():
 		
 	tracks = []
 	active_track = null
-	active_note = null
+	active_notes.clear()
 	update_cursor_length()
 
 func update_track(track):
@@ -1078,3 +1114,10 @@ func on_update_confirm():
 	confirmed_updates[str(new_version_info.number)] = true
 	EditorSession.save_value("confirmed_updates", confirmed_updates)
 
+func _on_selection_box_selected_notes(notes : Array):
+	if not Input.is_key_pressed(KEY_SHIFT):
+		unset_active_note()
+	
+	for note in notes:
+		active_notes.append(note)
+		note.set_active(true)
