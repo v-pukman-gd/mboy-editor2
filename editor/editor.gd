@@ -880,9 +880,8 @@ func _handle_note_track_keys(e):
 	if selected_notes.size() == 0:
 		return false
 
-	#var focus = get_viewport().get_focus_owner()
-	#if focus and (focus is LineEdit or focus is TextEdit or focus is SpinBox):
-	#	return false
+	if _text_field_has_focus():
+		return false
 
 	for n in selected_notes:
 		if is_instance_valid(n) and n.is_pressed:
@@ -894,6 +893,21 @@ func _handle_note_track_keys(e):
 	move_selected_notes(direction)
 	get_tree().set_input_as_handled()
 	return true
+
+# This Godot build has no Viewport focus lookup, so ask the text controls directly.
+# Tracks are skipped; they hold the notes, not the text fields.
+func _text_field_has_focus():
+	return _branch_has_focused_text(self)
+
+func _branch_has_focused_text(node):
+	if node == tracks_c:
+		return false
+	if node is Control and node.has_focus() and (node is LineEdit or node is TextEdit or node is SpinBox):
+		return true
+	for child in node.get_children():
+		if _branch_has_focused_text(child):
+			return true
+	return false
 
 func _same_pos(a, b):
 	return abs(a - b) < 0.001
