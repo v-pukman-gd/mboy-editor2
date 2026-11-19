@@ -58,6 +58,9 @@ func _on_control_gui_input(e):  #-- NOTE: Automatically converted by Godot 2 to 
 
 	# if e.is_action_pressed("editor_click"):
 	if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT and e.pressed) or (e is InputEventScreenTouch):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		# Shift-click selects notes; don't also create one under the cursor.
+		if e is InputEventMouseButton and e.shift:
+			return
 		#print("bar "+str(index)+" Clicked at", e.position)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 		var i = floor( e.position.x/float(EDITOR_BAR_C.CELL_WIDTH) )  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
@@ -118,7 +121,7 @@ func update_notes_width():
 	for n in notes:
 		set_note_borders(n)
 		
-func set_note_borders(note):
+func set_note_borders(note, apply_limit=true):
 	#print("set_note_borders:")
 	var cells_after = []
 	var cells_before = []
@@ -147,17 +150,47 @@ func set_note_borders(note):
 	note.drag_x_min = left
 	note.drag_x_max = right
 	note.max_width = right - note_x
-	
-	if note.max_width < note.get_width():
+
+	# Keep imported lengths that run past the bar. Callers that pass false
+	# only refresh drag limits.
+	if apply_limit and note.max_width < note.get_width():
 		note.set_width_scale(note.max_width)
 	
 	#print("L:", note.drag_x_min, "R:", note.drag_x_max, "W:", note.max_width)
 
 func delete_note(note):
-	remove_child(note)
-	notes.erase(note)
-	editor.unset_active_note()
+	remove_note_silent(note)
 	update_notes_width()
+
+func detach_note(note):
+	notes.erase(note)
+	if is_instance_valid(note) and note.get_parent() == self:
+		remove_child(note)
+
+func adopt_note(note):
+	note.bar = self
+	if not notes.has(note):
+		notes.append(note)
+	if note.get_parent() != self:
+		add_child(note)
+	note.update()
+
+func remove_note_silent(note):
+	if note.is_deleted and not notes.has(note):
+		return
+	note.is_deleted = true
+	notes.erase(note)
+	if is_instance_valid(note) and note.get_parent() == self:
+		remove_child(note)
+	editor.on_note_removed(note)
+	if is_instance_valid(note):
+		note.queue_free()
+
+func refresh_note_limits():
+	sort_notes()
+	for n in notes:
+		set_note_borders(n, false)
+		n.update()
 
 func get_first_note():
 	if notes.size() == 0: return null

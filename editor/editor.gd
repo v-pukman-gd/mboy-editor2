@@ -4,6 +4,8 @@ extends Control
 signal toogle_grid
 
 var active_note
+var selected_notes = []
+var moving_notes = false
 var active_track
 var window_size = 950
 var is_playing = false
@@ -146,6 +148,7 @@ func _ready():
 	
 	set_process(true)
 	set_process_input(true)
+	selected_notes = []
 	#cursor_slider.connect("value_changed", self, "_on_hslider_value_changed")
 	window_scroll_size = window_scroll.get_minimum_size().x
 	update_controls()
@@ -470,7 +473,9 @@ func _on_play_btn_pressed():
 
 func _input(e):
 	if not audio_loaded: return
-		
+	if _handle_note_track_keys(e):
+		return
+
 	if e.is_action_pressed("editor_follow_play"):
 		is_follow_playing = true
 		play()
@@ -817,15 +822,194 @@ func _on_ScrollC_resized():
 	
 
 # ACTIVE NOTE
+# Plain click selects one note. Shift-click adds to the selection.
+# Arrow up / down moves every selected note to the neighboring track.
 func set_active_note(note):
-	if active_note != null: active_note.set_active(false)
+	clear_note_selection()
+	add_note_to_selection(note)
+
+func add_note_to_selection(note):
+	if note == null or not is_instance_valid(note) or note.is_deleted:
+		return
+	if not selected_notes.has(note):
+		selected_notes.append(note)
+	note.set_active(true)
 	active_note = note
-	active_note.set_active(true)
 	set_active_track(note.bar.track)
 
-func unset_active_note():
-	if active_note != null: active_note.set_active(false)
+func clear_note_selection():
+	for n in selected_notes:
+		if is_instance_valid(n) and not n.is_deleted:
+			n.set_active(false)
+	selected_notes = []
 	active_note = null
+
+func unset_active_note():
+	clear_note_selection()
+
+func on_note_removed(note):
+	if selected_notes.has(note):
+		selected_notes.erase(note)
+	if active_note != note:
+		return
+	active_note = null
+	if selected_notes.size() == 0:
+		return
+	active_note = selected_notes[selected_notes.size() - 1]
+	if moving_notes:
+		return
+	if is_instance_valid(active_note) and not active_note.is_deleted and active_note.bar:
+		set_active_track(active_note.bar.track)
+
+func _prune_note_selection():
+	var living = []
+	for note in selected_notes:
+		if is_instance_valid(note) and not note.is_deleted and note.bar:
+			living.append(note)
+	selected_notes = living
+	if active_note and (not is_instance_valid(active_note) or active_note.is_deleted or not selected_notes.has(active_note)):
+		active_note = null
+		if selected_notes.size() > 0:
+			active_note = selected_notes[selected_notes.size() - 1]
+
+func _handle_note_track_keys(e):
+	if not (e is InputEventKey) or not e.pressed:
+		return false
+	if e.scancode != KEY_UP and e.scancode != KEY_DOWN:
+		return false
+	if selected_notes.size() == 0:
+		return false
+
+	#var focus = get_viewport().get_focus_owner()
+	#if focus and (focus is LineEdit or focus is TextEdit or focus is SpinBox):
+	#	return false
+
+	for n in selected_notes:
+		if is_instance_valid(n) and n.is_pressed:
+			return false
+
+	var direction = -1
+	if e.scancode == KEY_DOWN:
+		direction = 1
+	move_selected_notes(direction)
+	get_tree().set_input_as_handled()
+	return true
+
+func _same_pos(a, b):
+	return abs(a - b) < 0.001
+
+func _remember_bar(bars, bar):
+	if bar and not bars.has(bar):
+		bars.append(bar)
+
+func _sort_notes_for_move(a, b):
+	if a.bar.index != b.bar.index:
+		return a.bar.index < b.bar.index
+	return a.position.x < b.position.x
+
+func _note_can_move(note, direction, accepted):
+	var src_idx = tracks.find(note.bar.track)
+	var dest_idx = src_idx + direction
+	if dest_idx < 0 or dest_idx >= tracks.size():
+		return false
+	var dest_track = tracks[dest_idx]
+	if note.bar.index < 0 or note.bar.index >= dest_track.bars.size():
+		return false
+	var dest_bar = dest_track.bars[note.bar.index]
+	for n in dest_bar.notes:
+		if n == note or n.is_deleted:
+			continue
+		# Occupants that are already accepted will leave this track.
+		if _same_pos(n.position.x, note.position.x) and not accepted.has(n):
+			return false
+	for other in accepted:
+		var other_src = tracks.find(other.bar.track)
+		if other_src < 0:
+			continue
+		var other_dest_idx = other_src + direction
+		if other_dest_idx < 0 or other_dest_idx >= tracks.size():
+			continue
+		if tracks[other_dest_idx] == dest_track and other.bar.index == note.bar.index and _same_pos(other.position.x, note.position.x):
+			return false
+	return true
+
+# Move each selected note one track up (direction -1) or down (direction 1).
+# A note stays put when there is no track in that direction, or the destination
+# bar already has a note with the same pos. A destination note that merely
+# overlaps is shortened (or pushed past the moved note) so the moved note fits.
+func move_selected_notes(direction):
+	if direction == 0:
+		return
+	_prune_note_selection()
+
+	var pending = []
+	for note in selected_notes:
+		var src_idx = tracks.find(note.bar.track)
+		if src_idx < 0:
+			continue
+		var dest_idx = src_idx + direction
+		if dest_idx < 0 or dest_idx >= tracks.size():
+			continue
+		if note.bar.index < 0 or note.bar.index >= tracks[dest_idx].bars.size():
+			continue
+		pending.append(note)
+
+	var accepted = []
+	var progressed = true
+	while progressed:
+		progressed = false
+		var still = []
+		for note in pending:
+			if _note_can_move(note, direction, accepted):
+				accepted.append(note)
+				progressed = true
+			else:
+				still.append(note)
+		pending = still
+
+	if accepted.size() == 0:
+		return
+
+	moving_notes = true
+	var affected = []
+	for note in accepted:
+		_remember_bar(affected, note.bar)
+		note.bar.detach_note(note)
+
+	accepted.sort_custom(self, "_sort_notes_for_move")
+
+	for note in accepted:
+		if not is_instance_valid(note) or note.is_deleted or note.bar == null:
+			continue
+		var src_bar = note.bar
+		var src_idx = tracks.find(src_bar.track)
+		if src_idx < 0:
+			src_bar.adopt_note(note)
+			continue
+		var dest_track = tracks[src_idx + direction]
+		var dest_bar = dest_track.bars[note.bar.index]
+		var global_start = dest_bar.x_pos + note.position.x
+		var global_end = global_start + note.get_width()
+		dest_track.trim_overlapping(global_start, global_end, affected)
+		if not is_instance_valid(note) or note.is_deleted:
+			continue
+		dest_bar.adopt_note(note)
+		_remember_bar(affected, dest_bar)
+
+	for bar in affected:
+		bar.refresh_note_limits()
+
+	var affected_tracks = []
+	for bar in affected:
+		if bar.track and not affected_tracks.has(bar.track):
+			affected_tracks.append(bar.track)
+	for track in affected_tracks:
+		track.update_height()
+
+	moving_notes = false
+	_prune_note_selection()
+	if active_note and active_note.bar:
+		set_active_track(active_note.bar.track)
 
 func _on_note_marker_btn_pressed(marker):
 	if active_note != null: active_note.add_markers([marker])
@@ -870,21 +1054,34 @@ func add_track():
 	scale_to(0)
 
 func destroy_track(track):
-	if active_track == track: active_track = null
-	active_note = null
+	var kept = []
+	for n in selected_notes:
+		if is_instance_valid(n) and not n.is_deleted and n.bar and n.bar.track != track:
+			kept.append(n)
+		elif is_instance_valid(n) and not n.is_deleted:
+			n.set_active(false)
+	selected_notes = kept
+	if active_note == null or not is_instance_valid(active_note) or active_note.is_deleted or (active_note.bar and active_note.bar.track == track):
+		active_note = null
+		if selected_notes.size() > 0:
+			active_note = selected_notes[selected_notes.size() - 1]
+	if active_track == track:
+		active_track = null
 	tracks_c.remove_child(track)
 	tracks.erase(track)
+	if active_track == null and active_note and active_note.bar:
+		set_active_track(active_note.bar.track)
 	update_cursor_length()
 
 func clear_tracks():
 	# don't use "destroy_track" since "tracks.erase" breaks order and brings bugs
+	clear_note_selection()
+	active_track = null
 	for track in tracks:
 		tracks_c.remove_child(track)
 		track.queue_free()
-		
+
 	tracks = []
-	active_track = null
-	active_note = null
 	update_cursor_length()
 
 func update_track(track):

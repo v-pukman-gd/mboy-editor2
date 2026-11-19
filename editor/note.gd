@@ -29,6 +29,7 @@ var marker_icon_scn = preload("res://editor/note_marker/note_marker_icon.tscn")
 
 func _ready():
 	set_process(true)
+	control.set_focus_mode(Control.FOCUS_NONE)
 	markers_c.set_position(Vector2(0, EDITOR_BAR_C.CELL_HEIGHT))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 func _process(delta):
@@ -121,8 +122,12 @@ func _on_control_gui_input(e):
 		is_pressed = e.pressed
 		if not is_pressed:
 			cancel_dragging_x()
-		if is_pressed and not is_active:
-			editor.set_active_note(self)
+		if is_pressed:
+			# Shift adds this note to the selection. A plain click selects only it.
+			if e.shift or Input.is_key_pressed(KEY_SHIFT):
+				editor.add_note_to_selection(self)
+			else:
+				editor.set_active_note(self)
 
 	elif e is InputEventMouseButton and e.button_index == BUTTON_RIGHT:
 		if e.pressed:
